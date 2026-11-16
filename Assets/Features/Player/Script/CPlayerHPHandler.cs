@@ -35,7 +35,10 @@ public class CPlayerHPHandler : CHPHandler<CPlayerStausDataSO>
             enabled = false;
             return;
         }
+    }
 
+    private void Start()
+    {
         HP = MaxHP;
     }
 
