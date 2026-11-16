@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class CEnemySpawnManager : MonoBehaviour
@@ -21,15 +19,19 @@ public class CEnemySpawnManager : MonoBehaviour
     [SerializeField] private float _spawnOutsideDistance = 1.5f;
     [SerializeField] private float _minPlayerDistance = 4f;
 
-    [Header("NavMesh 설정")]
+    [Header("적 제거 설정")]
+    [SerializeField] private float _enemyRemoveDistance = 20f;
+
+    [Header("내비메쉬 설정")]
     [SerializeField] private float _navMeshSearchRadius = 2f;
     [SerializeField] private int _spawnTryCount = 15;
 
     private GameObject[] _spawnedEnemies;
 
+
+
     private float _spawnTimer;
     private float _nextSpawnTime;
-    private float _playerFindTimer;
 
     private Vector3 _spawnPosition;
 
@@ -48,28 +50,27 @@ public class CEnemySpawnManager : MonoBehaviour
             _mainCamera = Camera.main;
         }
 
-        FindPlayer();
+        if (_player == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+            if (playerObject != null)
+            {
+                _player = playerObject.transform;
+            }
+        }
 
         SetNextSpawnTime();
     }
 
-
     private void Update()
     {
-        if (_enemyPrefab == null)
+        if (_enemyPrefab == null || _player == null || _mainCamera == null)
         {
             return;
         }
 
-        if (_mainCamera == null)
-        {
-            _mainCamera = Camera.main;
-
-            if (_mainCamera == null)
-            {
-                return;
-            }
-        }
+        RemoveFarEnemies();
 
         int enemyCount = CountEnemy();
 
@@ -93,17 +94,6 @@ public class CEnemySpawnManager : MonoBehaviour
         }
     }
 
-    private void FindPlayer()
-    {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-
-        if (playerObject != null)
-        {
-            _player = playerObject.transform;
-        }
-    }
-
-
     private void SetNextSpawnTime()
     {
         _nextSpawnTime = Random.Range(
@@ -112,6 +102,28 @@ public class CEnemySpawnManager : MonoBehaviour
         );
     }
 
+    private void RemoveFarEnemies()
+    {
+        for (int i = 0; i < _spawnedEnemies.Length; i++)
+        {
+            if (_spawnedEnemies[i] == null)
+            {
+                continue;
+            }
+
+            float distance = Vector2.Distance(
+                _player.position,
+                _spawnedEnemies[i].transform.position
+            );
+
+            if (distance > _enemyRemoveDistance)
+            {
+                Destroy(_spawnedEnemies[i]);
+
+                _spawnedEnemies[i] = null;
+            }
+        }
+    }
 
     private int CountEnemy()
     {
@@ -132,7 +144,6 @@ public class CEnemySpawnManager : MonoBehaviour
 
         return enemyCount;
     }
-
 
     private bool FindSpawnPosition()
     {
@@ -156,19 +167,16 @@ public class CEnemySpawnManager : MonoBehaviour
                 candidate.x = cameraX - halfWidth - _spawnOutsideDistance;
                 candidate.y = cameraY + randomY;
             }
-
             else if (side == 1)
             {
                 candidate.x = cameraX + halfWidth + _spawnOutsideDistance;
                 candidate.y = cameraY + randomY;
             }
-
             else if (side == 2)
             {
                 candidate.x = cameraX + randomX;
                 candidate.y = cameraY - halfHeight - _spawnOutsideDistance;
             }
-
             else
             {
                 candidate.x = cameraX + randomX;
@@ -207,6 +215,7 @@ public class CEnemySpawnManager : MonoBehaviour
             {
                 continue;
             }
+
             _spawnPosition = checkPosition;
             _spawnPosition.z = _player.position.z;
 
