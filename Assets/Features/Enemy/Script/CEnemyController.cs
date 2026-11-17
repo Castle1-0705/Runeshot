@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CEnemyController : MonoBehaviour
@@ -7,61 +9,88 @@ public class CEnemyController : MonoBehaviour
     #region 인스펙터 
     [SerializeField] private CEnemy _enemy;
     [SerializeField] private CEnemyFSM _enemyFSM;
-    [SerializeField] private CEnemyAttack _attack;
-    [SerializeField] private CEnemyMove _move;
-    [SerializeField] private CEnemyIdle _idle; 
-    [SerializeField] private CEnemyReturn _return;
+    [SerializeField] private CEnemySetting _enemySetting;
+    [SerializeField] List<CEnemyActionBaseSO> _enemyActionSOList;
     #endregion
 
-    #region 내부변수 
-    private Vector3 _setPosition;
-    private float _attackRange;
+    #region 내부변수   
+    private Dictionary<int, CEnemyActionBase> _enemyActionDictionary = new Dictionary<int, CEnemyActionBase>(10); 
     #endregion
-    
     private void Awake()
-    { 
-        if (_enemyFSM == null || _enemy == null || _attack == null || _move == null || _idle == null || _return == null)
+    {
+        if (_enemyActionSOList.Count == 0)
         {
-            Debug.Log("인스펙터 확인");
-        } 
-       _setPosition = transform.position;
-        _attackRange = _enemy.Enemydata.AttackRange;
+            Debug.Log("적 행동이 없음");
+            return;
+        }
+         
+       IniDictionary(); 
     }
+    private void OnDisable()
+    {
+        foreach (var dic in _enemyActionDictionary)
+        {
+            _enemyActionDictionary[dic.Key].OnDisable();
+        }
+    }
+
     private void Update()
     {
         if (!_enemy.IsAlive)
         {
             return;
         }
-     
-        if(_enemy.PlayerTr == null)
-        {
-            float distance = (_setPosition - transform.position).sqrMagnitude;
+         
+        SetControll();
 
-            if (distance < 0.1f)
-            {
-                _enemyFSM.SetControll(_idle);
-            }
-            else
-            {
-                _enemyFSM.SetControll(_return);
-            }
-        }
-        else
-        {
-            float distance = (_enemy.PlayerTr.transform.position - transform.position).sqrMagnitude;
-
-            if (distance <= _attackRange* _attackRange)
-            {
-                _enemyFSM.SetControll(_attack);
-            }
-            else
-            {
-                _enemyFSM.SetControll(_move);
-            }
-        }
-
-            _enemyFSM.Action();
-
+       _enemyFSM.Action(); 
     }
+
+    private void IniDictionary()
+    { 
+        for (int i = 0; i < _enemyActionSOList.Count; i++)
+        {
+            if (_enemyActionSOList[i] == null)
+            {
+                Debug.Log($"_enemyActionSOList{i}가 null");
+                continue;
+            }
+
+            CEnemyActionBase enemyActionBase = _enemyActionSOList[i].Create(_enemySetting);
+            _enemyActionDictionary.Add(_enemyActionSOList[i]._num, enemyActionBase);
+        }
+    }
+    public void SetControll(int action)
+    {
+        if(_enemyActionDictionary.ContainsKey(action))
+        {
+            _enemyFSM.SetControll(_enemyActionDictionary[action]);
+        } 
+    }
+
+    private void SetControll()
+    { 
+        int num = -1;
+
+        foreach (var dic in _enemyActionDictionary)
+        {
+            if (_enemyActionDictionary[dic.Key].Condition(_enemy.PlayerTr))
+            { 
+                if (num < dic.Key)
+                {
+                    num = dic.Key;
+                } 
+            }
+        }
+         
+        if(num < 0)
+        { 
+            return;
+        }
+         
+        SetControll(num);
+    }
+
+    
+    
 }

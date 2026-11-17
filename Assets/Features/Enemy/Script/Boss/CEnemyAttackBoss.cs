@@ -8,8 +8,7 @@ using UnityEngine.AI;
 
 public class CEnemyAttackBoss : CEnemyAttack
 {
-    #region ¿ŒΩ∫∆Â≈Õ
-    [SerializeField] private NavMeshAgent _navMove;
+    #region ¿ŒΩ∫∆Â≈Õ 
     [SerializeField] private SpriteRenderer _meleeAttack;
     [SerializeField] private SpriteRenderer _rangeAttack;
     #endregion
@@ -19,21 +18,21 @@ public class CEnemyAttackBoss : CEnemyAttack
     private string _attackRange = "TAttackRange";
     private string _attackCharge = "IMove";
     private bool _isCharging;
-    private float _chargeAttackSpeed = 10f;
+    private float _chargeAttackSpeed = 15f;
     private CancellationTokenSource _source;
+    private LayerMask _mask;
+    private string _playerLayer = "Player";
     #endregion
+     
+    public CEnemyAttackBoss(CEnemySetting enemySetting, int num) : base(enemySetting, num)
+    { 
+        _meleeAttack = enemySetting._meleeAttack;
+        _rangeAttack = enemySetting._rangeAttack;
 
-    private new void Awake()
-    {
-        if (_enemy == null || _aniAttack == null || _navMove == null)
-        {
-            Debug.Log("¿ŒΩ∫∆Â≈Õ »Æ¿Œ"); 
-        }
-        
-        _attackInterval = _enemy.Enemydata.WeaponFireInterval;
-        _damage = _enemy.Enemydata.WeaponDamage; 
+        _mask = 1 << LayerMask.NameToLayer(_playerLayer);
     }
-
+    
+     
     public override void ActionUpdate(Transform PlayerTr)
     {
         if (PlayerTr == null || _playerHP == null)
@@ -46,7 +45,7 @@ public class CEnemyAttackBoss : CEnemyAttack
             return;
         }
 
-        Flip(PlayerTr);
+        Flip(PlayerTr.position);
 
         _time += Time.deltaTime;
 
@@ -55,23 +54,23 @@ public class CEnemyAttackBoss : CEnemyAttack
             return;
         }
 
-        float distance = (PlayerTr.position - transform.position).magnitude;
+        float distance = (PlayerTr.position - _tr.position).magnitude;
 
         if (distance < 2f)
         { 
             ChangeAlpha(true);
             _playerHP.OnHit(_damage);
-            _aniAttack.SetTrigger(_attackMelee);
+            _ani.SetTrigger(_attackMelee);
         }
         else if (distance < 6f)
         {
             ChangeAlpha(false);
-            _aniAttack.SetTrigger(_attackRange);
+            _ani.SetTrigger(_attackRange);
         } 
         else 
         { 
             _source = new CancellationTokenSource();
-            ChargeAttack(PlayerTr,_source).Forget();
+            ChargeAttack(PlayerTr, _source).Forget();
         }
          
         _time = 0;
@@ -81,33 +80,14 @@ public class CEnemyAttackBoss : CEnemyAttack
     {
         base.ActionExit();
 
-        TokenCancel(); 
+        TokenCancel(_source); 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (_isCharging)
-        { 
-            if (collision.collider.tag == "Player")
-            {
-                _playerHP.OnHit(_damage); 
-                TokenCancel();
-            }
-        }
+     
+    public override void OnDisable()
+    { 
+        TokenCancel(_source);
     }
-    private void OnDestroy()
-    {
-        TokenCancel();
-    }
-    private void TokenCancel()
-    {
-        if (_source != null)
-        {
-            _source.Cancel();
-            _source.Dispose();
-            _source = null;
-        }
-
-    }
+     
     private void ChangeAlpha(bool isMeleeAttack)
     {
         Color colorMelee = _meleeAttack.color;
@@ -133,9 +113,9 @@ public class CEnemyAttackBoss : CEnemyAttack
 
         IsCharging(true);
 
-        if (!_navMove.pathPending)
+        if (!_nav.pathPending)
         {
-            _navMove.SetDestination(PlayerTr.position);
+            _nav.SetDestination(PlayerTr.position);
         }
 
         try
@@ -155,27 +135,33 @@ public class CEnemyAttackBoss : CEnemyAttack
 
         if (_isCharging)
         {
-            _navMove.autoBraking = false;
-            _navMove.speed = _chargeAttackSpeed;
-            _navMove.stoppingDistance = 0;
-            _aniAttack.SetInteger(_attackCharge, 1);
+            _nav.autoBraking = false;
+            _nav.speed = _chargeAttackSpeed;
+            _nav.stoppingDistance = 0;
+            _ani.SetInteger(_attackCharge, 1);
         }
         else
         {
-            _navMove.autoBraking = true;
-            _navMove.speed = _enemy.Enemydata.MovementSpeed;
-            _navMove.stoppingDistance = _enemy.Enemydata.AttackRange;
-            _aniAttack.SetInteger(_attackCharge, 0);
+            _nav.autoBraking = true;
+            _nav.speed = _enemy.Enemydata.MovementSpeed;
+            _nav.stoppingDistance = _enemy.Enemydata.AttackRange;
+            _ani.SetInteger(_attackCharge, 0);
         }
 
     } 
     private bool ArriveDestination(Transform PlayerTr)
-    { 
-        if ((_navMove.destination - transform.position).sqrMagnitude < 0.1f)
+    {
+        if(_col.IsTouchingLayers(_mask))
+        {
+            _playerHP.OnHit(_damage);
+            TokenCancel(_source); 
+        }
+       
+        if ((_nav.destination - _tr.position).sqrMagnitude < 0.1f)
         { 
             return true;
         } 
         return false;
     }
-     
+   
 }

@@ -21,6 +21,10 @@ public class CEnemyFSM : MonoBehaviour
 
     public void Action()
     {
+        if(_currentControll == null)
+        {
+            return;
+        }
         _currentControll.ActionUpdate(_enemy.PlayerTr);
     }
 

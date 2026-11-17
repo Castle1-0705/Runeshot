@@ -1584,18 +1584,15 @@ GameObject:
   - component: {fileID: 3729386601672415145}
   - component: {fileID: 4169632211207575208}
   - component: {fileID: 3566337923104379051}
-  - component: {fileID: 7869474756702734813}
-  - component: {fileID: 7177021939956913277}
   - component: {fileID: 1065920800225360951}
-  - component: {fileID: 3183994161054993109}
   - component: {fileID: 7817215342569448407}
   - component: {fileID: 8796105317512110678}
   - component: {fileID: 4023471168227441603}
   - component: {fileID: 4042492839850327510}
-  - component: {fileID: 6371195155086054929}
   - component: {fileID: 7730510040813789145}
   - component: {fileID: 802286809473166219}
   - component: {fileID: 1269642409722986836}
+  - component: {fileID: 4675538724075312446}
   m_Layer: 0
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -1654,33 +1651,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7869474756702734813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3755275131119344471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 589b6307957c46b4aa8dc5d789d4d5c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _aniIdle: {fileID: 3566337923104379051}
---- !u!114 &7177021939956913277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3755275131119344471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56b1cf4170029b940b8c41c3f79eb633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemy: {fileID: 4042492839850327510}
-  _aniAttack: {fileID: 3566337923104379051}
 --- !u!114 &1065920800225360951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,21 +1664,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 4042492839850327510}
---- !u!114 &3183994161054993109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3755275131119344471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b90152654e2699741996429411ccda16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemy: {fileID: 4042492839850327510}
-  _navMove: {fileID: 8796105317512110678}
-  _aniMove: {fileID: 3566337923104379051}
 --- !u!114 &7817215342569448407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1731,7 +1686,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1802,21 +1757,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _detectObject: {fileID: -1032632159660435134, guid: fbca1830812baed42b1d86d3db6da985, type: 3}
   _enemydata: {fileID: 802286809473166219}
---- !u!114 &6371195155086054929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3755275131119344471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad4019cce76ed524fbe2dd0f616898bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _navMove: {fileID: 8796105317512110678}
-  _aniReturn: {fileID: 3566337923104379051}
-  _col: {fileID: 4023471168227441603}
 --- !u!114 &7730510040813789145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1860,10 +1800,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemy: {fileID: 4042492839850327510}
   _enemyFSM: {fileID: 1065920800225360951}
-  _attack: {fileID: 7177021939956913277}
-  _move: {fileID: 3183994161054993109}
-  _idle: {fileID: 7869474756702734813}
-  _return: {fileID: 6371195155086054929}
+  _enemySetting: {fileID: 4675538724075312446}
+  _enemyActionSOList:
+  - {fileID: 11400000, guid: 7cf45c1fc45d65f4bb1df9bd946bedf5, type: 2}
+  - {fileID: 11400000, guid: db17437f430456a4abe7c2a49b0308c2, type: 2}
+  - {fileID: 11400000, guid: f55307242f2e0ff43baa6ef738116fda, type: 2}
+  - {fileID: 11400000, guid: c4fe58c836f24654abc517d5acf876d8, type: 2}
+--- !u!114 &4675538724075312446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755275131119344471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c439e2a42ef2fb45b5d07b1372e6c0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 4042492839850327510}
+  _navAgent: {fileID: 8796105317512110678}
+  _ani: {fileID: 3566337923104379051}
+  _col: {fileID: 4023471168227441603}
+  _controll: {fileID: 1269642409722986836}
+  _meleeAttack: {fileID: 0}
+  _rangeAttack: {fileID: 0}
 --- !u!1 &3974456026828644878
 GameObject:
   m_ObjectHideFlags: 0
@@ -3462,6 +3423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 0}
   _child: {fileID: 3755275131119344471}
+  _interval: 0.3
 --- !u!1 &6162403449626828650
 GameObject:
   m_ObjectHideFlags: 0
