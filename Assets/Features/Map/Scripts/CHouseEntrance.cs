@@ -6,6 +6,7 @@ public class CHouseEntrance : MonoBehaviour
 {
     [Header("씬 설정")]
     [SerializeField] private string _sceneName;
+    [SerializeField] private string _houseID;
 
     private bool _isPlayerNear;
     private bool _isLoading;
@@ -17,12 +18,25 @@ public class CHouseEntrance : MonoBehaviour
             return;
         }
 
-        if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current != null &&
+            Keyboard.current.eKey.wasPressedThisFrame)
         {
-            _isLoading = true;
-
-            SceneManager.LoadScene(_sceneName);
+            EnterHouse();
         }
+    }
+
+    private void EnterHouse()
+    {
+        if (!Application.CanStreamedLevelBeLoaded(_sceneName))
+        {
+            return;
+        }
+
+        CHouseLootData.SetCurrentHouse(_houseID);
+
+        _isLoading = true;
+
+        SceneManager.LoadScene(_sceneName);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -30,8 +44,6 @@ public class CHouseEntrance : MonoBehaviour
         if (other.transform.root.CompareTag("Player"))
         {
             _isPlayerNear = true;
-
-            Debug.Log("E");
         }
     }
 
