@@ -265,7 +265,7 @@ MonoBehaviour:
   m_BuildHeightMesh: 0
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: 50169221e28c29f49b3db3df74d66cd7, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 1d55a33ceec013043ba23dca4f9b12e2, type: 2}
 --- !u!1 &747305125
 GameObject:
   m_ObjectHideFlags: 0
@@ -94227,6 +94227,7 @@ MonoBehaviour:
   _spawnIntervalMax: 5
   _spawnOutsideDistance: 1.5
   _minPlayerDistance: 4
+  _enemyRemoveDistance: 20
   _navMeshSearchRadius: 2
   _spawnTryCount: 15
 --- !u!1 &2015750364
@@ -334661,7 +334662,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 21300104, guid: 41ed6ef399e2c4c559e1cac90deed718, type: 3}
       - {fileID: 21300106, guid: 41ed6ef399e2c4c559e1cac90deed718, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -214, y: 102, z: 0}
