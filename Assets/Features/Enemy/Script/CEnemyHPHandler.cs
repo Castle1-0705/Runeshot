@@ -14,6 +14,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
     #region 내부변수
     private string _death = "BDeath";
     private string _stringDamaged = "TDamaged";
+    private string _stringDeath = "DEATH";
     #endregion
 
     private void Awake()
@@ -37,7 +38,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
      
     private void Destroy()
     {
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     //TODO
@@ -54,14 +55,25 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         if (HP <= 0f)
         {
             _enemy.Die();
-            _aniHP.SetBool(_death,true);
+            _aniHP.SetBool(_death,true); 
 
-            await UniTask.WaitUntil( () => _aniHP.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f,PlayerLoopTiming.Update, destroyCancellationToken);
+            await UniTask.WaitUntil(UntilDeath, PlayerLoopTiming.Update, destroyCancellationToken); 
 
             OnDeathInvoke();
-             
         }
        
+    }
+
+    bool UntilDeath()
+    {
+        if (_aniHP.GetCurrentAnimatorStateInfo(0).IsName(_stringDeath))
+        {
+            if (_aniHP.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
+            { 
+                return true;
+            }
+        } 
+        return false;
     }
     public override UniTask OnHeal(float amount)
     { 
