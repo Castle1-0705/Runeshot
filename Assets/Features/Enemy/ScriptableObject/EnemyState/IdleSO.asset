@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: IdleSO
   m_EditorClassIdentifier: 
   _id: Idle
-  _num: 6
+  _priority: 1

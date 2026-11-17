@@ -7,6 +7,6 @@ public class CEnemyRunawaySO : CEnemyActionBaseSO
 {
     public override CEnemyActionBase Create(CEnemySetting enemySetting)
     {
-        return new CEnemyRunaway(enemySetting,_num);
+        return new CEnemyRunaway(enemySetting, _priority);
     }
 }

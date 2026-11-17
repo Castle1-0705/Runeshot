@@ -7,7 +7,7 @@ public class CEnemyIdleSO : CEnemyActionBaseSO
 {
     public override CEnemyActionBase Create(CEnemySetting enemySetting)
     {
-        return new CEnemyIdle(enemySetting,_num);
+        return new CEnemyIdle(enemySetting, _priority);
     }
 
 }

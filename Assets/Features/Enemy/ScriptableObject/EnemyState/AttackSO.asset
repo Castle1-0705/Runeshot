@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AttackSO
   m_EditorClassIdentifier: 
   _id: Attack
-  _num: 2
+  _priority: 2

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RunawaySO
   m_EditorClassIdentifier: 
   _id: Runaway
-  _num: 0
+  _priority: 6

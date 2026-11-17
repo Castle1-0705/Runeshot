@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AttackBossSO
   m_EditorClassIdentifier: 
   _id: AttackBoss
-  _num: 7
+  _priority: 3

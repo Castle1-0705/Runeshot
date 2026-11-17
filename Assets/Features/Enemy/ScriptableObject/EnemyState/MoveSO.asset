@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MoveSO
   m_EditorClassIdentifier: 
   _id: Move
-  _num: 3
+  _priority: 4

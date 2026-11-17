@@ -7,7 +7,7 @@ public class CEnemyMoveSO : CEnemyActionBaseSO
 {
     public override CEnemyActionBase Create(CEnemySetting enemySetting)
     {
-        return new CEnemyMove(enemySetting,_num);
+        return new CEnemyMove(enemySetting,_priority);
     }
 
 }

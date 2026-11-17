@@ -57,7 +57,7 @@ public class CEnemyController : MonoBehaviour
             }
 
             CEnemyActionBase enemyActionBase = _enemyActionSOList[i].Create(_enemySetting);
-            _enemyActionDictionary.Add(_enemyActionSOList[i]._num, enemyActionBase);
+            _enemyActionDictionary.Add(_enemyActionSOList[i]._priority, enemyActionBase);
         }
     }
     public void SetControll(int action)
