@@ -19,8 +19,7 @@ public class CEnemyAttackBoss : CEnemyAttack
     private string _attackRange = "TAttackRange";
     private string _attackCharge = "IMove";
     private bool _isCharging;
-    private float _chargeAttackSpeed = 15f;
-    private CancellationTokenSource _source;
+    private float _chargeAttackSpeed = 15f; 
     private LayerMask _mask;
     private string _playerLayer = "Player";
     #endregion
@@ -70,9 +69,8 @@ public class CEnemyAttackBoss : CEnemyAttack
             _ani.SetTrigger(_attackRange);
         } 
         else 
-        {
-            _source = _enemySetting.TokenGen(); 
-            ChargeAttack(PlayerTr, _source).Forget();
+        { 
+            ChargeAttack(PlayerTr, _enemySetting.TokenGen()).Forget();
         }
          
         _time = 0;
@@ -150,7 +148,7 @@ public class CEnemyAttackBoss : CEnemyAttack
         if(_col.IsTouchingLayers(_mask))
         {
             _playerHP.OnHit(_damage);
-            _enemySetting.TokenCancel();
+            _enemySetting.TokenCancel(); 
         }
        
         if ((_nav.destination - _tr.position).sqrMagnitude < 0.1f)

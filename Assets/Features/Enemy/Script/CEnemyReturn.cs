@@ -8,17 +8,14 @@ using UnityEngine.AI;
 
 public class CEnemyReturn : CEnemyActionBase
 {
-
-    private CEnemySetting _enemySetting;
+     
     #region 내부변수
+    private CEnemySetting _enemySetting;
+
     private float _maxReturnTime = 3f;
     private float _time;
-
-    private Vector3 _setPosition;
-
-    private string _move = "IMove"; 
-     
-    CancellationTokenSource _source;
+    private Vector3 _setPosition; 
+    private string _move = "IMove";  
     #endregion
      
     public CEnemyReturn(CEnemySetting enemySetting,int num) : base(enemySetting, num)
@@ -34,7 +31,7 @@ public class CEnemyReturn : CEnemyActionBase
             float distance = (_setPosition - _tr.position).sqrMagnitude;
 
             if (distance > 0.1f)
-            {
+            { 
                 return true;
             }
 
@@ -44,23 +41,22 @@ public class CEnemyReturn : CEnemyActionBase
     }
     public override void ActionEnter(Transform PlayerTr)
     {   
-        if(_source == null)
+        if(_enemySetting._source == null)
         {
-            _source = _enemySetting.TokenGen();  
+            _nav.stoppingDistance = 0f;
+            ReturnPosition(_enemySetting.TokenGen()).Forget(); 
         }
         else
         {
             return;
         }    
-
-        _nav.stoppingDistance = 0f;
-
-        ReturnPosition(_source).Forget();
+         
     }
      
     public override void ActionExit()
     {  
-        _enemySetting.TokenCancel();
+        _enemySetting.TokenCancel(); 
+        
     }
     async UniTask ReturnPosition(CancellationTokenSource tokenSource)
     { 
@@ -77,9 +73,7 @@ public class CEnemyReturn : CEnemyActionBase
         _ani.SetInteger(_move, 1);
 
         Flip(_setPosition);
-
-        _source.Dispose();
-        _source = null;
+  
     }
 
     private bool IsDestinationArrive()
