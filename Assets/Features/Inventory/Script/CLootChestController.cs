@@ -8,7 +8,7 @@ public class CLootChestController : MonoBehaviour, IInteractable
     #region 인스팩터
     [SerializeField] private CLootChestDataSO _data;
     [SerializeField] private CItemContainerInventoryHandler _inventory;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private SpriteRenderer _spriteRenderer; 
     #endregion
 
     #region 내부변수
@@ -16,8 +16,8 @@ public class CLootChestController : MonoBehaviour, IInteractable
     #endregion
 
     private void Awake()
-    {
-        if(_inventory == null)
+    { 
+        if (_inventory == null)
         {
             if(!TryGetComponent<CItemContainerInventoryHandler>(out _inventory))
             {
@@ -46,6 +46,8 @@ public class CLootChestController : MonoBehaviour, IInteractable
         }
 
         _spriteRenderer.sprite = _data.ChestSprite;
+
+        CInputDispatcher.Instance.InputActionMap["Interact"].OnPerformedAction += ChestToggle;
     }
 
     public void Interact()
@@ -89,11 +91,53 @@ public class CLootChestController : MonoBehaviour, IInteractable
 
     //for test=================
 
+    //modified by June Gyu
     [ContextMenu("DebuggingTest(OpenChest)")]
     private void ChestOpenTest()
     {
-        _isOpend = false;
-        Interact();
+        //_isOpend = false;
+        Interact(); 
     }
+     
+    private bool _isInteractable = false;
+    private bool _enabled = false;
+    private string _playerTag = "Player";
+    private void ChestToggle()
+    {
+        if(!_isInteractable)
+        {
+            return;
+        }
+
+        _enabled = !_enabled;
+
+        if(_enabled)
+        {
+            ChestOpenTest();
+        }
+        else
+        {
+            CLootChestUIController.Instance.ToggleUI(false);
+        } 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == _playerTag)
+        {
+            _isInteractable = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == _playerTag)
+        {
+            _isInteractable = false;
+            _enabled = false;
+            CLootChestUIController.Instance.ToggleUI(false);
+        }
+    }
+  
 
 }
