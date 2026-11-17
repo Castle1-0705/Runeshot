@@ -14,7 +14,7 @@ public class COptionPenel : MonoBehaviour
     [SerializeField] Button _resumeButton;
 
     private bool _enabled = false;
-    private string _name = "ESC";
+    [SerializeField] private string _inputKey = "ESC";
     private void Start()
     {
         BindOption();
@@ -26,17 +26,17 @@ public class COptionPenel : MonoBehaviour
 
     private void BindOption()
     {
-        if (CInputDispatcher.Instance.InputActionMap.ContainsKey(_name))
+        if (CInputDispatcher.Instance.InputActionMap.ContainsKey(_inputKey))
         {
-            CInputDispatcher.Instance.InputActionMap[_name].OnPerformedAction += OpenOption;
+            CInputDispatcher.Instance.InputActionMap[_inputKey].OnPerformedAction += OpenOption;
         }
     }
 
     private void OnDisable()
     {
-        if (CInputDispatcher.Instance.InputActionMap.ContainsKey(_name))
+        if (CInputDispatcher.Instance.InputActionMap.ContainsKey(_inputKey))
         {
-            CInputDispatcher.Instance.InputActionMap[_name].OnPerformedAction -= OpenOption;
+            CInputDispatcher.Instance.InputActionMap[_inputKey].OnPerformedAction -= OpenOption;
         }
     }
     public void OpenOption()
