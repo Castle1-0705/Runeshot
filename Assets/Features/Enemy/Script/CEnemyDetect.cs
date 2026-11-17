@@ -5,8 +5,8 @@ using UnityEngine;
 public class CEnemyDetect : MonoBehaviour
 {
     #region ¿ŒΩ∫∆Â≈Õ
-    [SerializeField] private LayerMask _MonsterRangelayer;
-    [SerializeField] private CircleCollider2D _MonsterRangelayerCollider;
+    [SerializeField] private LayerMask _monsterRangelayer;
+    [SerializeField] private CircleCollider2D _monsterRangelayerCollider;
     [SerializeField] private CEnemy _parentEnemy;
     #endregion
 
@@ -20,13 +20,13 @@ public class CEnemyDetect : MonoBehaviour
 
     private void Awake()
     {
-        if(_MonsterRangelayerCollider == null || _parentEnemy == null)
+        if(_monsterRangelayerCollider == null || _parentEnemy == null)
         {
             Debug.Log("¿ŒΩ∫∆Â≈Õ »Æ¿Œ");
         }
           
-       _MonsterRangelayer = 1 << LayerMask.NameToLayer(_playerLayer) | 1 << LayerMask.NameToLayer(_wallLayer);
-        _MonsterRangelayerCollider.radius = _parentEnemy.Enemydata.DetectionDistance;
+       _monsterRangelayer = 1 << LayerMask.NameToLayer(_playerLayer) | 1 << LayerMask.NameToLayer(_wallLayer);
+        _monsterRangelayerCollider.radius = _parentEnemy.Enemydata.DetectionDistance;
     }
      
 
@@ -52,7 +52,7 @@ public class CEnemyDetect : MonoBehaviour
         
         Vector3 origin = transform.parent.position;
         Vector3 dir = collision.transform.position - transform.parent.position;
-        _hit2D = Physics2D.Raycast(origin, dir, _MonsterRangelayerCollider.bounds.size.x, _MonsterRangelayer);
+        _hit2D = Physics2D.Raycast(origin, dir, _monsterRangelayerCollider.bounds.size.x, _monsterRangelayer);
 
         if (_hit2D.collider.tag == _playerTag)
         { 

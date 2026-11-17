@@ -3,12 +3,7 @@ using UnityEngine.AI;
 
 public class CEnemyMove : CEnemyActionBase
 {
-    #region 인스펙터
-    [SerializeField] private CEnemy _enemy;
-    [SerializeField] private NavMeshAgent _navMove;
-    [SerializeField] private Animator _aniMove;
-    #endregion
-
+    
     #region 내부변수 
     private string _move = "IMove";
     
@@ -17,43 +12,47 @@ public class CEnemyMove : CEnemyActionBase
     private Vector3 _setPosition;  
     private Vector3 _prePlayerPosision;
     #endregion
-
-    private void Awake()
-    {
-        if( _enemy == null || _navMove == null || _aniMove == null)
-        {
-            Debug.Log("인스펙터 확인");
-        }
-          
-        _navMove.speed = _enemy.Enemydata.MovementSpeed;
-        _setPosition = transform.position;
+     
+    public CEnemyMove(CEnemySetting enemySetting, int num): base(enemySetting, num)
+    {  
+        _nav.speed = enemySetting._enemy.Enemydata.MovementSpeed;
+        _setPosition = enemySetting.transform.position;
     }
     
+    public override bool Condition(Transform PlayerTr)
+    {
+        if(PlayerTr == null)
+        {
+            return false;
+        }
+         
+        if ((PlayerTr.position - _tr.position).sqrMagnitude > _enemy.Enemydata.AttackRange * _enemy.Enemydata.AttackRange)
+        {
+            return true;
+        }
+
+        return false;
+    }
     public override void ActionEnter(Transform PlayerTr)
     {
         Debug.Log("Enter Move");
 
-        _navMove.stoppingDistance = _enemy.Enemydata.AttackRange;
+        _nav.stoppingDistance = _enemy.Enemydata.AttackRange;
 
-        _aniMove.SetInteger(_move, 1);
+        _ani.SetInteger(_move, 1);
     }
     public override void ActionUpdate(Transform PlayerTr)
     { 
-        if (PlayerTr == null)
+        if (_nav.speed != 0f)
         {
-            return;
-        }
-
-        if (_navMove.speed != 0f)
-        {
-            float speed = _navMove.velocity.sqrMagnitude / (_navMove.speed * _navMove.speed);
+            float speed = _nav.velocity.sqrMagnitude / (_nav.speed * _nav.speed);
 
             if (speed == 0)
             {
                 _time += Time.deltaTime;
             }
 
-            _aniMove.speed = speed == 0 ? 1f : speed;
+            _ani.speed = speed == 0 ? 1f : speed;
         }
 
         if (_prePlayerPosision == PlayerTr.position)
@@ -68,44 +67,31 @@ public class CEnemyMove : CEnemyActionBase
         _prePlayerPosision = PlayerTr.position;
 
 
-        if (!_navMove.pathPending)
+        if (!_nav.pathPending)
         {
             if (_time <= _waitTime)
             {
-                _navMove.destination = PlayerTr.position;
+                _nav.destination = PlayerTr.position;
 
             }
             else
             {
                 _time = 0f;
-                _navMove.stoppingDistance = 0;
-                _navMove.destination = _setPosition; 
+                _nav.stoppingDistance = 0;
+                _nav.destination = _setPosition; 
             }
         }
 
-        Flip(); 
+        Flip(_nav.destination);
+         
     }
   
     public override void ActionExit()
     {
-        _aniMove.SetInteger(_move, 0);
-        _aniMove.speed = 1f;
+        _ani.SetInteger(_move, 0);
+        _ani.speed = 1f;
         _time = 0f;
-        _navMove.stoppingDistance = _enemy.Enemydata.AttackRange;
-        Debug.Log("Exit Move"); 
-        
-    }
-
-    private void Flip()
-    { 
-        
-        if ((_navMove.destination - transform.position).x <= 0)
-        { 
-           transform.rotation = Quaternion.identity;
-        }
-        else
-        { 
-           transform.rotation = Quaternion.Euler(0, 180f, 0);
-        }
-    }
+        _nav.stoppingDistance = _enemy.Enemydata.AttackRange;
+        Debug.Log("Exit Move");   
+    } 
 }
