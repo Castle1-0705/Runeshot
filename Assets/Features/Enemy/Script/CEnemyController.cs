@@ -26,14 +26,7 @@ public class CEnemyController : MonoBehaviour
          
        IniDictionary(); 
     }
-    private void OnDisable()
-    {
-        foreach (var dic in _enemyActionDictionary)
-        {
-            _enemyActionDictionary[dic.Key].OnDisable();
-        }
-    }
-
+    
     private void Update()
     {
         if (!_enemy.IsAlive)

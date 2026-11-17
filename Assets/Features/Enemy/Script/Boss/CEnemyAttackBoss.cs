@@ -9,8 +9,9 @@ using UnityEngine.AI;
 public class CEnemyAttackBoss : CEnemyAttack
 {
     #region 인스펙터 
-    [SerializeField] private SpriteRenderer _meleeAttack;
-    [SerializeField] private SpriteRenderer _rangeAttack;
+    private SpriteRenderer _meleeAttack;
+    private SpriteRenderer _rangeAttack;
+    private CEnemySetting _enemySetting;
     #endregion
 
     #region 내부변수
@@ -28,6 +29,7 @@ public class CEnemyAttackBoss : CEnemyAttack
     { 
         _meleeAttack = enemySetting._meleeAttack;
         _rangeAttack = enemySetting._rangeAttack;
+        _enemySetting = enemySetting;
 
         _mask = 1 << LayerMask.NameToLayer(_playerLayer);
     }
@@ -68,8 +70,8 @@ public class CEnemyAttackBoss : CEnemyAttack
             _ani.SetTrigger(_attackRange);
         } 
         else 
-        { 
-            _source = new CancellationTokenSource();
+        {
+            _source = _enemySetting.TokenGen(); 
             ChargeAttack(PlayerTr, _source).Forget();
         }
          
@@ -79,15 +81,9 @@ public class CEnemyAttackBoss : CEnemyAttack
     public override void ActionExit()
     {
         base.ActionExit();
-
-        TokenCancel(_source); 
+        _enemySetting.TokenCancel(); 
     }
-     
-    public override void OnDisable()
-    { 
-        TokenCancel(_source);
-    }
-     
+      
     private void ChangeAlpha(bool isMeleeAttack)
     {
         Color colorMelee = _meleeAttack.color;
@@ -154,7 +150,7 @@ public class CEnemyAttackBoss : CEnemyAttack
         if(_col.IsTouchingLayers(_mask))
         {
             _playerHP.OnHit(_damage);
-            TokenCancel(_source); 
+            _enemySetting.TokenCancel();
         }
        
         if ((_nav.destination - _tr.position).sqrMagnitude < 0.1f)

@@ -7,7 +7,9 @@ using UnityEngine;
 using UnityEngine.AI; 
 
 public class CEnemyReturn : CEnemyActionBase
-{ 
+{
+
+    private CEnemySetting _enemySetting;
     #region 내부변수
     private float _maxReturnTime = 3f;
     private float _time;
@@ -22,12 +24,9 @@ public class CEnemyReturn : CEnemyActionBase
     public CEnemyReturn(CEnemySetting enemySetting,int num) : base(enemySetting, num)
     {
         _setPosition = _tr.position;
+        _enemySetting = enemySetting;
     }
-      
-    public override void OnDisable()
-    {  
-        TokenCancel(_source);
-    }
+       
     public override bool Condition(Transform PlayerTr)
     {
         if (PlayerTr == null)
@@ -47,8 +46,7 @@ public class CEnemyReturn : CEnemyActionBase
     {   
         if(_source == null)
         {
-            _source = new CancellationTokenSource();
-           
+            _source = _enemySetting.TokenGen();  
         }
         else
         {
@@ -61,8 +59,8 @@ public class CEnemyReturn : CEnemyActionBase
     }
      
     public override void ActionExit()
-    { 
-        TokenCancel(_source);
+    {  
+        _enemySetting.TokenCancel();
     }
     async UniTask ReturnPosition(CancellationTokenSource tokenSource)
     { 

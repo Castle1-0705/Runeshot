@@ -46,21 +46,9 @@ public class CEnemyActionBase
 
     }
 
-    public virtual void OnDisable()
-    {
-
-    }
     protected void Flip(Vector3 position)
     {
         _tr.rotation = (position - _tr.position).x <= 0 ? Quaternion.identity : _tr.rotation = Quaternion.Euler(0, 180f, 0);
     }
-    protected void TokenCancel(CancellationTokenSource tokenSource)
-    {
-        if (tokenSource != null)
-        {   
-            tokenSource.Cancel();
-            tokenSource.Dispose();
-            tokenSource = null;
-        }
-    }
+    
 }
