@@ -7,6 +7,7 @@ public class CEnchantCraftingManager : CSingleton<CEnchantCraftingManager>
     #region 인스팩터
     [SerializeField] private CEnchantCraftingPanelController _panelPrefab;
     [SerializeField] private Transform _panelLayout;
+    [SerializeField] private CSoundControllerUI _sound;
     #endregion
 
     #region 내부변수
@@ -26,6 +27,8 @@ public class CEnchantCraftingManager : CSingleton<CEnchantCraftingManager>
         for (int i = 0; i < recipeDatabase.Count; i++)
         {
             CEnchantCraftingPanelController panel = Instantiate(_panelPrefab, _panelLayout);
+
+            panel.InjectSound(_sound);
 
             panel.InitializePanel(recipeDatabase[i]);
 

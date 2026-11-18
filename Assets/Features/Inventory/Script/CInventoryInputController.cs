@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CInventoryInputController : MonoBehaviour
 {
     #region 인스펙터    
     [SerializeField] private GameObject _inventoyPanel;
+    [SerializeField] private CSoundControllerUI _sound;
+
+    
 
     [Space]
     [Header("인풋 엑션")]
@@ -29,6 +33,8 @@ public class CInventoryInputController : MonoBehaviour
 
     private int _scrollIndex = 1;
     private bool _isReady = false;
+
+    private string _soundInventory = "Inventory";
     #endregion
 
     private void Start()
@@ -52,6 +58,13 @@ public class CInventoryInputController : MonoBehaviour
         }
 
         TryBind();
+
+        if(_sound == null)
+        {
+            Debug.Log("인벤토리 사운드 누락");
+            enabled = false;
+            return;
+        }
     }
 
     private void OnEnable()
@@ -208,6 +221,7 @@ public class CInventoryInputController : MonoBehaviour
 
     private void ToggleInventory()
     {
+        _sound.PlaySound(_sound.SoundSO.Clips[_soundInventory]);
         _inventoyPanel.SetActive(!_inventoyPanel.activeSelf);
     }
 }
