@@ -57,6 +57,20 @@ public class CWeapon : MonoBehaviour
 
     private void Start()
     {
+        if (_projectilePool == null && _data != null && _data.Projectile != null)
+        {
+            CProjectilePool[] pools = FindObjectsByType<CProjectilePool>(FindObjectsSortMode.None);
+            for (int i = 0; i < pools.Length; i++)
+            {
+                if (pools[i].gameObject.scene == gameObject.scene && pools[i].isActiveAndEnabled &&
+                    pools[i].Prefab == _data.Projectile.Prefab)
+                {
+                    _projectilePool = pools[i];
+                    break;
+                }
+            }
+        }
+
         if (HasInvalidReferences(_data))
         {
             Debug.LogError("무기 데이터, 투사체 풀 또는 Muzzle이 비어있음");
