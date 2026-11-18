@@ -25,10 +25,7 @@ public class CEnemy : MonoBehaviour
         if(_detectObject == null || _enemydata == null)
         {
             Debug.Log("인스펙터 확인");
-        }
-
-        //Debug.Log("디텍트 오브젝트 생성"); 
-        //Instantiate(_detectObject,transform);
+        } 
     }
   
     public bool Die()

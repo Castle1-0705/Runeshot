@@ -2,91 +2,78 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.AI; 
 
 public class CEnemyReturn : CEnemyActionBase
 {
-    #region 인스펙터
-    [SerializeField] private NavMeshAgent _navMove;
-    [SerializeField] private Animator _aniReturn;
-    [SerializeField] private Collider2D _col;
-    #endregion
-
+     
     #region 내부변수
+    private CEnemySetting _enemySetting;
+
     private float _maxReturnTime = 3f;
     private float _time;
-
-    private Vector3 _setPosition;
-
-    private string _move = "IMove";
-
-    CancellationTokenSource _tokenSource;
+    private Vector3 _setPosition; 
+    private string _move = "IMove";  
     #endregion
+     
+    public CEnemyReturn(CEnemySetting enemySetting,int num) : base(enemySetting, num)
+    {
+        _setPosition = _tr.position;
+        _enemySetting = enemySetting;
+    }
+       
+    public override bool Condition(Transform PlayerTr)
+    {
+        if (PlayerTr == null)
+        {
+            float distance = (_setPosition - _tr.position).sqrMagnitude;
 
-    private void Awake()
-    {
-        if(_navMove == null || _aniReturn == null || _col == null)
-        {
-            Debug.Log("인스펙터 확인");
+            if (distance > 0.1f)
+            { 
+                return true;
+            }
+
         }
-         
-        _setPosition = transform.position;
+
+        return false;
     }
-     
-    private void OnDestroy()
-    {
-        if(_tokenSource != null )
-        {
-            _tokenSource.Cancel();
-            _tokenSource.Dispose();
-            _tokenSource = null;
-        } 
-    }
-     
     public override void ActionEnter(Transform PlayerTr)
     {   
-        if(_tokenSource == null)
+        if(_enemySetting._source == null)
         {
-            _tokenSource = new CancellationTokenSource();
+            _nav.stoppingDistance = 0f;
+            ReturnPosition(_enemySetting.TokenGen()).Forget(); 
         }
         else
         {
             return;
         }    
-
-        _navMove.stoppingDistance = 0f;
-
-        ReturnPosition(_tokenSource).Forget();
+         
     }
- 
+     
     public override void ActionExit()
-    { 
-        if (_tokenSource != null)
-        {
-            _tokenSource.Cancel();
-            _tokenSource.Dispose();
-            _tokenSource = null;
-        } 
+    {  
+        _enemySetting.TokenCancel(); 
+        
     }
     async UniTask ReturnPosition(CancellationTokenSource tokenSource)
-    {
-        _aniReturn.SetInteger(_move, 1);
+    { 
+        _ani.SetInteger(_move, 1);
           
         await UniTask.WaitUntil(IsDestinationArrive, PlayerLoopTiming.Update, tokenSource.Token);
 
         float _time = UnityEngine.Random.Range(0f, _maxReturnTime);
 
         await UniTask.Delay(TimeSpan.FromSeconds(_maxReturnTime), false, PlayerLoopTiming.Update, tokenSource.Token);
+         
+        _nav.velocity = Vector3.zero;
+        _nav.destination = _setPosition;
+        _ani.SetInteger(_move, 1);
 
-        _navMove.velocity = Vector3.zero;
-        _navMove.destination = _setPosition;
-        _aniReturn.SetInteger(_move, 1);
-
-        Flip();
-
-        _tokenSource.Dispose();
-        _tokenSource = null;
+        Flip(_setPosition);
+  
     }
 
     private bool IsDestinationArrive()
@@ -94,13 +81,13 @@ public class CEnemyReturn : CEnemyActionBase
         bool isArrive = false;
          
         
-        if ((_navMove.destination - transform.position).magnitude <= 0.1f)
+        if ((_nav.destination - _tr.position).magnitude <= 0.1f)
         {
             isArrive = true;
             _time = 0;
-            _aniReturn.SetInteger(_move, 0);
+            _ani.SetInteger(_move, 0);
         }
-        else if ((_navMove.destination - transform.position).magnitude < _col.bounds.size.x)
+        else if ((_nav.destination - _tr.position).magnitude < _col.bounds.size.x)
         {
             _time += Time.deltaTime;
         }
@@ -108,24 +95,11 @@ public class CEnemyReturn : CEnemyActionBase
         if (_time > _maxReturnTime)
         {
             _time = 0;
-            _aniReturn.SetInteger(_move, 0);
+            _ani.SetInteger(_move, 0);
             return true;
         }
 
         return isArrive;
     }
-    
-
-    private void Flip()
-    {
-        if ((_setPosition - transform.position).x <= 0)
-        {
-            transform.rotation = Quaternion.identity;
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 180f, 0);
-        }
-    }
-
+     
 }
