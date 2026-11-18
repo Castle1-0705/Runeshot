@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class CItemSlotData
 {
@@ -116,6 +115,20 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 		InitializeInventory();
     }
 
+    private void Start()
+    {
+        if (_inventory.Count == 0)
+        {
+            return;
+        }
+
+        CPlayerCharacterController player = FindFirstObjectByType<CPlayerCharacterController>();
+        if (player != null && player.Weapon != null)
+        {
+            player.Weapon.SetAmmoSource(this);
+        }
+    }
+
     private void InitializeInventory()
     {
 		if(_itemSlotPrefab == null)
@@ -127,7 +140,7 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 
 		for (int i = 0; i < _inventorySize; i++)
 		{
-			if (_inventorySlots.Count -1 < i)
+			if (_inventorySlots.Count <= i || _inventorySlots[i] == null)
 			{
 
 				CItemSlotController slot = Instantiate(_itemSlotPrefab, _itemSlotLayout);
@@ -137,7 +150,14 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 					continue;
 				}
 
-				_inventorySlots.Add(slot);
+                if (i < _inventorySlots.Count)
+                {
+                    _inventorySlots[i] = slot;
+                }
+                else
+                {
+                    _inventorySlots.Add(slot);
+                }
 			}
 
 			_inventory.Add(null);
