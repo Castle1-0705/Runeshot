@@ -10,12 +10,5 @@ public class CSoundControllerSFXPlayer : CSoundController
     {
         AudioSource.outputAudioMixerGroup = CSoundManager.Instance.SFX; 
     }
-
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            PlaySound(SoundSO.Clips["Pistol"]);
-        }
-    }
+     
 }
