@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AttackArcherSO
   m_EditorClassIdentifier: 
   _id: 
-  _priority: 0
+  _priority: 6
