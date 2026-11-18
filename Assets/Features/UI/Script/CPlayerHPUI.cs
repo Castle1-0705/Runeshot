@@ -23,9 +23,14 @@ public class CPlayerHPUI : MonoBehaviour
         }
 
         _playerHP.OnHitEvent += PlayerHP;
-        PlayerHP();
+
+        IniValue(); 
     }
     
+    private void IniValue()
+    {
+        _hpSlider.value = 1f;
+    }
     public void PlayerHP()
     {
         if(_playerHP.MaxHP != 0)
@@ -35,5 +40,5 @@ public class CPlayerHPUI : MonoBehaviour
            _hpSlider.value = playerhp;
         } 
     }
-     
+       
 }
