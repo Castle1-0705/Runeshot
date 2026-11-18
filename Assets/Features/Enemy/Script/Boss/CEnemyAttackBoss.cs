@@ -12,6 +12,7 @@ public class CEnemyAttackBoss : CEnemyAttack
     private SpriteRenderer _meleeAttack;
     private SpriteRenderer _rangeAttack;
     private CEnemySetting _enemySetting;
+    private CWeapon _rangeWeaponAttack;
     #endregion
 
     #region 내부변수
@@ -29,6 +30,8 @@ public class CEnemyAttackBoss : CEnemyAttack
         _meleeAttack = enemySetting._meleeAttack;
         _rangeAttack = enemySetting._rangeAttack;
         _enemySetting = enemySetting;
+
+        _rangeWeaponAttack = enemySetting._weapon;
 
         _mask = 1 << LayerMask.NameToLayer(_playerLayer);
     }
@@ -66,6 +69,7 @@ public class CEnemyAttackBoss : CEnemyAttack
         else if (distance < 6f)
         {
             ChangeAlpha(false);
+            _rangeWeaponAttack.TryFire(PlayerTr.position);
             _ani.SetTrigger(_attackRange);
         } 
         else 
