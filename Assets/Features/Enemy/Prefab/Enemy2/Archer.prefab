@@ -2648,6 +2648,7 @@ MonoBehaviour:
   _meleeAttack: {fileID: 0}
   _rangeAttack: {fileID: 0}
   _weapon: {fileID: 4256507207067086744}
+  _muzzle: {fileID: 1299797046657567942}
 --- !u!114 &338432387877702798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3155,6 +3156,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c562f92f3b8b435d98ac3b65547b755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5432253269269311417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1299797046657567942}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1299797046657567942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432253269269311417}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.05, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8066623224860596095}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5535599948646843527
 GameObject:
   m_ObjectHideFlags: 0
@@ -4788,6 +4820,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8066623224860596095}
   - component: {fileID: 4256507207067086744}
+  - component: {fileID: 6767911283022591444}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -4803,11 +4836,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8608732479272447407}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.008726558, z: -0, w: 0.999962}
-  m_LocalPosition: {x: -1.6966469, y: 1.9301326, z: -0.06575987}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1299797046657567942}
   m_Father: {fileID: 2975364234635817597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4256507207067086744
@@ -4824,10 +4858,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 9223801bd24f4c3c8ee3e0805ece8c7e, type: 2}
   _projectilePool: {fileID: 0}
-  _gunHolder: {fileID: 2975364234635817597}
-  _muzzle: {fileID: 2975364234635817597}
+  _gunHolder: {fileID: 8066623224860596095}
+  _muzzle: {fileID: 1299797046657567942}
   _triggerActionName: TriggerWeapon
   _usePlayerInput: 0
+--- !u!114 &6767911283022591444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608732479272447407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954a9e83a0f3f294c877ac98c99daf30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 338432387877702798}
 --- !u!1 &8717932308154556624
 GameObject:
   m_ObjectHideFlags: 0
