@@ -98,7 +98,7 @@ public class CLootChestController : MonoBehaviour, IInteractable
         //_isOpend = false;
         Interact(); 
     }
-     
+
     private bool _isInteractable = false;
     private bool _enabled = false;
     private string _playerTag = "Player";
@@ -129,6 +129,22 @@ public class CLootChestController : MonoBehaviour, IInteractable
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.tag == _playerTag)
+        { 
+            if(collision.transform.position.y < _spriteRenderer.bounds.max.y)
+            {
+                
+                _spriteRenderer.sortingOrder = 4;
+            }
+            else
+            { 
+                _spriteRenderer.sortingOrder = 6;
+            }
+        }
+        
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == _playerTag)
