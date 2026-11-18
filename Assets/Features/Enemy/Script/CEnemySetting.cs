@@ -15,6 +15,7 @@ public class CEnemySetting : MonoBehaviour
 
     [SerializeField] public SpriteRenderer _meleeAttack;
     [SerializeField] public SpriteRenderer _rangeAttack;
+    [SerializeField] public CWeapon _weapon;
 
     public CancellationTokenSource _source;
      

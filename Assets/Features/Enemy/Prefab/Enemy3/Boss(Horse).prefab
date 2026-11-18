@@ -1534,6 +1534,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c562f92f3b8b435d98ac3b65547b755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1852254174658985986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5810947937719153321}
+  - component: {fileID: 2970740973002615961}
+  m_Layer: 0
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5810947937719153321
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852254174658985986}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.008727775, z: -0, w: 0.999962}
+  m_LocalPosition: {x: -1.9915808, y: 169.12883, z: -0.07092972}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8806603000988735365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2970740973002615961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852254174658985986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646ae1d480b34a4784e783df2c09eb54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 60bda336e9d342378e0d029c93a8f690, type: 2}
+  _projectilePool: {fileID: 0}
+  _gunHolder: {fileID: 8806603000988735365}
+  _muzzle: {fileID: 8806603000988735365}
+  _triggerActionName: TriggerWeapon
+  _usePlayerInput: 0
 --- !u!1 &2128451762486497556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1971,6 +2021,7 @@ Transform:
   - {fileID: 1504881165485770474}
   - {fileID: 5723152899697740184}
   - {fileID: 2073328925163991856}
+  - {fileID: 5810947937719153321}
   m_Father: {fileID: 8553682414496702744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!210 &4499602340503353491
@@ -2180,6 +2231,7 @@ MonoBehaviour:
   _controll: {fileID: 1529194602899979945}
   _meleeAttack: {fileID: 5264859269640265551}
   _rangeAttack: {fileID: 2892317310372394637}
+  _weapon: {fileID: 2970740973002615961}
 --- !u!1 &2772452684905689719
 GameObject:
   m_ObjectHideFlags: 0
