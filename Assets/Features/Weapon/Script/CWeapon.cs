@@ -25,6 +25,7 @@ public class CWeapon : MonoBehaviour
     #endregion
 
     #region 프로퍼티
+    public CWeaponDataSO Data => _data;
     public bool IsAutomatic => _data != null && _data.Trigger != null && _data.Trigger.IsAutomatic;
     public bool IsReloading { get; private set; }
 
@@ -56,6 +57,20 @@ public class CWeapon : MonoBehaviour
 
     private void Start()
     {
+        if (_projectilePool == null && _data != null && _data.Projectile != null)
+        {
+            CProjectilePool[] pools = FindObjectsByType<CProjectilePool>(FindObjectsSortMode.None);
+            for (int i = 0; i < pools.Length; i++)
+            {
+                if (pools[i].gameObject.scene == gameObject.scene && pools[i].isActiveAndEnabled &&
+                    pools[i].Prefab == _data.Projectile.Prefab)
+                {
+                    _projectilePool = pools[i];
+                    break;
+                }
+            }
+        }
+
         if (HasInvalidReferences(_data))
         {
             Debug.LogError("무기 데이터, 투사체 풀 또는 Muzzle이 비어있음");
@@ -145,7 +160,7 @@ public class CWeapon : MonoBehaviour
     public bool TryFire(Vector2 direction)
     {
         if (!isActiveAndEnabled || HasInvalidReferences(_data) ||
-            direction == Vector2.zero || IsReloading || MagazineAmmo <= 0 || Time.time < _nextFireTime)
+            direction == Vector2.zero || IsReloading || (_enemyStatus == null && MagazineAmmo <= 0) || Time.time < _nextFireTime)
         {
             return false;
         }
@@ -179,7 +194,10 @@ public class CWeapon : MonoBehaviour
             direction = Quaternion.Euler(0.0f, 0.0f, angle) * direction;
         }
 
-        _magazines[_data] = MagazineAmmo - 1;
+        if (_enemyStatus == null)
+        {
+            _magazines[_data] = MagazineAmmo - 1;
+        }
         _nextFireTime = Time.time + Mathf.Max(0.0f, fireInterval);
         Transform shooter = transform;
         if (_enemyStatus != null)
@@ -213,7 +231,7 @@ public class CWeapon : MonoBehaviour
     public bool TryReload()
     {
         if (!isActiveAndEnabled || HasInvalidReferences(_data) || IsPlayerDead() ||
-            IsReloading || MagazineAmmo >= _data.MagazineSize || _data.AmmoItem == null ||
+            _enemyStatus != null || IsReloading || MagazineAmmo >= _data.MagazineSize || _data.AmmoItem == null ||
             _data.AmmoItem.ItemType != EItemtype.Ammunition ||
             !HasAmmoSource() || !HasAmmo(_data.AmmoItem))
         {
