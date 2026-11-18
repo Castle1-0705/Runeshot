@@ -5,16 +5,20 @@ using UnityEngine.UI;
 
 public class COptionPenel : MonoBehaviour
 {
+    #region 인스펙터
+    [SerializeField] private GameObject _optionPanel;
+    [SerializeField] private GameObject _soundPenel;
+    [SerializeField] private Button _exitButton;
+    [SerializeField] private Button _soundButton;
+    [SerializeField] private Button _resumeButton;
 
-    [SerializeField] GameObject _optionPanel;
-    [SerializeField] GameObject _soundPenel;
-    [SerializeField] Button _exitButton;
-    [SerializeField] Button _soundButton;
-
-    [SerializeField] Button _resumeButton;
-
-    private bool _enabled = false;
     [SerializeField] private string _inputKey = "ESC";
+    #endregion
+
+    #region 내부 변수 
+    private bool _enabled = false;
+    #endregion
+
     private void Start()
     {
         BindOption();

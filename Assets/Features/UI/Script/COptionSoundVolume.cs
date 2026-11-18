@@ -6,15 +6,19 @@ using UnityEngine.UI;
 
 public class COptionSoundVolume : MonoBehaviour
 {
-    [SerializeField] GameObject _optionPanel;
+    #region 인스펙터 
+    [SerializeField] private GameObject _optionPanel;
+                     
+    [SerializeField] private Slider _master;
+    [SerializeField] private Slider _background;
+    [SerializeField] private Slider _sfx;
+    [SerializeField] private Slider _ui;
+    #endregion
 
-    [SerializeField] Slider _master;
-    [SerializeField] Slider _background;
-    [SerializeField] Slider _sfx;
-    [SerializeField] Slider _ui;
-
+    #region 내부 변수 
     private float _maxValue = 10f;
     private float _minValue = -40f;
+    #endregion
 
     private void Awake()
     {

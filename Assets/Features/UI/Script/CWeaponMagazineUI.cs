@@ -6,16 +6,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CWeaponMagazineUI : MonoBehaviour
-{  
-     Image _magazineUI;
-     Image _icon;
-    Image _reload;
+{
 
-    [SerializeField] Slider _magazineSlider;
-    [SerializeField] CWeapon _weapon;
+    #region 인스펙터
+    [SerializeField] private Slider _magazineSlider;
+    [SerializeField] private CWeapon _weapon;
+    #endregion
 
-    private List<Image> _images = new List<Image>();
+    #region 내부 변수
     private float _time;
+    #endregion 
+
+    //for test
+    #region for test
+    private Image _magazineUI;
+    private Image _icon;
+    private Image _reload;
+    private List<Image> _images = new List<Image>();
+    #endregion
+
     private void Start()
     { 
         if(_magazineSlider == null || _weapon == null)

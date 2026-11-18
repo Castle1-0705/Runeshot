@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class CPlayerHPUI : MonoBehaviour
 {
-
-    [SerializeField] Slider _hpSlider;
-    [SerializeField] CPlayerHPHandler _playerHP; 
+    #region ¿ŒΩ∫∆Â≈Õ 
+    [SerializeField] private Slider _hpSlider;
+    [SerializeField] private CPlayerHPHandler _playerHP;
+    #endregion
 
     private void Start()
     {
