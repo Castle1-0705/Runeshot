@@ -26,4 +26,4 @@ MonoBehaviour:
     - rid: 5559903884550864896
       type: {class: CItemEffectEquipWeapon, ns: , asm: Assembly-CSharp}
       data:
-        _weaponData: {fileID: 0}
+        _weaponData: {fileID: 11400000, guid: 9223801bd24f4c3c8ee3e0805ece8c7e, type: 2}
