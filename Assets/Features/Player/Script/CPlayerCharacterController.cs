@@ -20,5 +20,6 @@ public class CPlayerCharacterController : CSingleton<CPlayerCharacterController>
 	public CStatusEffectHandler StatusEffectHandler => _statusEffectHandler;
     public CModifierHandler ModifierHandler => _modifierHandler;
 	public CWeapon Weapon => _weapon;
+	public CPlayerStateController StateController => GetComponent<CPlayerStateController>();
 	#endregion
 }
