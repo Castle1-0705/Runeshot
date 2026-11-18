@@ -53,8 +53,18 @@ public class CItemDataSO : CGameDataSO
         }
 
         for (int i = 0; i < _effect.Length; i++)
-		{
-			_effect[i].OnUse().Forget();
+        {
+            if (_effect[i] is CItemEffectEquipWeapon equipWeapon)
+            {
+                if (!equipWeapon.TryEquipWeapon())
+                {
+                    return false;
+                }
+
+                continue;
+            }
+
+            _effect[i].OnUse().Forget();
         }
 
 		return true;
@@ -132,10 +142,21 @@ public class CItemEffectEquipWeapon : CItemEffect
 
 	public override UniTask OnUse()
 	{
-        //Todo: 무기 장착 로직 구현
-
+        TryEquipWeapon();
         return UniTask.CompletedTask;
-	}
+    }
+
+    public bool TryEquipWeapon()
+    {
+        CPlayerCharacterController player = CPlayerCharacterController.Instance;
+        if (player == null || player.Weapon == null || _weaponData == null)
+        {
+            Debug.LogWarning("플레이어 무기 또는 장착할 무기 데이터가 비어있음");
+            return false;
+        }
+
+        return player.Weapon.EquipWeapon(_weaponData);
+    }
 }
 
 [Serializable]

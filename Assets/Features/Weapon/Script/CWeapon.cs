@@ -108,17 +108,27 @@ public class CWeapon : MonoBehaviour
             _muzzle == null;
     }
 
-    public bool EquipWeapon(CWeaponDataSO data)
+    public bool EquipWeapon(CWeaponDataSO data, bool fromPickup = false)
     {
+        if (fromPickup && (!isActiveAndEnabled || IsPlayerDead()))
+        {
+            return false;
+        }
+
         if (HasInvalidReferences(data))
         {
             Debug.LogError("무기 데이터, 투사체 풀 또는 Muzzle이 비어있음");
             return false;
         }
 
-        if (_data == data)
+        if (_data == data && !fromPickup)
         {
             return true;
+        }
+
+        if (_playerState != null)
+        {
+            _magazines.Clear();
         }
 
         IsReloading = false;
