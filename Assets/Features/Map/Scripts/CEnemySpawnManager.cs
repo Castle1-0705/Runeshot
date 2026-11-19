@@ -26,6 +26,9 @@ public class CEnemySpawnManager : MonoBehaviour
     [SerializeField] private float _navMeshSearchRadius = 2f;
     [SerializeField] private int _spawnTryCount = 15;
 
+    [Header("설정")]
+    [SerializeField] private CProjectilePool _projectilePool;
+
     private GameObject[] _enemyPool;
 
     private float _spawnTimer;
@@ -223,14 +226,12 @@ public class CEnemySpawnManager : MonoBehaviour
 
             if (_enemyPool[i] == null)
             {
-                _enemyPool[i] = Instantiate(
-                    _enemyPrefab,
-                    _spawnPosition,
-                    Quaternion.identity
-                );
+                CWeapon weapon = _enemyPool[i].GetComponentInChildren<CWeapon>(true);
 
-                return;
-
+                if (weapon != null)
+                {
+                    weapon.SetProjectilePool(_projectilePool);
+                }
             }
 
             if (!_enemyPool[i].activeSelf)
