@@ -5,10 +5,12 @@ using UnityEngine.AI;
 
 public class CEnemyAttackArcher : CEnemyAttack
 {
-     
+    CWeapon _rangeAttack;
+    Transform _muzzle;
     public CEnemyAttackArcher(CEnemySetting enemySetting, int num) : base(enemySetting, num)
     {
-         
+        _rangeAttack = enemySetting._weapon;
+        _muzzle = enemySetting._muzzle;
     }
   
     public override void ActionUpdate(Transform PlayerTr)
@@ -27,8 +29,10 @@ public class CEnemyAttackArcher : CEnemyAttack
         {
             return;
         }
-         
-        _playerHP.OnHit(_damage);
+
+        Vector2 direction = (PlayerTr.position - _muzzle.position).normalized;
+
+        _rangeAttack.TryFire(direction); 
 
         _ani.SetTrigger(_attack);
         _time = 0;
