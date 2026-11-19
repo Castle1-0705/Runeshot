@@ -15,11 +15,16 @@ public class CEnchantCraftingPanelController : MonoBehaviour
     [SerializeField] private CItemIconController _ingredientItemIconPrefab;
 	[SerializeField] private List<CItemIconController> _ingredientItemIcons = new List<CItemIconController>();
     [SerializeField] private Transform _ingredientItemIconLayout;
-    [SerializeField] private Button _craftButton;
+    [SerializeField] private Button _craftButton; 
     #endregion
 
     #region 프로퍼티
     public CEnchantCraftingRecipeDataSO RecipeData => _recipeData;
+    #endregion
+
+    #region 내부 변수
+    private CSoundControllerUI _sound;
+    private string _craftSound = "Craft";
     #endregion
 
     private void Awake()
@@ -30,7 +35,12 @@ public class CEnchantCraftingPanelController : MonoBehaviour
             Debug.LogWarning("인스펙터 요소 누락");
             gameObject.SetActive(false);
             enabled = false;
-        }
+        } 
+    }
+    
+    public void InjectSound(CSoundControllerUI sound)
+    {
+        _sound = sound;
     }
 
     public void InitializePanel(CEnchantCraftingRecipeDataSO recipe)
@@ -75,6 +85,7 @@ public class CEnchantCraftingPanelController : MonoBehaviour
     private void OnCraftButtonClicked()
     {
         CEnchantCraftingManager.Instance.CraftItem(_recipeData);
+        _sound.PlaySound(_sound.SoundSO.Clips[_craftSound]);
     }
 
     public void SetPanelActive(bool active)
