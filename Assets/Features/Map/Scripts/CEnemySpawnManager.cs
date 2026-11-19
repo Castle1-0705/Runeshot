@@ -230,6 +230,7 @@ public class CEnemySpawnManager : MonoBehaviour
                 );
 
                 return;
+
             }
 
             if (!_enemyPool[i].activeSelf)
