@@ -18,14 +18,31 @@ public class CSoundManager : CSingletonDontDstroyAtLoad<CSoundManager>
     public AudioMixerGroup UI => _ui;
 
     Transform _cameraTr;
-     
+
     private void Start()
     {
-        _cameraTr = Camera.main.transform;
+        Camera mainCamera = Camera.main;
+
+        if (mainCamera != null)
+        {
+            _cameraTr = mainCamera.transform;
+        }
     }
 
     private void Update()
-    { 
+    {
+        if (_cameraTr == null)
+        {
+            Camera mainCamera = Camera.main;
+
+            if (mainCamera == null)
+            {
+                return;
+            }
+
+            _cameraTr = mainCamera.transform;
+        }
+
         transform.position = _cameraTr.position;
     }
 }
