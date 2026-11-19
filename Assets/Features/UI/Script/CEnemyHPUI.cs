@@ -23,6 +23,8 @@ public class CEnemyHPUI : MonoBehaviour
             return;
         }
         _enemyHP.OnHitEvent += EnemyHP;
+        _enemyHP.OnDeath += EnemyHP;
+        _enemyHP.OnHealEvent += EnemyHP;
         EnemyHP();
     }
 
