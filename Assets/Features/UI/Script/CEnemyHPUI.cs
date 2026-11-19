@@ -14,7 +14,7 @@ public class CEnemyHPUI : MonoBehaviour
     {
         if(_enemyHP == null || _hpSlider == null)
         {
-            _enemyHP = transform.parent.GetComponent<CEnemyHPHandler>();
+            _enemyHP = transform.GetComponent<CEnemyHPHandler>();
             Debug.Log("인스펙터 확인");
         }
 
