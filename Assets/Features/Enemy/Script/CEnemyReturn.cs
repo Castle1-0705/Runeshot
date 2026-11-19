@@ -73,11 +73,18 @@ public class CEnemyReturn : CEnemyActionBase
         _nav.velocity = Vector3.zero;
 
         NavMeshHit hit;
-
-        if(NavMesh.SamplePosition(_setPosition, out hit, _navMeshRadius, _nav.areaMask))
+         
+        if (NavMesh.SamplePosition(_setPosition, out hit, _navMeshRadius, NavMesh.AllAreas))
         {
-            _nav.destination = hit.position;
-        } 
+            if (_nav.isOnNavMesh)
+            {
+                _nav.destination = hit.position;
+            }
+            else
+            { 
+                _nav.Warp(hit.position);
+            } 
+        }
 
         _ani.SetInteger(_move, 1);
 
