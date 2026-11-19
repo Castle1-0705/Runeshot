@@ -67,6 +67,12 @@ public class CWeapon : MonoBehaviour
 
         if (_usePlayerInput)
         {
+            // Inspector 연결이 없는 경우 기존 플레이어 SFX를 재사용
+            if (_sound == null)
+            {
+                _sound = FindFirstObjectByType<CSoundControllerSFXPlayer>();
+            }
+
             if (_gunHolder == null)
             {
                 Debug.LogError("GunHolder가 비어있음");
