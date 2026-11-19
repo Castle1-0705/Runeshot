@@ -9,6 +9,7 @@ public interface IHPHandler
     float HP { get; set; }
     float MaxHP { get; }
     event Action OnHitEvent;
+    event Action OnHealEvent;
     event Action OnDeath;
     UniTask OnHit(float damage);
     UniTask OnHeal(float amount);
@@ -28,6 +29,7 @@ public abstract class CHPHandler<T> : MonoBehaviour, IHPHandler where T : CChara
     public float HP { get { return _hp; } set { _hp = Mathf.Clamp(value, 0, _status.MaxHP); } }
     public float MaxHP => _status.MaxHP;
     public event Action OnHitEvent;
+    public event Action OnHealEvent;
     public event Action OnDeath;
     #endregion
 
@@ -42,6 +44,10 @@ public abstract class CHPHandler<T> : MonoBehaviour, IHPHandler where T : CChara
     public void OnHitInvoke()
     {
         OnHitEvent?.Invoke();
+    }
+    public void OnHealInvoke()
+    {
+        OnHealEvent?.Invoke();
     }
 
 }

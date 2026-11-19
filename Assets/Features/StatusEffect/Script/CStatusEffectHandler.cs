@@ -6,7 +6,7 @@ using UnityEngine;
 public class CStatusEffectHandler : MonoBehaviour
 {
     #region 인스팩터
-    [SerializeField] private List<CStatusEffect> _statusEffects;
+    [SerializeField] private List<CStatusEffect> _statusEffects = new List<CStatusEffect>();
     #endregion
 
     #region 내부변수
