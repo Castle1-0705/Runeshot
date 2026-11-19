@@ -35,7 +35,15 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
     {
        
     }
-     
+    private void OnEnable()
+    {
+        _enemy.DieOrAlive(true);
+        
+    }
+    private void OnDisable()
+    {
+        
+    }
     private void SetFalse()
     {
         gameObject.SetActive(false);
@@ -55,7 +63,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         _aniHP.SetTrigger(_stringDamaged);
         if (HP <= 0f)
         {
-            _enemy.Die();
+            _enemy.DieOrAlive(false);
             _aniHP.SetBool(_death,true); 
 
             await UniTask.WaitUntil(UntilDeath, PlayerLoopTiming.Update, destroyCancellationToken); 

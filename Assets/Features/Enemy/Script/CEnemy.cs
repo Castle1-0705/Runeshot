@@ -28,9 +28,10 @@ public class CEnemy : MonoBehaviour
         } 
     }
   
-    public bool Die()
+    
+    public bool DieOrAlive(bool isAlive)
     {
-        _isAlive = false;
+        _isAlive = isAlive;
         
         return _isAlive;
     }
