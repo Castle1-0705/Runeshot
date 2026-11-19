@@ -84,10 +84,8 @@ public class CStatusEffectHeal : CStatusEffect
             {
                 break;
             }
-
-            float amount = _healAmount/_durationTimer;
              
-            hp.OnHeal(amount).Forget();
+            hp.OnHeal(_healAmount).Forget();
 
             _durationTimer -= Time.deltaTime;
 
