@@ -104,11 +104,13 @@ public class CPlayerHPHandler : CHPHandler<CPlayerStausDataSO>
     // 체력 회복
     public void Heal(float amount)
     {
-        if (amount <= 0.0f || HP <= 0.0f)
+        if (amount <= 0.0f || HP <= 0.0f || HP >= MaxHP)
         {
             return;
         }
 
         HP = Mathf.Min(MaxHP, HP + amount);
+
+        OnHealInvoke();
     }
 }
