@@ -24,7 +24,7 @@ public class CPlayerHPUI : MonoBehaviour
         }
 
         _playerHP.OnHitEvent += PlayerHP;
-
+        _playerHP.OnHealEvent += PlayerHP;
         IniValue(); 
     }
     

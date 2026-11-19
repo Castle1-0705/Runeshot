@@ -4,8 +4,9 @@ public class CPlayerRoll : MonoBehaviour
 {
     #region 인스펙터
     [SerializeField] private string _rollActionName = "DodgeRoll";
-    [SerializeField] private float _rollSpeed = 4.5f;
-    [SerializeField] private float _rollDuration = 0.7f;
+    [SerializeField] private float _rollSpeed = 7.5f;
+    [SerializeField] private float _rollDuration = 0.4f;
+    [SerializeField] private float _rollCooldown = 0.8f;
     #endregion
 
     #region 내부 변수
@@ -15,6 +16,9 @@ public class CPlayerRoll : MonoBehaviour
     private CInputActionData _rollInput;
     private Vector2 _rollDirection;
     private float _rollTimer;
+    private float _rollCooldownTimer;
+    private int _cooldownStartFrame = -1;
+    private bool _isRolling;
     #endregion
 
     #region 프로퍼티
@@ -23,6 +27,11 @@ public class CPlayerRoll : MonoBehaviour
         _stateController.CurrentState == EPlayerState.Roll &&
         _rollTimer > _rollDuration * 0.5f;
     public Vector2 RollDirection => _rollDirection;
+    public float RollDuration => _rollDuration;
+    public bool CanRoll =>
+        isActiveAndEnabled && _stateController != null &&
+        _stateController.CurrentState == EPlayerState.Move &&
+        !_isRolling && _rollCooldownTimer <= 0.0f;
     #endregion
 
     private void Awake()
@@ -80,6 +89,27 @@ public class CPlayerRoll : MonoBehaviour
         {
             _stateController.ChangeState(EPlayerState.Idle);
         }
+
+        if (_isRolling)
+        {
+            StartRollCooldown();
+        }
+    }
+
+    private void Update()
+    {
+        // 피격·사망 등 외부 상태 변경으로 대시가 중단된 경우
+        if (_isRolling && _stateController.CurrentState != EPlayerState.Roll)
+        {
+            StartRollCooldown();
+        }
+
+        // 종료 프레임은 차감하지 않고 다음 프레임부터 쿨타임 감소
+        if (!_isRolling && _rollCooldownTimer > 0.0f &&
+            Time.frameCount != _cooldownStartFrame)
+        {
+            _rollCooldownTimer = Mathf.Max(0.0f, _rollCooldownTimer - Time.deltaTime);
+        }
     }
 
     private void FixedUpdate()
@@ -95,13 +125,14 @@ public class CPlayerRoll : MonoBehaviour
     // 구르기 시작
     private void StartRoll()
     {
-        if (_stateController.CurrentState != EPlayerState.Move)
+        if (!CanRoll)
         {
             return;
         }
 
         _rollDirection = _movement.MoveDirection.normalized;
         _rollTimer = _rollDuration;
+        _isRolling = true;
 
         _stateController.ChangeState(EPlayerState.Roll);
     }
@@ -124,6 +155,8 @@ public class CPlayerRoll : MonoBehaviour
     // 구르기 종료
     private void EndRoll()
     {
+        StartRollCooldown();
+
         if (_movement.MoveDirection == Vector2.zero)
         {
             _stateController.ChangeState(EPlayerState.Idle);
@@ -132,5 +165,13 @@ public class CPlayerRoll : MonoBehaviour
         {
             _stateController.ChangeState(EPlayerState.Move);
         }
+    }
+
+    // 정상 종료와 중단 모두 같은 쿨타임 시작 처리 사용
+    private void StartRollCooldown()
+    {
+        _isRolling = false;
+        _rollCooldownTimer = _rollCooldown;
+        _cooldownStartFrame = Time.frameCount;
     }
 }
