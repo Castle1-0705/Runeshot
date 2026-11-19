@@ -232,6 +232,8 @@ public class CEnemySpawnManager : MonoBehaviour
                 {
                     weapon.SetProjectilePool(_projectilePool);
                 }
+
+                return;
             }
 
             if (!_enemyPool[i].activeSelf)
