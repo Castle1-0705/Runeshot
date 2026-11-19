@@ -5,16 +5,20 @@ using UnityEngine.UI;
 
 public class COptionPenel : MonoBehaviour
 {
+    #region 인스펙터
+    [SerializeField] private GameObject _optionPanel;
+    [SerializeField] private GameObject _soundPenel;
+    [SerializeField] private Button _exitButton;
+    [SerializeField] private Button _soundButton;
+    [SerializeField] private Button _resumeButton;
 
-    [SerializeField] GameObject _optionPanel;
-    [SerializeField] GameObject _soundPenel;
-    [SerializeField] Button _exitButton;
-    [SerializeField] Button _soundButton;
+    [SerializeField] private string _inputKey = "ESC";
+    #endregion
 
-    [SerializeField] Button _resumeButton;
-
+    #region 내부 변수 
     private bool _enabled = false;
-    private string _name = "ESC";
+    #endregion
+
     private void Start()
     {
         BindOption();
@@ -26,17 +30,17 @@ public class COptionPenel : MonoBehaviour
 
     private void BindOption()
     {
-        if (CInputDispatcher.Instance.InputActionMap.ContainsKey(_name))
+        if (CInputDispatcher.Instance.InputActionMap.ContainsKey(_inputKey))
         {
-            CInputDispatcher.Instance.InputActionMap[_name].OnPerformedAction += OpenOption;
+            CInputDispatcher.Instance.InputActionMap[_inputKey].OnPerformedAction += OpenOption;
         }
     }
 
     private void OnDisable()
     {
-        if (CInputDispatcher.Instance.InputActionMap.ContainsKey(_name))
+        if (CInputDispatcher.Instance.InputActionMap.ContainsKey(_inputKey))
         {
-            CInputDispatcher.Instance.InputActionMap[_name].OnPerformedAction -= OpenOption;
+            CInputDispatcher.Instance.InputActionMap[_inputKey].OnPerformedAction -= OpenOption;
         }
     }
     public void OpenOption()

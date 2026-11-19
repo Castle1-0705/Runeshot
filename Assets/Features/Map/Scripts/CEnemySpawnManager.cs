@@ -26,9 +26,7 @@ public class CEnemySpawnManager : MonoBehaviour
     [SerializeField] private float _navMeshSearchRadius = 2f;
     [SerializeField] private int _spawnTryCount = 15;
 
-    private GameObject[] _spawnedEnemies;
-
-
+    private GameObject[] _enemyPool;
 
     private float _spawnTimer;
     private float _nextSpawnTime;
@@ -43,7 +41,7 @@ public class CEnemySpawnManager : MonoBehaviour
             _maxEnemyCount = 1;
         }
 
-        _spawnedEnemies = new GameObject[_maxEnemyCount];
+        _enemyPool = new GameObject[_maxEnemyCount];
 
         if (_mainCamera == null)
         {
@@ -104,23 +102,21 @@ public class CEnemySpawnManager : MonoBehaviour
 
     private void RemoveFarEnemies()
     {
-        for (int i = 0; i < _spawnedEnemies.Length; i++)
+        for (int i = 0; i < _enemyPool.Length; i++)
         {
-            if (_spawnedEnemies[i] == null)
+            if (_enemyPool[i] == null || !_enemyPool[i].activeSelf)
             {
                 continue;
             }
 
             float distance = Vector2.Distance(
                 _player.position,
-                _spawnedEnemies[i].transform.position
+                _enemyPool[i].transform.position
             );
 
             if (distance > _enemyRemoveDistance)
             {
-                Destroy(_spawnedEnemies[i]);
-
-                _spawnedEnemies[i] = null;
+                _enemyPool[i].SetActive(false);
             }
         }
     }
@@ -129,14 +125,9 @@ public class CEnemySpawnManager : MonoBehaviour
     {
         int enemyCount = 0;
 
-        for (int i = 0; i < _spawnedEnemies.Length; i++)
+        for (int i = 0; i < _enemyPool.Length; i++)
         {
-            if (_spawnedEnemies[i] == null ||
-                !_spawnedEnemies[i].activeInHierarchy)
-            {
-                _spawnedEnemies[i] = null;
-            }
-            else
+            if (_enemyPool[i] != null && _enemyPool[i].activeSelf)
             {
                 enemyCount++;
             }
@@ -227,17 +218,26 @@ public class CEnemySpawnManager : MonoBehaviour
 
     private void CreateEnemy()
     {
-        for (int i = 0; i < _spawnedEnemies.Length; i++)
+        for (int i = 0; i < _enemyPool.Length; i++)
         {
-            if (_spawnedEnemies[i] == null)
+
+            if (_enemyPool[i] == null)
             {
-                GameObject enemy = Instantiate(
+                _enemyPool[i] = Instantiate(
                     _enemyPrefab,
                     _spawnPosition,
                     Quaternion.identity
                 );
 
-                _spawnedEnemies[i] = enemy;
+                return;
+            }
+
+            if (!_enemyPool[i].activeSelf)
+            {
+                _enemyPool[i].transform.position = _spawnPosition;
+                _enemyPool[i].transform.rotation = Quaternion.identity;
+
+                _enemyPool[i].SetActive(true);
 
                 return;
             }
