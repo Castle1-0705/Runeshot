@@ -223,11 +223,21 @@ public class CEnemySpawnManager : MonoBehaviour
 
             if (_enemyPool[i] == null)
             {
-                _enemyPool[i] = Instantiate(
+                GameObject enemy = Instantiate(
                     _enemyPrefab,
                     _spawnPosition,
                     Quaternion.identity
                 );
+
+
+                CWeapon weapon = enemy.GetComponentInChildren<CWeapon>(true);
+
+                if (weapon != null)
+                {
+                    weapon.SetProjectilePool(_projectilePool);
+                }
+
+                _enemyPool[i] = enemy;
 
                 return;
             }
