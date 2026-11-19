@@ -38,7 +38,8 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
      
     private void SetFalse()
     {
-        transform.parent.gameObject.SetActive(false);
+        gameObject.SetActive(false);
+        HP = MaxHP;
     }
 
     //TODO

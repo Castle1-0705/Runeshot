@@ -107,7 +107,7 @@ public class CEnemySpawnManager : MonoBehaviour
     {
         for (int i = 0; i < _enemyPool.Length; i++)
         {
-            if (_enemyPool[i] == null || !_enemyPool[i].activeSelf)
+            if (_enemyPool[i] == null)
             {
                 continue;
             }
@@ -116,10 +116,16 @@ public class CEnemySpawnManager : MonoBehaviour
                 _player.position,
                 _enemyPool[i].transform.position
             );
-
+            
             if (distance > _enemyRemoveDistance)
             {
+                
                 _enemyPool[i].SetActive(false);
+
+            }
+            else
+            {
+                _enemyPool[i].SetActive(true);
             }
         }
     }
@@ -222,10 +228,10 @@ public class CEnemySpawnManager : MonoBehaviour
     private void CreateEnemy()
     {
         for (int i = 0; i < _enemyPool.Length; i++)
-        {
-
+        { 
             if (_enemyPool[i] == null)
             {
+                _enemyPool[i] = Instantiate(_enemyPrefab, _spawnPosition, Quaternion.identity);
                 CWeapon weapon = _enemyPool[i].GetComponentInChildren<CWeapon>(true);
 
                 if (weapon != null)
@@ -234,8 +240,11 @@ public class CEnemySpawnManager : MonoBehaviour
                 }
 
                 return;
-            }
+            } 
+        }
 
+        for (int i = 0; i < _enemyPool.Length; i++)
+        {
             if (!_enemyPool[i].activeSelf)
             {
                 _enemyPool[i].transform.position = _spawnPosition;
@@ -246,5 +255,6 @@ public class CEnemySpawnManager : MonoBehaviour
                 return;
             }
         }
+
     }
 }
