@@ -5,6 +5,7 @@ public class CPlayerAnimationController : MonoBehaviour
     #region 인스펙터
     [SerializeField] private SPUM_Prefabs _spumPrefabs;
     [SerializeField] private Transform _visualRoot;
+    [SerializeField] private Transform _bodySet;
     [SerializeField] private Transform _gunHolder;
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -15,6 +16,7 @@ public class CPlayerAnimationController : MonoBehaviour
     #region 내부 변수
     private CPlayerStateController _stateController;
     private CPlayerRoll _roll;
+    private CPlayerMovement _movement;
     private CPlayerHPHandler _hpHandler;
 
     private bool _wasRolling;
@@ -25,6 +27,15 @@ public class CPlayerAnimationController : MonoBehaviour
     private SpriteRenderer[] _spumRenderers;
     private Color[] _spumColors;
     private Vector3 _visualScale;
+    private Vector3 _bodyScale;
+    private Quaternion _visualRotation;
+    private Quaternion _bodyRotation;
+    private float _spumAnimationSpeed;
+    private float _dodgeLowerDirection;
+    private float _dodgeUpperDirection;
+    private float _dodgeTimer;
+    private float _lowerDirection;
+    private float _upperDirection;
     private PlayerState _currentSpumAnimation;
     private bool _hasSpumAnimation;
     #endregion
@@ -33,6 +44,7 @@ public class CPlayerAnimationController : MonoBehaviour
     {
         _stateController = GetComponent<CPlayerStateController>();
         _roll = GetComponent<CPlayerRoll>();
+        _movement = GetComponent<CPlayerMovement>();
         _hpHandler = GetComponent<CPlayerHPHandler>();
 
         if (_animator == null || _spriteRenderer == null ||
@@ -79,6 +91,14 @@ public class CPlayerAnimationController : MonoBehaviour
         _hitMask.backSortingOrder = _spriteRenderer.sortingOrder;
     }
 
+    private void OnDisable()
+    {
+        if (_spumPrefabs != null && _wasRolling)
+        {
+            RestoreSpumDodgeVisual();
+        }
+    }
+
     private void Update()
     {
         UpdateAnimation();
@@ -90,6 +110,7 @@ public class CPlayerAnimationController : MonoBehaviour
         if (_spumPrefabs != null)
         {
             UpdateSpumVisualDirection();
+            UpdateSpumDodgeVisual();
         }
         else
         {
@@ -349,7 +370,8 @@ public class CPlayerAnimationController : MonoBehaviour
     // SPUM은 기존 플레이어 상태를 외형 애니메이션으로만 연결
     private void InitializeSpum()
     {
-        if (_visualRoot == null || _gunHolder == null || _spumPrefabs._anim == null ||
+        if (_visualRoot == null || _bodySet == null || _movement == null ||
+            _gunHolder == null || _spumPrefabs._anim == null ||
             _spumPrefabs._anim.runtimeAnimatorController == null ||
             _spumPrefabs.IDLE_List.Count == 0 || _spumPrefabs.IDLE_List[0] == null ||
             _spumPrefabs.MOVE_List.Count == 0 || _spumPrefabs.MOVE_List[0] == null ||
@@ -379,6 +401,12 @@ public class CPlayerAnimationController : MonoBehaviour
         }
 
         _visualScale = _visualRoot.localScale;
+        _bodyScale = _bodySet.localScale;
+        _visualRotation = _visualRoot.localRotation;
+        _bodyRotation = _bodySet.localRotation;
+        _spumAnimationSpeed = _spumPrefabs._anim.speed;
+        _lowerDirection = -Mathf.Sign(_visualScale.x);
+        _upperDirection = _lowerDirection;
         _spumPrefabs.OverrideControllerInit();
         _animator.enabled = false;
         _spriteRenderer.enabled = false;
@@ -387,6 +415,12 @@ public class CPlayerAnimationController : MonoBehaviour
     private void UpdateSpumAnimation()
     {
         EPlayerState state = _stateController.CurrentState;
+
+        // 대시 종료 및 피격·사망 전환 시 원래 애니메이션 속도로 복원
+        if (state != EPlayerState.Roll && _wasRolling)
+        {
+            RestoreSpumDodgeVisual();
+        }
 
         if (state == EPlayerState.Dead)
         {
@@ -409,52 +443,111 @@ public class CPlayerAnimationController : MonoBehaviour
         }
     }
 
-    // 마우스 조준 방향에 따른 외형
+    // 하체는 이동 방향, 상체는 마우스 조준 방향 사용
     private void UpdateSpumVisualDirection()
     {
-        if (_visualRoot == null || _gunHolder == null)
-        {
-            return;
-        }
-
         EPlayerState state = _stateController.CurrentState;
 
-        // 피격 및 사망 중에는 기존 방향 유지
+        // 피격 및 사망 중에는 마지막 방향을 유지하고 기울기 보정만 해제
         if (state == EPlayerState.Hit || state == EPlayerState.Dead)
         {
+            _bodySet.localRotation = _bodyRotation;
             return;
         }
 
-        float directionX;
-
-        // 구르기 중에는 구르기 방향 사용
         if (state == EPlayerState.Roll)
         {
-            directionX = _roll.RollDirection.x;
+            // 진입 직전 방향을 각각 보관해 수직 대시에서도 갑자기 반전되지 않음
+            if (!_wasRolling)
+            {
+                _dodgeLowerDirection = _lowerDirection;
+                _dodgeUpperDirection = _upperDirection;
+            }
+            _lowerDirection = _dodgeLowerDirection;
+            _upperDirection = _dodgeUpperDirection;
         }
         else
         {
-            // 일반 상태에서는 마우스 조준 방향 사용
-            directionX = _gunHolder.right.x;
-        }
+            // 정지 및 수직 이동 중에는 하체의 마지막 방향 유지
+            if (state == EPlayerState.Move)
+            {
+                if (_movement.MoveDirection.x > 0.05f)
+                {
+                    _lowerDirection = 1.0f;
+                }
+                else if (_movement.MoveDirection.x < -0.05f)
+                {
+                    _lowerDirection = -1.0f;
+                }
+            }
 
-        Vector3 scale = _visualRoot.localScale;
+            if (_gunHolder.right.x > 0.05f)
+            {
+                _upperDirection = 1.0f;
+            }
+            else if (_gunHolder.right.x < -0.05f)
+            {
+                _upperDirection = -1.0f;
+            }
+        }
 
         // SPUM 기본 외형은 왼쪽을 바라보는 상태
-        if (directionX > 0.05f)
+        Vector3 scale = _visualScale;
+        scale.x = -_lowerDirection * Mathf.Abs(_visualScale.x);
+        _visualRoot.localScale = scale;
+
+        Vector3 bodyScale = _bodyScale;
+        Quaternion bodyRotation = _bodyRotation;
+        if (_upperDirection != _lowerDirection)
         {
-            scale.x = -Mathf.Abs(_visualScale.x);
+            bodyScale.x = -_bodyScale.x;
+
+            // MOVE의 Root 기울기까지 반전해야 화면의 수직축을 기준으로 뒤집힘
+            // 위치는 건드리지 않고 매 프레임 원래 회전을 기준으로 계산
+            float rootAngle = Mathf.DeltaAngle(0.0f, _bodySet.parent.localEulerAngles.z);
+            bodyRotation *= Quaternion.Euler(0.0f, 0.0f, -2.0f * rootAngle);
         }
-        else if (directionX < -0.05f)
+        _bodySet.localScale = bodyScale;
+        _bodySet.localRotation = bodyRotation;
+    }
+
+    // 실제 이동은 CPlayerRoll에 맡기고 외형에만 짧고 약한 대시 효과 적용
+    private void UpdateSpumDodgeVisual()
+    {
+        if (_stateController.CurrentState != EPlayerState.Roll)
         {
-            scale.x = Mathf.Abs(_visualScale.x);
-        }
-        else
-        {
+            if (_wasRolling)
+            {
+                RestoreSpumDodgeVisual();
+            }
             return;
         }
 
+        if (!_wasRolling)
+        {
+            _dodgeTimer = 0.0f;
+            _wasRolling = true;
+            _spumPrefabs._anim.speed = _spumAnimationSpeed * 1.5f;
+            // 진입할 때 한 번만 재생해 IDLE 전환 대기 없이 발 동작 시작
+            _spumPrefabs._anim.Play("MOVE", 0, 0.0f);
+        }
+
+        _dodgeTimer += Time.deltaTime;
+        float effect = Mathf.Sin(Mathf.Clamp01(_dodgeTimer / _roll.RollDuration) * Mathf.PI);
+        float angle = -_roll.RollDirection.x * 4.0f * effect;
+        _visualRoot.localRotation = _visualRotation * Quaternion.Euler(0.0f, 0.0f, angle);
+    }
+
+    private void RestoreSpumDodgeVisual()
+    {
+        Vector3 scale = _visualScale;
+        scale.x = -_lowerDirection * Mathf.Abs(_visualScale.x);
         _visualRoot.localScale = scale;
+        _visualRoot.localRotation = _visualRotation;
+        _bodySet.localRotation = _bodyRotation;
+        _spumPrefabs._anim.speed = _spumAnimationSpeed;
+        _dodgeTimer = 0.0f;
+        _wasRolling = false;
     }
 
     // 같은 애니메이션은 다시 시작하지 않음

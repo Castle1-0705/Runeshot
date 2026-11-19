@@ -265,8 +265,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rollActionName: DodgeRoll
-  _rollSpeed: 4.5
-  _rollDuration: 0.7
+  _rollSpeed: 7.5
+  _rollDuration: 0.4
+  _rollCooldown: 0.8
 --- !u!114 &1717773717688115804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spumPrefabs: {fileID: 4760082657068843107}
   _visualRoot: {fileID: 7009196361145889800}
+  _bodySet: {fileID: 7009196361145889801}
   _gunHolder: {fileID: 3406150681989994273}
   _animator: {fileID: 70578492069737218}
   _spriteRenderer: {fileID: 4646929293568256905}
@@ -747,5 +749,10 @@ MonoBehaviour:
 --- !u!224 &7009196361145889800 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5266601598151883741, guid: b24b24a1878dfa24891e5e98ca961a88, type: 3}
+  m_PrefabInstance: {fileID: 2905684651674128341}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7009196361145889801 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9010609970929417499, guid: b24b24a1878dfa24891e5e98ca961a88, type: 3}
   m_PrefabInstance: {fileID: 2905684651674128341}
   m_PrefabAsset: {fileID: 0}
