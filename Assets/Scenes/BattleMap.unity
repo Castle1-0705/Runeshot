@@ -791,6 +791,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7861532054912300010, guid: 417b4dcac69c3934aad30d2911019f7d, type: 3}
+      propertyPath: _projectilePool
+      value:
+      objectReference: {fileID: 1740200002}
+    - target: {fileID: 7861532054912300010, guid: 417b4dcac69c3934aad30d2911019f7d, type: 3}
       propertyPath: _UI
       value: 
       objectReference: {fileID: 0}
@@ -3346152,6 +3346156,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &1740200000
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f4fdc9c2302446c69407ead5403b6771, type: 3}
+--- !u!4 &1740200001 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7861532054912300021, guid: f4fdc9c2302446c69407ead5403b6771, type: 3}
+  m_PrefabInstance: {fileID: 1740200000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1740200002 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7861532054912300022, guid: f4fdc9c2302446c69407ead5403b6771, type: 3}
+  m_PrefabInstance: {fileID: 1740200000}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461fb2255e25475f93124e7ed18e8d3c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3346183,6 +3346216,7 @@ SceneRoots:
   - {fileID: 2095646365}
   - {fileID: 1099386238}
   - {fileID: 1108940146}
+  - {fileID: 1740200001}
   - {fileID: 470864944}
   - {fileID: 377332421}
   - {fileID: 380915490}

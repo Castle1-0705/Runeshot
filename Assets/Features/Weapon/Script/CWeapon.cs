@@ -11,6 +11,7 @@ public class CWeapon : MonoBehaviour
     [SerializeField] private Transform _muzzle;
     [SerializeField] private string _triggerActionName = "TriggerWeapon";
     [SerializeField] private bool _usePlayerInput = true;
+    [SerializeField] private CSoundController _sound;
     #endregion
 
     #region 내부 변수
@@ -57,20 +58,6 @@ public class CWeapon : MonoBehaviour
 
     private void Start()
     {
-        if (_projectilePool == null && _data != null && _data.Projectile != null)
-        {
-            CProjectilePool[] pools = FindObjectsByType<CProjectilePool>(FindObjectsSortMode.None);
-            for (int i = 0; i < pools.Length; i++)
-            {
-                if (pools[i].gameObject.scene == gameObject.scene && pools[i].isActiveAndEnabled &&
-                    pools[i].Prefab == _data.Projectile.Prefab)
-                {
-                    _projectilePool = pools[i];
-                    break;
-                }
-            }
-        }
-
         if (HasInvalidReferences(_data))
         {
             Debug.LogError("무기 데이터, 투사체 풀 또는 Muzzle이 비어있음");
@@ -213,6 +200,13 @@ public class CWeapon : MonoBehaviour
             shooter = _playerStatus.transform;
         }
 
+        AudioClip clip;
+        if (_sound != null && _sound.SoundSO != null && _sound.AudioSource != null &&
+            _sound.SoundSO.Clips.TryGetValue(_data.name, out clip) && clip != null)
+        {
+            _sound.PlaySound(clip);
+        }
+
         _data.Trigger.TriggerWeapon(_data.Projectile, _projectilePool, _muzzle.position, direction, damage, shooter).Forget();
         return true;
     }
@@ -220,6 +214,11 @@ public class CWeapon : MonoBehaviour
     private bool IsPlayerDead()
     {
         return _playerState != null && _playerState.CurrentState == EPlayerState.Dead;
+    }
+
+    public void SetProjectilePool(CProjectilePool pool)
+    {
+        _projectilePool = pool;
     }
 
     public void SetAmmoSource(IitemContainer ammoSource)
@@ -250,6 +249,13 @@ public class CWeapon : MonoBehaviour
         if (_playerInput != null)
         {
             _playerInput.ClearPendingShots();
+        }
+
+        AudioClip clip;
+        if (_sound != null && _sound.SoundSO != null && _sound.AudioSource != null &&
+            _sound.SoundSO.Clips.TryGetValue("Reload", out clip) && clip != null)
+        {
+            _sound.PlaySound(clip);
         }
 
         return true;
