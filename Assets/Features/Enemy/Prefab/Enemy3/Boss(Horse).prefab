@@ -1560,8 +1560,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1852254174658985986}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.008727775, z: -0, w: 0.999962}
-  m_LocalPosition: {x: -1.9915808, y: 169.12883, z: -0.07092972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1586,6 +1586,7 @@ MonoBehaviour:
   _muzzle: {fileID: 9203339776144751375}
   _triggerActionName: TriggerWeapon
   _usePlayerInput: 0
+  _sound: {fileID: 0}
 --- !u!114 &5704660558240267136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2017,8 +2018,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2623341516922337334}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.008726558, z: -0, w: 0.999962}
-  m_LocalPosition: {x: 2.7473762, y: -1.93013, z: 0.017814124}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.05, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2211,7 +2212,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.44}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2278,7 +2279,7 @@ MonoBehaviour:
   _meleeAttack: {fileID: 5264859269640265551}
   _rangeAttack: {fileID: 2892317310372394637}
   _weapon: {fileID: 2970740973002615961}
-  _muzzle: {fileID: 0}
+  _muzzle: {fileID: 9203339776144751375}
 --- !u!1 &2772452684905689719
 GameObject:
   m_ObjectHideFlags: 0

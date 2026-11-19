@@ -27,7 +27,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         HP = MaxHP;
 
         OnDeath += DropItem;
-        OnDeath += Destroy;
+        OnDeath += SetFalse;
 
     }
 
@@ -36,9 +36,9 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
        
     }
      
-    private void Destroy()
+    private void SetFalse()
     {
-        Destroy(transform.parent.gameObject);
+        transform.parent.gameObject.SetActive(false);
     }
 
     //TODO
