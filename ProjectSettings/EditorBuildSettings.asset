@@ -33,6 +33,6 @@ EditorBuildSettings:
     path: Assets/Features/Map/Scenes/HouseE.unity
     guid: 76daeeec0f11ed548a8c7037259c70e0
   - enabled: 1
-    path: Assets/Features/Map/Scenes/Store.unity
+    path: Assets/Features/Map/Scenes/StoreA.unity
     guid: d4b2717e456dda045a306464eef2746f
   m_configObjects: {}

@@ -74,7 +74,7 @@ public class CEnemyAttackBoss : CEnemyAttack
             Vector2 direction = (PlayerTr.position - _muzzle.position).normalized;
 
             _rangeWeaponAttack.TryFire(direction);
-
+              
             _ani.SetTrigger(_attackRange);
         } 
         else 
