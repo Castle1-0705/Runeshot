@@ -6,6 +6,13 @@ public class CCameraFollow : MonoBehaviour
     [SerializeField] private Transform _target;
     #endregion
 
+    // 씬 로드 후 유지된 Player를 추적 대상으로 연결
+    public void SetTarget(Transform target)
+    {
+        _target = target;
+        enabled = _target != null;
+    }
+
     private void Start()
     {
         if (_target == null)

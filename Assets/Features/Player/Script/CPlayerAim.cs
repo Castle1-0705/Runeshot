@@ -13,14 +13,20 @@ public class CPlayerAim : MonoBehaviour
 
     private void Awake()
     {
-        _mainCamera = Camera.main;
+        RefreshCamera();
 
-        if (_mainCamera == null || _gunHolder == null)
+        if (_gunHolder == null)
         {
-            Debug.LogError("카메라 또는 GunHolder가 비어있음");
+            Debug.LogWarning("GunHolder가 비어있음");
             enabled = false;
             return;
         }
+    }
+
+    // 새 씬 카메라로 갱신. 카메라가 없는 동안에는 조준을 대기
+    public void RefreshCamera()
+    {
+        _mainCamera = Camera.main;
     }
 
     private void Update()
@@ -31,7 +37,12 @@ public class CPlayerAim : MonoBehaviour
     // 마우스 방향 조준
     private void Aim()
     {
-        if (Mouse.current == null)
+        if (_mainCamera == null)
+        {
+            RefreshCamera();
+        }
+
+        if (_mainCamera == null || _gunHolder == null || Mouse.current == null)
         {
             return;
         }
