@@ -6,11 +6,15 @@ public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
 
     private static T _instance = null;
-
+    protected static bool _isDestroyed = false;
     public static T Instance
     {
         get
         {
+            if(_isDestroyed)
+            {
+                return null;
+            }
             if (_instance == null)
             {
                 var go = new GameObject(typeof(T).ToString());
@@ -46,5 +50,7 @@ public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             _instance = null;
         }
+
+        _isDestroyed = true;
     }
 }
