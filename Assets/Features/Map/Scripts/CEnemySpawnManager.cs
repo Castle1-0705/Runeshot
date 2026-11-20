@@ -127,8 +127,12 @@ public class CEnemySpawnManager : MonoBehaviour
             {
                 if(!_enemyPool[i].IsAlive)
                 {
-                    _enemyPool[i].transform.position = _spawnPosition;
-                    _enemyPool[i].transform.rotation = Quaternion.identity;
+                    if(!_enemyPool[i].gameObject.activeSelf)
+                    {
+                        _enemyPool[i].transform.position = _spawnPosition;
+                        _enemyPool[i].transform.rotation = Quaternion.identity;
+                    } 
+                    return;
                 }
                 _enemyPool[i].gameObject.SetActive(true);
             }
