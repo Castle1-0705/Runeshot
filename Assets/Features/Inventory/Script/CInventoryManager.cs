@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CItemSlotData
 {
@@ -107,6 +108,17 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
     {
 		base.Awake();
 
+        if (Instance != this)
+        {
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+        if (_itemSlotLayout != null)
+        {
+            DontDestroyOnLoad(_itemSlotLayout.root.gameObject);
+        }
+
 		if(_itemSlotLayout == null || _itemSlotPrefab == null)
 		{
 			Debug.LogWarning("아이템 슬롯 요소 누락");
@@ -117,6 +129,11 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 
     private void Start()
     {
+        if (EventSystem.current != null)
+        {
+            DontDestroyOnLoad(EventSystem.current.transform.root.gameObject);
+        }
+
         if (_inventory.Count == 0)
         {
             return;

@@ -36,6 +36,8 @@ public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
         if (_instance == null && _instance != this)
         {
             _instance = this as T;
+            // 실제 새 인스턴스가 등록되면 다시 정상 조회 가능
+            _isDestroyed = false;
         }
 
         else if(_instance != this)
@@ -49,8 +51,7 @@ public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
         if(_instance == this)
         {
             _instance = null;
+            _isDestroyed = true;
         }
-
-        _isDestroyed = true;
     }
 }
