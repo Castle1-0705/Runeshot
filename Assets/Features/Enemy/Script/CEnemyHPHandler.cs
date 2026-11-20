@@ -9,12 +9,14 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
     #region 인스펙터
     [SerializeField] private CEnemy _enemy;
     [SerializeField] private Animator _aniHP;
+    [SerializeField] private float _distance = 10f;
     #endregion
 
     #region 내부변수
     private string _death = "BDeath";
     private string _stringDamaged = "TDamaged";
     private string _stringDeath = "DEATH";
+    private bool _dead = false;
     #endregion
 
     private void Awake()
@@ -35,7 +37,45 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
     {
        
     }
-     
+    private void OnEnable()
+    {
+
+        _enemy.DieOrAlive(true);
+
+        //if (!_dead)
+        //{
+        //    return;
+        //}
+        //
+        //Revive().Forget(); 
+    }
+
+    private async UniTask Revive()
+    {
+        _dead = true;
+
+        await UniTask.WaitUntil(Distance, PlayerLoopTiming.Update, destroyCancellationToken);
+
+        _enemy.DieOrAlive(true);
+
+        _dead = false;
+    }
+
+    private bool Distance()
+    {
+        float distance = (_enemy.PlayerTr.position - transform.position).sqrMagnitude;
+
+        if (distance > _distance)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    private void OnDisable()
+    {
+        
+    }
     private void SetFalse()
     {
         gameObject.SetActive(false);
@@ -50,12 +90,16 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         {
             return;
         }
+
         HP -= damage;
         OnHitInvoke();
+
+        _aniHP.speed = 1f;
         _aniHP.SetTrigger(_stringDamaged);
+
         if (HP <= 0f)
         {
-            _enemy.Die();
+            _enemy.DieOrAlive(false);
             _aniHP.SetBool(_death,true); 
 
             await UniTask.WaitUntil(UntilDeath, PlayerLoopTiming.Update, destroyCancellationToken); 
