@@ -90,9 +90,13 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         {
             return;
         }
+
         HP -= damage;
         OnHitInvoke();
+
+        _aniHP.speed = 1f;
         _aniHP.SetTrigger(_stringDamaged);
+
         if (HP <= 0f)
         {
             _enemy.DieOrAlive(false);
