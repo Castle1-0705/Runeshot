@@ -218,6 +218,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8116258793411343436, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116258793411343436, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3225166,6 +3225174,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8116258793411343436, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116258793411343436, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3227265,7 +3227281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e2cb34436e5584d9a19919b8d512c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 7664203789072113408, guid: 0a3b201ebdef0ee43805fe3f98396ffe, type: 3}
+  _enemyPrefab: {fileID: 1715956814467052569, guid: 0a3b201ebdef0ee43805fe3f98396ffe, type: 3}
   _maxEnemyCount: 8
   _player: {fileID: 285415444}
   _mainCamera: {fileID: 0}
@@ -3322152,6 +3322168,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8116258793411343436, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116258793411343436, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3322523,7 +3322547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e2cb34436e5584d9a19919b8d512c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 6080599832434818069, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
+  _enemyPrefab: {fileID: 1620478685575174749, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
   _maxEnemyCount: 8
   _player: {fileID: 285415444}
   _mainCamera: {fileID: 0}
@@ -3356071,6 +3356095,14 @@ PrefabInstance:
     - target: {fileID: 6080599832434818069, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116258793411343436, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116258793411343436, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
