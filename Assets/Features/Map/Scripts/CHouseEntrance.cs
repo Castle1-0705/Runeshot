@@ -32,6 +32,9 @@ public class CHouseEntrance : MonoBehaviour
             return;
         }
 
+        CMapReturnData.ReturnPosition = transform.position;
+        CMapReturnData.HasReturnPosition = true;
+
         CHouseLootData.SetCurrentHouse(_houseID);
 
         _isLoading = true;
