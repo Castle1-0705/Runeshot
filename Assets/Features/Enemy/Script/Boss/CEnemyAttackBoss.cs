@@ -17,11 +17,13 @@ public class CEnemyAttackBoss : CEnemyAttack
     #endregion
 
     #region 내부변수
-    private string _attackMelee = "TAttack";
-    private string _attackRange = "TAttackRange";
-    private string _attackCharge = "IMove";
+    private string _stringAttackMelee = "TAttack";
+    private string _stringAttackRange = "TAttackRange";
+    private string _stringAttackCharge = "IMove";
     private bool _isCharging;
-    private float _chargeAttackSpeed = 15f; 
+    private float _chargeAttackSpeed = 15f;
+    private float _movementSpeed;
+    private float _attackRange;
     private LayerMask _mask;
     private string _playerLayer = "Player";
     private float _rangeFireInterval = 0.5f;
@@ -42,6 +44,9 @@ public class CEnemyAttackBoss : CEnemyAttack
 
         _rangeWeaponAttack = enemySetting._weapon;
         _muzzle = enemySetting._muzzle;
+
+        _movementSpeed = _enemy.Enemydata.MovementSpeed;
+        _attackRange = _enemy.Enemydata.AttackRange;
 
         _mask = 1 << LayerMask.NameToLayer(_playerLayer);
     }
@@ -105,7 +110,7 @@ public class CEnemyAttackBoss : CEnemyAttack
         base.ActionExit();
         _enemySetting.TokenCancel(); 
     }
-
+     
     private void Attack(Transform PlayerTr)
     {
         switch (_attackState)
@@ -126,7 +131,7 @@ public class CEnemyAttackBoss : CEnemyAttack
     {
         ChangeAlpha(true);
         _playerHP.OnHit(_damage);
-        _ani.SetTrigger(_attackMelee);
+        _ani.SetTrigger(_stringAttackMelee);
     }
 
     private void RangeAttack(Transform PlayerTr)
@@ -136,7 +141,7 @@ public class CEnemyAttackBoss : CEnemyAttack
 
         _rangeWeaponAttack.TryFire(direction);
 
-        _ani.SetTrigger(_attackRange);
+        _ani.SetTrigger(_stringAttackRange);
     }
 
     private void ChargeAttack(Transform PlayerTr)
@@ -194,14 +199,19 @@ public class CEnemyAttackBoss : CEnemyAttack
             _nav.autoBraking = false;
             _nav.speed = _chargeAttackSpeed;
             _nav.stoppingDistance = 0;
-            _ani.SetInteger(_attackCharge, 1);
+            _ani.SetInteger(_stringAttackCharge, 1);
         }
         else
         {
+            if(_enemy.Enemydata == null)
+            {
+                return;
+            }
+
             _nav.autoBraking = true;
-            _nav.speed = _enemy.Enemydata.MovementSpeed;
-            _nav.stoppingDistance = _enemy.Enemydata.AttackRange;
-            _ani.SetInteger(_attackCharge, 0);
+            _nav.speed = _movementSpeed;
+            _nav.stoppingDistance = _attackRange;
+            _ani.SetInteger(_stringAttackCharge, 0);
         }
 
     } 
