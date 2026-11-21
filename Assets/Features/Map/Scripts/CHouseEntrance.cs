@@ -1,19 +1,17 @@
-﻿using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
+﻿using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class CHouseEntrance : MonoBehaviour
 {
-    [Header("씬 설정")]
-    [SerializeField] private string _sceneName;
-    [SerializeField] private string _houseID;
+    [Header("집 설정")]
+    [SerializeField] private Transform _interiorSpawnPoint;
 
+    private Transform _player;
     private bool _isPlayerNear;
-    private bool _isLoading;
 
     private void Update()
     {
-        if (!_isPlayerNear || _isLoading)
+        if (!_isPlayerNear)
         {
             return;
         }
@@ -27,7 +25,7 @@ public class CHouseEntrance : MonoBehaviour
 
     private void EnterHouse()
     {
-        if (!Application.CanStreamedLevelBeLoaded(_sceneName))
+        if (_player == null || _interiorSpawnPoint == null)
         {
             return;
         }
@@ -35,11 +33,10 @@ public class CHouseEntrance : MonoBehaviour
         CMapReturnData.ReturnPosition = transform.position;
         CMapReturnData.HasReturnPosition = true;
 
-        CHouseLootData.SetCurrentHouse(_houseID);
+        _player.position = _interiorSpawnPoint.position;
 
-        _isLoading = true;
-
-        SceneManager.LoadScene(_sceneName);
+        _isPlayerNear = false;
+        _player = null;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -47,6 +44,7 @@ public class CHouseEntrance : MonoBehaviour
         if (other.transform.root.CompareTag("Player"))
         {
             _isPlayerNear = true;
+            _player = other.transform.root;
         }
     }
 
@@ -55,6 +53,7 @@ public class CHouseEntrance : MonoBehaviour
         if (other.transform.root.CompareTag("Player"))
         {
             _isPlayerNear = false;
+            _player = null;
         }
     }
 }
