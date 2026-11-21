@@ -5,8 +5,10 @@ using UnityEngine.AI;
 
 public class CEnemyAttackArcher : CEnemyAttack
 {
-    CWeapon _rangeAttack;
-    Transform _muzzle;
+    private CWeapon _rangeAttack;
+    private Transform _muzzle;
+
+    private float _rangeFireInterval = 1.5f;
     public CEnemyAttackArcher(CEnemySetting enemySetting, int num) : base(enemySetting, num)
     {
         _rangeAttack = enemySetting._weapon;
@@ -23,15 +25,27 @@ public class CEnemyAttackArcher : CEnemyAttack
          
         Flip(PlayerTr.position);
 
-         _time += Time.deltaTime;
-
-        if( _time < _attackInterval )
+        if(_rangeFireInterval == 0)
         {
-            return;
+            _time += Time.deltaTime;
+
+            if (_time < _attackInterval)
+            {
+                return;
+            }
         }
+        else
+        {
+            _time += Time.deltaTime;
 
+            if( _time < _rangeFireInterval)
+            {
+                return;
+            }
+        }
+         
         Vector2 direction = (PlayerTr.position - _muzzle.position).normalized;
-
+        
         _rangeAttack.TryFire(direction); 
 
         _ani.SetTrigger(_attack);

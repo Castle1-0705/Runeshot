@@ -24,8 +24,16 @@ public class CEnemyAttackBoss : CEnemyAttack
     private float _chargeAttackSpeed = 15f; 
     private LayerMask _mask;
     private string _playerLayer = "Player";
+    private float _rangeFireInterval = 0.5f;
     #endregion
-     
+
+    private AttackState _attackState;
+    private enum AttackState
+    {
+        MeleeAttack,
+        RangeAttack,
+        ChargeAttack,
+    }
     public CEnemyAttackBoss(CEnemySetting enemySetting, int num) : base(enemySetting, num)
     { 
         _meleeAttack = enemySetting._meleeAttack;
@@ -52,36 +60,43 @@ public class CEnemyAttackBoss : CEnemyAttack
         }
 
         Flip(PlayerTr.position);
-
-        _time += Time.deltaTime;
-
-        if (_time < _attackInterval)
-        {
-            return;
-        }
-
+         
         float distance = (PlayerTr.position - _tr.position).magnitude;
 
-        if (distance < 2f)
-        { 
-            ChangeAlpha(true);
-            _playerHP.OnHit(_damage);
-            _ani.SetTrigger(_attackMelee);
-        }
-        else if (distance < 6f)
+        if (distance < 1.5f)
         {
-            ChangeAlpha(false);
-            Vector2 direction = (PlayerTr.position - _muzzle.position).normalized;
+            _attackState = AttackState.MeleeAttack;
+        }
+        else if (distance < _enemy.Enemydata.AttackRange * 0.8f)
+        {
+            _attackState = AttackState.RangeAttack;
+        }
+        else
+        {
+            _attackState = AttackState.ChargeAttack;
+        }
 
-            _rangeWeaponAttack.TryFire(direction);
-              
-            _ani.SetTrigger(_attackRange);
-        } 
-        else 
-        { 
-            ChargeAttack(PlayerTr, _enemySetting.TokenGen()).Forget();
+        if (_attackState != AttackState.RangeAttack)
+        {
+            _time += Time.deltaTime;
+
+            if (_time < _attackInterval)
+            {
+                return;
+            }
+        }
+        else
+        {
+            _time += Time.deltaTime;
+
+            if (_time < _rangeFireInterval)
+            {
+                return;
+            }
         }
          
+        Attack(PlayerTr);
+
         _time = 0;
 
     }
@@ -89,6 +104,44 @@ public class CEnemyAttackBoss : CEnemyAttack
     {
         base.ActionExit();
         _enemySetting.TokenCancel(); 
+    }
+
+    private void Attack(Transform PlayerTr)
+    {
+        switch (_attackState)
+        {
+            case AttackState.MeleeAttack:
+                MeleeAttack();
+                break;
+            case AttackState.RangeAttack:
+                RangeAttack(PlayerTr);
+                break;
+            case AttackState.ChargeAttack:
+                ChargeAttack(PlayerTr);
+                break;
+        }
+    }
+
+    private void MeleeAttack()
+    {
+        ChangeAlpha(true);
+        _playerHP.OnHit(_damage);
+        _ani.SetTrigger(_attackMelee);
+    }
+
+    private void RangeAttack(Transform PlayerTr)
+    {
+        ChangeAlpha(false);
+        Vector2 direction = (PlayerTr.position - _muzzle.position).normalized;
+
+        _rangeWeaponAttack.TryFire(direction);
+
+        _ani.SetTrigger(_attackRange);
+    }
+
+    private void ChargeAttack(Transform PlayerTr)
+    {
+        ChargeAttack(PlayerTr, _enemySetting.TokenGen()).Forget();
     }
       
     private void ChangeAlpha(bool isMeleeAttack)
