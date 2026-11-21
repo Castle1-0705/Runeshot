@@ -7,9 +7,8 @@ public class CInventoryInputController : MonoBehaviour
 {
     #region 인스펙터    
     [SerializeField] private GameObject _inventoyPanel;
-    [SerializeField] private CSoundControllerUI _sound;
+    [SerializeField] private CSoundControllerUI _sound; 
 
-    
 
     [Space]
     [Header("인풋 엑션")]
@@ -223,5 +222,10 @@ public class CInventoryInputController : MonoBehaviour
     {
         _sound.PlaySound(_sound.SoundSO.Clips[_soundInventory]);
         _inventoyPanel.SetActive(!_inventoyPanel.activeSelf);
+
+        if(!_inventoyPanel.activeSelf)
+        {
+            CTooltipController.HideTooltip(); 
+        }
     }
 }

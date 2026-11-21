@@ -98,8 +98,7 @@ public class CInputDispatcher : CSingleton<CInputDispatcher>
         {
             return;
         }
-
-        DontDestroyOnLoad(gameObject);
+         
         TryBindAll();
     }
 
