@@ -4161,6 +4161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _detectObject: {fileID: 4160844660411104590}
   _enemydata: {fileID: 482140226745839886}
+  _weapon: {fileID: 4256507207067086744}
 --- !u!114 &748553373913046812
 MonoBehaviour:
   m_ObjectHideFlags: 0
