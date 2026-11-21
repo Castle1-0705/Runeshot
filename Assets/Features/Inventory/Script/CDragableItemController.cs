@@ -125,6 +125,11 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
 
     private void OnDisable()
     {
+        if(CTooltipController.Instance == null)
+        {
+            return;
+        }
+
         CTooltipController.HideTooltip(this);
     }
 }
