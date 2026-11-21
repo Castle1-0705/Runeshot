@@ -3206,6 +3206,7 @@ GameObject:
   - component: {fileID: 5623543979028812044}
   - component: {fileID: 4470107344538315100}
   - component: {fileID: 2538878165914962343}
+  - component: {fileID: 5295062727478326470}
   m_Layer: 5
   m_Name: Swordsman
   m_TagString: Untagged
@@ -3314,6 +3315,7 @@ MonoBehaviour:
   _status: {fileID: 7817114290965617857}
   _enemy: {fileID: 1620478685575174749}
   _aniHP: {fileID: 3566337923104379051}
+  _summonChest: {fileID: 5295062727478326470}
 --- !u!114 &1620478685575174749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3407,6 +3409,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.82}
   m_EdgeRadius: 0
+--- !u!114 &5295062727478326470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6080599832434818069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61911c4d654de94583248d69db8cc25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chestPrifab: {fileID: 1486333393817108243, guid: 6f798b40e9a66e142ae0ee8930ec986f, type: 3}
+  _percentage: 100
+  _togleIfDestroy: 1
+  _destroyTime: 10
 --- !u!1 &6162403449626828650
 GameObject:
   m_ObjectHideFlags: 0

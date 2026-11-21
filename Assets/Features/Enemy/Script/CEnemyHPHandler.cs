@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 
 public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
 {
     #region 인스펙터
     [SerializeField] private CEnemy _enemy;
-    [SerializeField] private Animator _aniHP; 
+    [SerializeField] private Animator _aniHP;
+    [SerializeField] private CEnemySummonChest _summonChest;
     #endregion
 
     #region 내부변수
@@ -28,7 +30,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
 
         OnDeath += DropItem;
         OnDeath += SetFalse;
-
+        OnDeath += () => _summonChest.SummonChest(transform);
     }
 
     private void DropItem()

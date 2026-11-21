@@ -8,9 +8,8 @@ public class CEnemySummonChest : MonoBehaviour
     [SerializeField] private GameObject _chestPrifab;
     [SerializeField][Range(0,100)] private int _percentage;
     [SerializeField] private bool _togleIfDestroy;
-    [SerializeField][Range(0f,100f)] private float _destroyTime;
-    #endregion
-
+    [SerializeField][Range(0f,100f)] private float _destroyTime; 
+    #endregion 
 
     public void SummonChest(Transform transform)
     {
