@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class CEnemySpawnManager : MonoBehaviour
 {
     [Header("적 설정")]
-    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private CEnemy _enemyPrefab;
     [SerializeField] private int _maxEnemyCount = 8;
 
     [Header("플레이어 설정")]
@@ -29,7 +29,7 @@ public class CEnemySpawnManager : MonoBehaviour
     [Header("설정")]
     [SerializeField] private CProjectilePool _projectilePool;
 
-    private GameObject[] _enemyPool;
+    private CEnemy[] _enemyPool;
 
     private float _spawnTimer;
     private float _nextSpawnTime;
@@ -44,7 +44,7 @@ public class CEnemySpawnManager : MonoBehaviour
             _maxEnemyCount = 1;
         }
 
-        _enemyPool = new GameObject[_maxEnemyCount];
+        _enemyPool = new CEnemy[_maxEnemyCount];
 
         if (_mainCamera == null)
         {
@@ -120,12 +120,21 @@ public class CEnemySpawnManager : MonoBehaviour
             if (distance > _enemyRemoveDistance)
             {
                 
-                _enemyPool[i].SetActive(false);
+                _enemyPool[i].gameObject.SetActive(false);
 
             }
             else
             {
-                _enemyPool[i].SetActive(true);
+                if(!_enemyPool[i].IsAlive)
+                {
+                    if(!_enemyPool[i].gameObject.activeSelf)
+                    {
+                        _enemyPool[i].transform.position = _spawnPosition;
+                        _enemyPool[i].transform.rotation = Quaternion.identity;
+                    } 
+                    return;
+                }
+                _enemyPool[i].gameObject.SetActive(true);
             }
         }
     }
@@ -136,7 +145,7 @@ public class CEnemySpawnManager : MonoBehaviour
 
         for (int i = 0; i < _enemyPool.Length; i++)
         {
-            if (_enemyPool[i] != null && _enemyPool[i].activeSelf)
+            if (_enemyPool[i] != null && _enemyPool[i].gameObject.activeSelf)
             {
                 enemyCount++;
             }
@@ -245,12 +254,12 @@ public class CEnemySpawnManager : MonoBehaviour
 
         for (int i = 0; i < _enemyPool.Length; i++)
         {
-            if (!_enemyPool[i].activeSelf)
+            if (!_enemyPool[i].gameObject.activeSelf)
             {
                 _enemyPool[i].transform.position = _spawnPosition;
                 _enemyPool[i].transform.rotation = Quaternion.identity;
 
-                _enemyPool[i].SetActive(true);
+                _enemyPool[i].gameObject.SetActive(true);
 
                 return;
             }

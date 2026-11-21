@@ -79,6 +79,7 @@ public class CInputDispatcher : CSingleton<CInputDispatcher>
 
     #region 내부변수
     private bool _isReady = false;
+    private bool _isDuplicate;
     #endregion
 
     #region 프로퍼티
@@ -91,11 +92,24 @@ public class CInputDispatcher : CSingleton<CInputDispatcher>
     {
         base.Awake();
 
+        // Singleton의 대표 등록이 끝난 뒤 중복 여부 확인
+        _isDuplicate = Instance != this;
+        if (_isDuplicate)
+        {
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
         TryBindAll();
     }
 
     private void OnEnable()
     {
+        if (_isDuplicate)
+        {
+            return;
+        }
+
         TryBindAll();
         EnableActions(true);
         BakeInputMap();
@@ -103,6 +117,11 @@ public class CInputDispatcher : CSingleton<CInputDispatcher>
 
     private void OnDisable()
     {
+        if (_isDuplicate)
+        {
+            return;
+        }
+
         EnableActions(false);
         InputActionMap.Clear();
         InputAxisActionMap.Clear();
@@ -112,6 +131,12 @@ public class CInputDispatcher : CSingleton<CInputDispatcher>
     protected override void OnDestroy()
     {
         base.OnDestroy();
+
+        if (_isDuplicate)
+        {
+            return;
+        }
+
         InputActionMap.Clear();
         InputAxisActionMap.Clear();
         InputVectorActionMap.Clear();
