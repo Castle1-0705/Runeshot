@@ -3,24 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CPlayerHPUI : CSingleton<CPlayerHPUI>
+public class CPlayerHPUI : MonoBehaviour
 {
     #region ¿ŒΩ∫∆Â≈Õ 
     [SerializeField] private Slider _hpSlider;
     [SerializeField] private CPlayerHPHandler _playerHP;
     #endregion
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (Instance != this)
-        {
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
-    } 
-
+     
     private void Start()
     {
         if (_playerHP == null || _hpSlider == null)
