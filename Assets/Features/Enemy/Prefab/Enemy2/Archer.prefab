@@ -4065,6 +4065,7 @@ GameObject:
   - component: {fileID: 482140226745839886}
   - component: {fileID: 6077197136949605434}
   - component: {fileID: 29349000650559744}
+  - component: {fileID: 9190520778472337984}
   m_Layer: 5
   m_Name: Archer
   m_TagString: Untagged
@@ -4160,6 +4161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _detectObject: {fileID: 4160844660411104590}
   _enemydata: {fileID: 482140226745839886}
+  _weapon: {fileID: 4256507207067086744}
 --- !u!114 &748553373913046812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4268,6 +4270,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &9190520778472337984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664203789072113408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61911c4d654de94583248d69db8cc25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHPHandler: {fileID: 5668128161228411320}
+  _chestPrifab: {fileID: 1486333393817108243, guid: 6f798b40e9a66e142ae0ee8930ec986f, type: 3}
+  _percentage: 100
+  _togleIfDestroy: 1
+  _destroyTime: 10
 --- !u!1 &7668683377348829408
 GameObject:
   m_ObjectHideFlags: 0
@@ -5160,7 +5179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 379269830091267690, guid: a708ade88bc80d547859b33e80c77d3b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.41
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 2235491795117068897, guid: a708ade88bc80d547859b33e80c77d3b, type: 3}
       propertyPath: m_Pivot.x
@@ -5228,7 +5247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2235491795117068897, guid: a708ade88bc80d547859b33e80c77d3b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 2235491795117068897, guid: a708ade88bc80d547859b33e80c77d3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5258,6 +5277,10 @@ PrefabInstance:
       propertyPath: _enemyHP
       value: 
       objectReference: {fileID: 5668128161228411320}
+    - target: {fileID: 8808346432195294301, guid: a708ade88bc80d547859b33e80c77d3b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 
 public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
 {
@@ -27,8 +28,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         HP = MaxHP;
 
         OnDeath += DropItem;
-        OnDeath += SetFalse;
-
+        OnDeath += SetFalse; 
     }
 
     private void DropItem()
