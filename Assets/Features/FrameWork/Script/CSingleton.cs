@@ -5,8 +5,13 @@ using UnityEngine;
 public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
 
-    private static T _instance = null;
-    protected static bool _isDestroyed = false;
+    private static T _instance = null;  
+    private static bool _isDestroyed = false;
+
+    #region 프로퍼티
+    public static bool IsDestroyed => _isDestroyed;
+    #endregion
+
     public static T Instance
     {
         get
