@@ -4188,7 +4188,6 @@ MonoBehaviour:
   _status: {fileID: 482140226745839886}
   _enemy: {fileID: 1715956814467052569}
   _aniHP: {fileID: 4154194748888095997}
-  _summonChest: {fileID: 9190520778472337984}
 --- !u!114 &482140226745839886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4282,6 +4281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61911c4d654de94583248d69db8cc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyHPHandler: {fileID: 5668128161228411320}
   _chestPrifab: {fileID: 1486333393817108243, guid: 6f798b40e9a66e142ae0ee8930ec986f, type: 3}
   _percentage: 100
   _togleIfDestroy: 1

@@ -9,8 +9,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
 {
     #region 인스펙터
     [SerializeField] private CEnemy _enemy;
-    [SerializeField] private Animator _aniHP;
-    [SerializeField] private CEnemySummonChest _summonChest;
+    [SerializeField] private Animator _aniHP; 
     #endregion
 
     #region 내부변수
@@ -29,8 +28,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         HP = MaxHP;
 
         OnDeath += DropItem;
-        OnDeath += SetFalse;
-        OnDeath += () => _summonChest.SummonChest(transform);
+        OnDeath += SetFalse; 
     }
 
     private void DropItem()
