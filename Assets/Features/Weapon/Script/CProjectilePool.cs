@@ -15,8 +15,7 @@ public class CProjectilePool : CObjectPool<CProjectilePool, CProjectile>
         {
             return;
         }
-
-        DontDestroyOnLoad(gameObject);
+         
         Prewarm();
         _poolRoot.SetParent(transform);
         SceneManager.sceneLoaded += OnSceneLoaded;
