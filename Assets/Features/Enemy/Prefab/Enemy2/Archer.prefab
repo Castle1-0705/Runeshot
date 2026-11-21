@@ -5178,7 +5178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 379269830091267690, guid: a708ade88bc80d547859b33e80c77d3b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.41
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 2235491795117068897, guid: a708ade88bc80d547859b33e80c77d3b, type: 3}
       propertyPath: m_Pivot.x
@@ -5246,7 +5246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2235491795117068897, guid: a708ade88bc80d547859b33e80c77d3b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 2235491795117068897, guid: a708ade88bc80d547859b33e80c77d3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5276,6 +5276,10 @@ PrefabInstance:
       propertyPath: _enemyHP
       value: 
       objectReference: {fileID: 5668128161228411320}
+    - target: {fileID: 8808346432195294301, guid: a708ade88bc80d547859b33e80c77d3b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
