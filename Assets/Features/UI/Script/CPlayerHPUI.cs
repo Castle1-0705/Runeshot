@@ -9,7 +9,7 @@ public class CPlayerHPUI : MonoBehaviour
     [SerializeField] private Slider _hpSlider;
     [SerializeField] private CPlayerHPHandler _playerHP;
     #endregion
-
+     
     private void Start()
     {
         if (_playerHP == null || _hpSlider == null)

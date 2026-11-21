@@ -25,7 +25,10 @@ public class CPlayerStatusHandler : CCharacterStatusHandler<CPlayerStausDataSO>
 
     protected override float GetStatusValue(float baseVal, string modifierName)
     {
-        _modifierHandler = CPlayerCharacterController.Instance.ModifierHandler;
+        if (CPlayerCharacterController.IsDestroyed == false)
+        {
+            _modifierHandler = CPlayerCharacterController.Instance.ModifierHandler;
+        } 
 
         return base.GetStatusValue(baseVal, modifierName);
     }

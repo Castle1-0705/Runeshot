@@ -14,7 +14,7 @@ public class CEnemyHPUI : MonoBehaviour
     {
         if(_enemyHP == null || _hpSlider == null)
         {
-            _enemyHP = transform.parent.GetComponent<CEnemyHPHandler>();
+            _enemyHP = transform.GetComponent<CEnemyHPHandler>();
             Debug.Log("인스펙터 확인");
         }
 
@@ -23,6 +23,8 @@ public class CEnemyHPUI : MonoBehaviour
             return;
         }
         _enemyHP.OnHitEvent += EnemyHP;
+        _enemyHP.OnDeath += EnemyHP;
+        _enemyHP.OnHealEvent += EnemyHP;
         EnemyHP();
     }
 

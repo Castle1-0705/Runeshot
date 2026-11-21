@@ -38,6 +38,11 @@ public class COptionPenel : MonoBehaviour
 
     private void OnDisable()
     {
+        if (CInputDispatcher.Instance == null)
+        {
+            return;
+        }
+
         if (CInputDispatcher.Instance.InputActionMap.ContainsKey(_inputKey))
         {
             CInputDispatcher.Instance.InputActionMap[_inputKey].OnPerformedAction -= OpenOption;

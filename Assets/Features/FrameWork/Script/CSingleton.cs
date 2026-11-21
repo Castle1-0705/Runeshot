@@ -5,12 +5,21 @@ using UnityEngine;
 public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
 
-    private static T _instance = null;
+    private static T _instance = null;  
+    private static bool _isDestroyed = false;
+
+    #region 프로퍼티
+    public static bool IsDestroyed => _isDestroyed;
+    #endregion
 
     public static T Instance
     {
         get
         {
+            if(_isDestroyed)
+            {
+                return null;
+            }
             if (_instance == null)
             {
                 var go = new GameObject(typeof(T).ToString());
@@ -32,6 +41,8 @@ public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
         if (_instance == null && _instance != this)
         {
             _instance = this as T;
+            // 실제 새 인스턴스가 등록되면 다시 정상 조회 가능
+            _isDestroyed = false;
         }
 
         else if(_instance != this)
@@ -45,6 +56,7 @@ public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
         if(_instance == this)
         {
             _instance = null;
+            _isDestroyed = true;
         }
     }
 }

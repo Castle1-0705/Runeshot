@@ -7,6 +7,8 @@ public class CEnemy : MonoBehaviour
     private CEnemyDetect _detectObject;
     [SerializeField]
     private CEnemyStatusHandler _enemydata;
+    [SerializeField]
+    private CWeapon _weapon;
     #endregion
 
     #region 내부변수
@@ -28,10 +30,16 @@ public class CEnemy : MonoBehaviour
         } 
     }
   
-    public bool Die()
+    
+    public bool DieOrAlive(bool isAlive)
     {
-        _isAlive = false;
+        _isAlive = isAlive;
         
         return _isAlive;
+    }
+
+    public void SetProjectilePool(CProjectilePool pool)
+    {
+        _weapon.SetProjectilePool(pool);
     }
 }

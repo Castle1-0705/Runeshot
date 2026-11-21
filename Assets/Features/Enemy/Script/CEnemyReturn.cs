@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,15 +16,16 @@ public class CEnemyReturn : CEnemyActionBase
     private float _maxReturnTime = 3f;
     private float _time;
     private Vector3 _setPosition; 
-    private string _move = "IMove";  
+    private string _move = "IMove"; 
+    private float _navMeshRadius = 5f;
     #endregion
-     
+
     public CEnemyReturn(CEnemySetting enemySetting,int num) : base(enemySetting, num)
     {
         _setPosition = _tr.position;
         _enemySetting = enemySetting;
     }
-       
+      
     public override bool Condition(Transform PlayerTr)
     {
         if (PlayerTr == null)
@@ -69,7 +71,21 @@ public class CEnemyReturn : CEnemyActionBase
         await UniTask.Delay(TimeSpan.FromSeconds(_maxReturnTime), false, PlayerLoopTiming.Update, tokenSource.Token);
          
         _nav.velocity = Vector3.zero;
-        _nav.destination = _setPosition;
+
+        NavMeshHit hit;
+         
+        if (NavMesh.SamplePosition(_setPosition, out hit, _navMeshRadius, NavMesh.AllAreas))
+        {
+            if (_nav.isOnNavMesh)
+            {
+                _nav.destination = hit.position;
+            }
+            else
+            { 
+                _nav.Warp(hit.position);
+            } 
+        }
+
         _ani.SetInteger(_move, 1);
 
         Flip(_setPosition);

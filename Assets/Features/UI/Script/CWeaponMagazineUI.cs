@@ -24,7 +24,7 @@ public class CWeaponMagazineUI : MonoBehaviour
     private Image _reload;
     private List<Image> _images = new List<Image>();
     #endregion
-
+     
     private void Start()
     { 
         if(_magazineSlider == null || _weapon == null)

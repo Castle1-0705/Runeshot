@@ -90,6 +90,12 @@ public class CPlayerMovement : MonoBehaviour
         Move();
     }
 
+    // 씬 이동 시 이전 이동 입력 정리
+    public void ResetMovement()
+    {
+        _moveDirection = Vector2.zero;
+    }
+
     // 이동 입력
     private void InputMove(Vector2 direction)
     {
