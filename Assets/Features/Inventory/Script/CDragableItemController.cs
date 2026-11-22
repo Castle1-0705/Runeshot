@@ -114,12 +114,22 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
     {
         if (_itemData != null)
         {
-            CTooltipController.ShowTooltip(_itemData.Name, _itemData.Description);
+            CTooltipController.ShowTooltip(_itemData.Name, _itemData.Description,this);
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        CTooltipController.HideTooltip();
+        CTooltipController.HideTooltip(this);
+    }
+
+    private void OnDisable()
+    {
+        if(CTooltipController.Instance == null)
+        {
+            return;
+        }
+
+        CTooltipController.HideTooltip(this);
     }
 }

@@ -221,11 +221,6 @@ public class CInventoryInputController : MonoBehaviour
     private void ToggleInventory()
     {
         _sound.PlaySound(_sound.SoundSO.Clips[_soundInventory]);
-        _inventoyPanel.SetActive(!_inventoyPanel.activeSelf);
-
-        if(!_inventoyPanel.activeSelf)
-        {
-            CTooltipController.HideTooltip(); 
-        }
+        _inventoyPanel.SetActive(!_inventoyPanel.activeSelf); 
     }
 }

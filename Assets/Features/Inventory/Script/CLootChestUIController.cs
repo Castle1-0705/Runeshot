@@ -15,10 +15,9 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 	#region 프로퍼티
 	public CItemSlotController[] Slots => _slots;
     #endregion
-
-    protected override void Awake()
+	  
+    private void Start()
     {
-		base.Awake();
         _panel.SetActive(false);
     }
 

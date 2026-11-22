@@ -12,6 +12,10 @@ public class CTooltipController : CSingleton<CTooltipController>
     [SerializeField] private RectTransform _rootTransform;
     #endregion
 
+    #region 내부 변수 
+    private CDragableItemController _currentItem;
+    #endregion
+
     protected override void Awake()
     {
         base.Awake();
@@ -40,7 +44,7 @@ public class CTooltipController : CSingleton<CTooltipController>
         gameObject.SetActive(false);
     }
 
-    public static void ShowTooltip(string header, string content)
+    public static void ShowTooltip(string header, string content, CDragableItemController dragableItemController)
     {
         if (Instance == null)
         {
@@ -51,16 +55,21 @@ public class CTooltipController : CSingleton<CTooltipController>
         Instance.gameObject.SetActive(true);
         Instance._header.text = header;
         Instance._content.text = content;
+
+        Instance._currentItem = dragableItemController;
     }
 
-    public static void HideTooltip()
+    public static void HideTooltip(CDragableItemController dragableItemController)
     {
         if (Instance == null)
         {
             Debug.LogWarning("CTooltipController 인스턴스 누락");
             return;
         }
-
+        if(Instance._currentItem != dragableItemController)
+        {
+            return;
+        }
         Instance.gameObject.SetActive(false);
     }
 
