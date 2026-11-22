@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CProjectilePool : CObjectPool<CProjectilePool, CProjectile>
 {
@@ -18,33 +17,10 @@ public class CProjectilePool : CObjectPool<CProjectilePool, CProjectile>
          
         Prewarm();
         _poolRoot.SetParent(transform);
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    // 이전 씬에서 발사한 탄환은 다음 씬으로 가져가지 않음
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (mode != LoadSceneMode.Single)
-        {
-            return;
-        }
-
-        for (int i = _liveList.Count - 1; i >= 0; i--)
-        {
-            if (_liveList[i] == null)
-            {
-                _liveList.RemoveAt(i);
-            }
-            else
-            {
-                _liveList[i].ReturnToPool();
-            }
-        }
     }
 
     protected override void OnDestroy()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
         for (int i = 0; i < _liveList.Count; i++)
         {
             if (_liveList[i] != null)

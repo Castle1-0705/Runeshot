@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class CPlayerCharacterController : CSingleton<CPlayerCharacterController>
 {
@@ -23,81 +20,6 @@ public class CPlayerCharacterController : CSingleton<CPlayerCharacterController>
 	public CWeapon Weapon => _weapon;
 	public CPlayerStateController StateController => GetComponent<CPlayerStateController>();
 	#endregion
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        // 중복 Player는 기존 Singleton에서 제거하므로 유지하거나 이벤트를 등록하지 않음
-        if (Instance != this)
-        {
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    protected override void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        base.OnDestroy();
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (mode != LoadSceneMode.Single)
-        {
-            return;
-        }
-
-        CPlayerAim aim = GetComponent<CPlayerAim>();
-        if (aim != null)
-        {
-            aim.RefreshCamera();
-        }
-
-        Camera mainCamera = Camera.main;
-        if (mainCamera != null)
-        {
-            CCameraFollow cameraFollow = mainCamera.GetComponent<CCameraFollow>();
-            if (cameraFollow != null)
-            {
-                cameraFollow.SetTarget(transform);
-            }
-        }
-
-        // 새로 로드된 씬 안에서만 검색. 스폰이 없으면 기존 위치 유지
-        GameObject[] roots = scene.GetRootGameObjects();
-        for (int i = 0; i < roots.Length; i++)
-        {
-            Transform spawn = FindPlayerSpawn(roots[i].transform);
-            if (spawn != null)
-            {
-                MoveToSpawn(spawn);
-                return;
-            }
-        }
-    }
-
-    private Transform FindPlayerSpawn(Transform target)
-    {
-        if (target.name == "PlayerSpawn")
-        {
-            return target;
-        }
-
-        for (int i = 0; i < target.childCount; i++)
-        {
-            Transform spawn = FindPlayerSpawn(target.GetChild(i));
-            if (spawn != null)
-            {
-                return spawn;
-            }
-        }
-
-        return null;
-    }
 
     // 추후 Map에서 정한 스폰 Transform을 직접 전달할 수 있음
     public void MoveToSpawn(Transform spawn)

@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class CTooltipController : CSingleton<CTooltipController>
 {
-
     #region 인스팩터
     [SerializeField] private TMP_Text _header;
     [SerializeField] private TMP_Text _content;
     [SerializeField] private RectTransform _rectTransform;
     [SerializeField] private RectTransform _rootTransform;
     #endregion
-
 
     protected override void Awake()
     {
@@ -55,8 +53,6 @@ public class CTooltipController : CSingleton<CTooltipController>
         Instance._content.text = content;
     }
 
-
-
     public static void HideTooltip()
     {
         if (Instance == null)
@@ -88,5 +84,4 @@ public class CTooltipController : CSingleton<CTooltipController>
         _rectTransform.pivot = new Vector2(pivotX, pivotY);
         transform.position = mousePos;
     }
-
 }
