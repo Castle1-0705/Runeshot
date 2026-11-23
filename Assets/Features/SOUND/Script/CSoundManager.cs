@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class CSoundManager : CSingletonDontDstroyAtLoad<CSoundManager>
@@ -19,6 +20,18 @@ public class CSoundManager : CSingletonDontDstroyAtLoad<CSoundManager>
 
     Transform _cameraTr;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        SceneManager.sceneLoaded += CSoundControllerBackground.PlayBackground;
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+
+        SceneManager.sceneLoaded -= CSoundControllerBackground.PlayBackground;
+    }
     private void Start()
     {
         Camera mainCamera = Camera.main;
