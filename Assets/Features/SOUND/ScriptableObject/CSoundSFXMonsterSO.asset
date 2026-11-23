@@ -17,5 +17,5 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 4b65b8adf1a5d436785169345c0264fd, type: 3}
     - {fileID: 8300000, guid: 221f5b953d4f149aa8482aa1b7e3d577, type: 3}
     _AudioClipNames:
-    - MonsterAttack
-    - MonsterDeath
+    - Hit
+    - Death
