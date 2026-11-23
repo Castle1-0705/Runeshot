@@ -11,8 +11,7 @@ public class CWeapon : MonoBehaviour
     [SerializeField] private Transform _gunHolder;
     [SerializeField] private Transform _muzzle;
     [SerializeField] private string _triggerActionName = "TriggerWeapon";
-    [SerializeField] private bool _usePlayerInput = true;
-    [SerializeField] private CSoundController _sound;
+    [SerializeField] private bool _usePlayerInput = true; 
     [SerializeField] private SpriteRenderer _weaponRenderer;
     #endregion
 
@@ -80,12 +79,7 @@ public class CWeapon : MonoBehaviour
         }
 
         if (_usePlayerInput)
-        {
-            // Inspector 연결이 없는 경우 기존 플레이어 SFX를 재사용
-            if (_sound == null)
-            {
-                _sound = FindFirstObjectByType<CSoundControllerSFXPlayer>();
-            }
+        { 
 
             if (_gunHolder == null)
             {
@@ -307,12 +301,7 @@ public class CWeapon : MonoBehaviour
             shooter = _playerStatus.transform;
         }
 
-        AudioClip clip;
-        if (_sound != null && _sound.SoundSO != null && _sound.AudioSource != null &&
-            _sound.SoundSO.Clips.TryGetValue(_data.name, out clip) && clip != null)
-        {
-            _sound.PlaySound(clip);
-        }
+        CSoundControllerSFXPlayer.PlaySound(Data.name);
 
         _data.Trigger.TriggerWeapon(_data.Projectile, _projectilePool, _muzzle.position, direction, damage, shooter).Forget();
         return true;
@@ -357,13 +346,8 @@ public class CWeapon : MonoBehaviour
         {
             _playerInput.ClearPendingShots();
         }
-
-        AudioClip clip;
-        if (_sound != null && _sound.SoundSO != null && _sound.AudioSource != null &&
-            _sound.SoundSO.Clips.TryGetValue("Reload", out clip) && clip != null)
-        {
-            _sound.PlaySound(clip);
-        }
+         
+        CSoundControllerSFXPlayer.PlaySound("Reload");
 
         return true;
     }

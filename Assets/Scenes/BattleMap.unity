@@ -276,8 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseD
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &39672710
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -368,8 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &46817316
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -471,8 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &50336788
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -563,8 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &61172080
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -655,8 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &62641902
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -747,8 +742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &73645759
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -839,8 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &77355994
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -931,8 +924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Store
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &77894011
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1080,8 +1072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &85790962
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4121,8 +4112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &115066728
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4213,8 +4203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &116201119
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4305,8 +4294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &116254277
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4477,8 +4465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Store
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &180580770
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4569,8 +4556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &187561881
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4661,8 +4647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &200684839
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4753,8 +4738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &202907397
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4845,8 +4829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Store
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &206503494
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4937,8 +4920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &207012906
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5029,8 +5011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &209977785
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5121,8 +5102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Store
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &212829802
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5213,8 +5193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &241086608
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5305,8 +5284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &264877683
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5397,8 +5375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &274329271
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5505,8 +5482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &287085492
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5628,8 +5604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &327369498
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5759,8 +5734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &341595383
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5851,8 +5825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &357009266
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6072,8 +6045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &378794144
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -214504,8 +214476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &383393542
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -214596,8 +214567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &393299925
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -214688,8 +214658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Store
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &404937085
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -214780,8 +214749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 1
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &444936264
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -214872,8 +214840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &449924805
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -214986,7 +214953,7 @@ PrefabInstance:
     - target: {fileID: 7861532054912300010, guid: 417b4dcac69c3934aad30d2911019f7d, type: 3}
       propertyPath: _sound
       value: 
-      objectReference: {fileID: 1720607284}
+      objectReference: {fileID: 0}
     - target: {fileID: 7861532054912300010, guid: 417b4dcac69c3934aad30d2911019f7d, type: 3}
       propertyPath: _projectilePool
       value: 
@@ -215041,8 +215008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &457565364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215133,8 +215099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &466672834
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215180,74 +215145,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1001 &470864944
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2200532173181660569, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-      propertyPath: m_Name
-      value: SoundManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
---- !u!114 &470864945 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2981648860816092575, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-  m_PrefabInstance: {fileID: 470864944}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f677d81ad1639fc46940d2ddf3505838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &474284915
 GameObject:
   m_ObjectHideFlags: 0
@@ -215293,8 +215190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &474284918
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215385,8 +215281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &501334063
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215477,8 +215372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &515071714
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215569,8 +215463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &534961541
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215661,8 +215554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &539668845
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215753,8 +215645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &562303966
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215845,8 +215736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &571420170
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215937,8 +215827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &571431322
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216029,8 +215918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &595081281
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216121,8 +216009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &606602498
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216213,8 +216100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &656368466
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216305,8 +216191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &662507746
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216397,8 +216282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &670940729
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216489,8 +216373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &676249423
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216581,8 +216464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &679578746
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216673,8 +216555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &698699783
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216765,8 +216646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &707802662
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216857,8 +216737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &712330486
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216949,8 +216828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &714367040
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3224234,8 +3224112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &735377605
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3224326,8 +3224203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &736362013
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3224418,8 +3224294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseD
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &767512946
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3224510,8 +3224385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &770250327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3224602,8 +3224476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseD
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &843668686
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3224694,8 +3224567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &884514079
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3224786,8 +3224658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &912292769
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3224878,8 +3224749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &912677556
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3225079,8 +3224949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &929702935
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3225171,8 +3225040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &946787793
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3225304,8 +3225172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &959402105
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3225439,8 +3225306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &970495696
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3225486,6 +3225352,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1001 &973195939
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656740336205332607, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2200532173181660569, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
 --- !u!1 &993016031
 GameObject:
   m_ObjectHideFlags: 0
@@ -3225565,8 +3225488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Store
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &999007173
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3225657,8 +3225579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseB
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1025286571
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3225749,8 +3225670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1035552810
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3225841,8 +3225761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1045152475
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3225933,8 +3225852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1047392409
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3226025,8 +3225943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1057658900
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3226117,8 +3226034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1058949250
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3226209,8 +3226125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1080199524
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3226301,8 +3226216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1085146312
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3226393,8 +3226307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1108624521
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3226485,8 +3226398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1124937772
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3226577,8 +3226489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1127682382
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3226669,8 +3226580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseD
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1129301964
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3226761,8 +3226671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1133697132
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3226853,8 +3226762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1134939917
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3226945,8 +3226853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1155160359
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3227037,8 +3226944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1166166746
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3227185,8 +3227091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseD
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1201478156
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3227277,8 +3227182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1202448272
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3227460,8 +3227364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1241370095
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3227552,8 +3227455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Store
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1265075821
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3227644,8 +3227546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1268288878
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3227736,8 +3227637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1273372250
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3227828,8 +3227728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1283366981
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3321547,8 +3321446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1295490481
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3321639,8 +3321537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1333682420
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3321731,8 +3321628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1359431627
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3321823,8 +3321719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseD
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1370832253
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3322073,8 +3321968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1391081349
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3322165,8 +3322059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1393677202
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3322303,8 +3322196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1399832365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3322451,8 +3322343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseD
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1432936464
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3322543,8 +3322434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1443760965
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3322635,8 +3322525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1445337543
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3322727,8 +3322616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1456898994
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3322819,8 +3322707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1462356037
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3322911,8 +3322798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1467524249
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3323003,8 +3322889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1493752097
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3323152,8 +3323037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1501847056
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3323244,8 +3323128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1507696022
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3323368,8 +3323251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1542230620
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3323460,8 +3323342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1547517032
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3323552,8 +3323433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1600526483
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3352714,8 +3352594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1602985149
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3352806,8 +3352685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1604517961
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3352898,8 +3352776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1611407769
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3352990,8 +3352867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1667305231
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3353082,8 +3352958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1678563635
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3353262,8 +3353137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1711269633
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3353354,8 +3353228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1712377399
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3353446,8 +3353319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1716431238
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3353538,8 +3353410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1717157688
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3353585,17 +3353456,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1720607284 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7660686194693971725, guid: 15eed2a12bcd65b48b13a66ea0cbd654, type: 3}
-  m_PrefabInstance: {fileID: 470864944}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b76b1edab30738b4ea9bb10a0be06886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1728443283
 GameObject:
   m_ObjectHideFlags: 0
@@ -3353641,8 +3353501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1728443286
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3353733,8 +3353592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1732611121
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3354052,8 +3353910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1757199233
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3354144,8 +3354001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1779403366
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3354236,8 +3354092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1784859312
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3354328,8 +3354183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1801884234
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3354420,8 +3354274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Store
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1802039602
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3354512,8 +3354365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1838336567
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3354604,8 +3354456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1857909390
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3354696,8 +3354547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1889707211
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3354788,8 +3354638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1891088868
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3354880,8 +3354729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseD
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1913923058
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3354972,8 +3354820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1928227790
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3355064,8 +3354911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1936376663
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3355156,8 +3355002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1939338734
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3355248,8 +3355093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1954600469
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3355340,8 +3355184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1969792117
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3355432,8 +3355275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1975336240
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3355524,8 +3355366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &1993747495
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3355616,8 +3355457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Store
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2003824034
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3355708,8 +3355548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Store
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2011742786
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3355800,8 +3355639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2024449299
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3356001,8 +3355839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2047256510
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3356134,8 +3355971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2064368243
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3356226,8 +3356062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseC
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2084901542
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3356318,8 +3356153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseE
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2096345251
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3356410,8 +3356244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2099881458
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3356502,8 +3356335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2106537721
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3356631,8 +3356463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2124716876
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3356723,8 +3356554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2135591111
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3356815,8 +3356645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2141512221
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3356907,8 +3356736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2143960683
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3356999,8 +3356827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fc46233fe703447ac6bf37b7c96f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: HouseA
-  _houseID: 
+  _interiorSpawnPoint: {fileID: 0}
 --- !u!61 &2146379990
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3357683,7 +3357510,7 @@ PrefabInstance:
     - target: {fileID: 160695589998856398, guid: 8382dab29f129fb498b8cddce1a4025f, type: 3}
       propertyPath: _sound
       value: 
-      objectReference: {fileID: 470864945}
+      objectReference: {fileID: 0}
     - target: {fileID: 160695589998856398, guid: 8382dab29f129fb498b8cddce1a4025f, type: 3}
       propertyPath: _inventoyPanel
       value: 
@@ -3358185,7 +3358012,7 @@ PrefabInstance:
     - target: {fileID: 1860199160583188913, guid: aeefc8a0a6e216b4b9ce8a3e8c51f174, type: 3}
       propertyPath: _sound
       value: 
-      objectReference: {fileID: 470864945}
+      objectReference: {fileID: 0}
     - target: {fileID: 2135510297514139805, guid: aeefc8a0a6e216b4b9ce8a3e8c51f174, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3359468,7 +3359295,6 @@ SceneRoots:
   - {fileID: 1740100030}
   - {fileID: 1740100040}
   - {fileID: 1740200000}
-  - {fileID: 470864944}
   - {fileID: 377332421}
   - {fileID: 1379104778}
   - {fileID: 1538409737}
@@ -3359476,3 +3359302,4 @@ SceneRoots:
   - {fileID: 2115399930}
   - {fileID: 993016032}
   - {fileID: 7721425332557534810}
+  - {fileID: 973195939}
