@@ -22,8 +22,7 @@ public class CEnchantCraftingPanelController : MonoBehaviour
     public CEnchantCraftingRecipeDataSO RecipeData => _recipeData;
     #endregion
 
-    #region 내부 변수
-    private CSoundControllerUI _sound;
+    #region 내부 변수 
     private string _craftSound = "Craft";
     #endregion
 
@@ -37,12 +36,7 @@ public class CEnchantCraftingPanelController : MonoBehaviour
             enabled = false;
         } 
     }
-    
-    public void InjectSound(CSoundControllerUI sound)
-    {
-        _sound = sound;
-    }
-
+     
     public void InitializePanel(CEnchantCraftingRecipeDataSO recipe)
     {
         if(recipe != null)
@@ -85,7 +79,7 @@ public class CEnchantCraftingPanelController : MonoBehaviour
     private void OnCraftButtonClicked()
     {
         CEnchantCraftingManager.Instance.CraftItem(_recipeData);
-        _sound.PlaySound(_sound.SoundSO.Clips[_craftSound]);
+        CSoundControllerUI.PlaySound(_craftSound); 
     }
 
     public void SetPanelActive(bool active)
