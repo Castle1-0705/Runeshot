@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class CTooltipController : CSingleton<CTooltipController>
 {
-
     #region 인스팩터
     [SerializeField] private TMP_Text _header;
     [SerializeField] private TMP_Text _content;
@@ -60,8 +59,6 @@ public class CTooltipController : CSingleton<CTooltipController>
         Instance._currentItem = dragableItemController;
     }
 
-
-
     public static void HideTooltip(CDragableItemController dragableItemController)
     {
         if (Instance == null)
@@ -96,5 +93,4 @@ public class CTooltipController : CSingleton<CTooltipController>
         _rectTransform.pivot = new Vector2(pivotX, pivotY);
         transform.position = mousePos;
     }
-
 }

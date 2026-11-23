@@ -12,6 +12,12 @@ public class CWeaponDataSO : CGameDataSO
     [SerializeField, Min(1)] private int _magazineSize = 12;
     [SerializeField, Min(0.01f)] private float _reloadTime = 1.0f;
     [SerializeField] private CItemDataSO _ammoItem;
+    [SerializeField] private Sprite _weaponSprite;
+    [SerializeField] private Vector2 _weaponSpriteOffset;
+    [SerializeField, Min(0.01f)] private float _weaponSpriteScale = 1.0f;
+    [SerializeField] private bool _weaponSpriteFlipX;
+    [SerializeField] private Vector2 _weaponGripPixels;
+    [SerializeField] private Vector2 _weaponMuzzlePixels;
     #endregion
 
     #region 프로퍼티
@@ -22,5 +28,11 @@ public class CWeaponDataSO : CGameDataSO
     public int MagazineSize => Mathf.Max(1, _magazineSize);
     public float ReloadTime => _reloadTime;
     public CItemDataSO AmmoItem => _ammoItem;
+    public Sprite WeaponSprite => _weaponSprite;
+    public Vector2 WeaponSpriteOffset => _weaponSpriteOffset;
+    public float WeaponSpriteScale => _weaponSpriteScale;
+    public bool WeaponSpriteFlipX => _weaponSpriteFlipX;
+    public Vector2 WeaponGripPixels => _weaponGripPixels;
+    public Vector2 WeaponMuzzlePixels => _weaponMuzzlePixels;
     #endregion
 }
