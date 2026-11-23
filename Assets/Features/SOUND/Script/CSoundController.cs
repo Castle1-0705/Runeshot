@@ -86,7 +86,7 @@ public class CSoundController<T> : MonoBehaviour
     {
         AudioClip clip;
 
-        if(Instance.SoundSO.Clips.TryGetValue(name, out clip))
+        if(Instance.SoundSO.Clips.TryGetValue(name, out clip) && clip != null)
         {
             Instance.AudioSource.PlayOneShot(clip);
         }
@@ -96,5 +96,17 @@ public class CSoundController<T> : MonoBehaviour
         Instance.AudioSource.clip = clip;
 
         Instance.AudioSource.Play();
+    }
+    public static void PlayOtherBackGround(string name)
+    { 
+        AudioClip clip;
+
+        if (Instance.SoundSO.Clips.TryGetValue(name, out clip) && clip != null)
+        {
+            Instance.AudioSource.clip = clip;
+
+            Instance.AudioSource.Play();
+        }
+         
     }
 }
