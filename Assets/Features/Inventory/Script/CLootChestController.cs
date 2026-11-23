@@ -99,9 +99,13 @@ public class CLootChestController : MonoBehaviour, IInteractable
         Interact(); 
     }
 
+    #region 내부 변수 
     private bool _isInteractable = false;
     private bool _enabled = false;
     private string _playerTag = "Player";
+    private string _soundChest = "Chest";
+    #endregion
+
     private void ChestToggle()
     {
         if(!_isInteractable)
@@ -111,6 +115,8 @@ public class CLootChestController : MonoBehaviour, IInteractable
 
         _enabled = !_enabled;
 
+        CSoundControllerUI.PlaySound(_soundChest);
+         
         if(_enabled)
         {
             ChestOpenTest();

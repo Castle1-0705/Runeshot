@@ -23,7 +23,7 @@ public class CEnchantCraftingPanelController : MonoBehaviour
     #endregion
 
     #region 내부 변수 
-    private string _craftSound = "Craft";
+    private string _soundCraft = "Craft";
     #endregion
 
     private void Awake()
@@ -79,7 +79,7 @@ public class CEnchantCraftingPanelController : MonoBehaviour
     private void OnCraftButtonClicked()
     {
         CEnchantCraftingManager.Instance.CraftItem(_recipeData);
-        CSoundControllerUI.PlaySound(_craftSound); 
+        CSoundControllerUI.PlaySound(_soundCraft); 
     }
 
     public void SetPanelActive(bool active)
