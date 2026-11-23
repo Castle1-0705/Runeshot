@@ -155,7 +155,7 @@ public class CWeapon : MonoBehaviour
             return;
         }
 
-        _weaponRenderer.enabled = _weaponRenderer.sprite != null && !IsPlayerDead();
+        _weaponRenderer.enabled = isActiveAndEnabled && _weaponRenderer.sprite != null && !IsPlayerDead();
         bool isLeft = _gunHolder.right.x < 0.0f;
         _weaponRenderer.flipY = isLeft;
         Sprite sprite = _weaponRenderer.sprite;
