@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[DefaultExecutionOrder(20)]
 public class CWeapon : MonoBehaviour
 {
     #region 인스펙터
@@ -12,6 +13,7 @@ public class CWeapon : MonoBehaviour
     [SerializeField] private string _triggerActionName = "TriggerWeapon";
     [SerializeField] private bool _usePlayerInput = true;
     [SerializeField] private CSoundController _sound;
+    [SerializeField] private SpriteRenderer _weaponRenderer;
     #endregion
 
     #region 내부 변수
@@ -23,6 +25,8 @@ public class CWeapon : MonoBehaviour
     private readonly Dictionary<CWeaponDataSO, int> _magazines = new Dictionary<CWeaponDataSO, int>();
     private IitemContainer _ammoSource;
     private float _reloadEndTime;
+    private int _weaponSortingOrder;
+    private Vector3 _muzzleLocalPosition;
     #endregion
 
     #region 프로퍼티
@@ -54,6 +58,16 @@ public class CWeapon : MonoBehaviour
         _playerState = GetComponentInParent<CPlayerStateController>();
         _playerStatus = GetComponentInParent<CPlayerStatusHandler>();
         _enemyStatus = GetComponentInParent<CEnemyStatusHandler>();
+
+        if (_muzzle != null)
+        {
+            _muzzleLocalPosition = _muzzle.localPosition;
+        }
+
+        if (_weaponRenderer != null)
+        {
+            _weaponSortingOrder = _weaponRenderer.sortingOrder;
+        }
     }
 
     private void Start()
@@ -88,10 +102,14 @@ public class CWeapon : MonoBehaviour
 
             _playerInput.Initialize(this, _gunHolder, _triggerActionName);
         }
+
+        UpdateWeaponVisual();
     }
 
     private void OnEnable()
     {
+        UpdateWeaponVisual();
+
         if (_playerInput != null)
         {
             _playerInput.enabled = true;
@@ -102,10 +120,91 @@ public class CWeapon : MonoBehaviour
     {
         IsReloading = false;
 
+        if (_weaponRenderer != null)
+        {
+            _weaponRenderer.enabled = false;
+        }
+
         if (_playerInput != null)
         {
             _playerInput.enabled = false;
         }
+    }
+
+    private void UpdateWeaponVisual()
+    {
+        if (_weaponRenderer == null || !_usePlayerInput || _enemyStatus != null)
+        {
+            return;
+        }
+
+        _weaponRenderer.sprite = _data != null ? _data.WeaponSprite : null;
+        _weaponRenderer.enabled = isActiveAndEnabled && _weaponRenderer.sprite != null && !IsPlayerDead();
+        if (_data != null)
+        {
+            _weaponRenderer.transform.localScale = Vector3.one * _data.WeaponSpriteScale;
+            _weaponRenderer.flipX = _data.WeaponSpriteFlipX;
+        }
+        UpdateWeaponPose();
+    }
+
+    private void LateUpdate()
+    {
+        UpdateWeaponPose();
+    }
+
+    private void UpdateWeaponPose()
+    {
+        if (_weaponRenderer == null || _data == null || _gunHolder == null ||
+            !_usePlayerInput || _enemyStatus != null)
+        {
+            return;
+        }
+
+        _weaponRenderer.enabled = _weaponRenderer.sprite != null && !IsPlayerDead();
+        bool isLeft = _gunHolder.right.x < 0.0f;
+        _weaponRenderer.flipY = isLeft;
+        Sprite sprite = _weaponRenderer.sprite;
+        Vector2 grip = _data.WeaponGripPixels;
+        Vector2 muzzle = _data.WeaponMuzzlePixels;
+        if (sprite != null && (muzzle - grip).sqrMagnitude > 0.0001f)
+        {
+            grip = (grip - sprite.pivot) / sprite.pixelsPerUnit;
+            muzzle = (muzzle - sprite.pivot) / sprite.pixelsPerUnit;
+            if (_data.WeaponSpriteFlipX)
+            {
+                grip.x = -grip.x;
+                muzzle.x = -muzzle.x;
+            }
+            if (isLeft)
+            {
+                grip.y = -grip.y;
+                muzzle.y = -muzzle.y;
+            }
+
+            float scale = _data.WeaponSpriteScale;
+            _weaponRenderer.transform.localRotation = Quaternion.identity;
+            _weaponRenderer.transform.localPosition = -grip * scale;
+            if (_muzzle != null && _muzzle.parent == _gunHolder)
+            {
+                _muzzle.localPosition = (muzzle - grip) * scale;
+            }
+        }
+        else
+        {
+            Vector2 offset = _data.WeaponSpriteOffset;
+            if (isLeft)
+            {
+                offset.y = -offset.y;
+            }
+            _weaponRenderer.transform.localPosition = offset;
+            _weaponRenderer.transform.localRotation = Quaternion.identity;
+            if (_muzzle != null && _muzzle.parent == _gunHolder)
+            {
+                _muzzle.localPosition = _muzzleLocalPosition;
+            }
+        }
+        _weaponRenderer.sortingOrder = _weaponSortingOrder;
     }
 
     private bool HasInvalidReferences(CWeaponDataSO data)
@@ -131,6 +230,7 @@ public class CWeapon : MonoBehaviour
 
         if (_data == data && !fromPickup)
         {
+            UpdateWeaponVisual();
             return true;
         }
 
@@ -141,6 +241,7 @@ public class CWeapon : MonoBehaviour
 
         IsReloading = false;
         _data = data;
+        UpdateWeaponVisual();
 
         if (_playerInput != null)
         {

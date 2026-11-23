@@ -22,3 +22,9 @@ MonoBehaviour:
   _magazineSize: 12
   _reloadTime: 1
   _ammoItem: {fileID: 11400000, guid: ffd4c510752c40d580c91f0f086fc0c1, type: 2}
+  _weaponSprite: {fileID: 21300000, guid: c4b198b92b21bfc43a6175dfa49b3cfd, type: 3}
+  _weaponSpriteOffset: {x: 0.55, y: -0.03}
+  _weaponSpriteScale: 1
+  _weaponSpriteFlipX: 0
+  _weaponGripPixels: {x: 2.5, y: 5.5}
+  _weaponMuzzlePixels: {x: 16, y: 11}
