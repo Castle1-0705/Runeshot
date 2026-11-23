@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[DefaultExecutionOrder(30)]
 public class CPlayerWeaponInput : MonoBehaviour
 {
     #region 내부 변수
