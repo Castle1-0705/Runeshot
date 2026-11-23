@@ -220,7 +220,7 @@ public class CInventoryInputController : MonoBehaviour
 
     private void ToggleInventory()
     {
-        _sound.PlaySound(_sound.SoundSO.Clips[_soundInventory]);
+        CSoundControllerUI.PlaySound(_soundInventory); 
         _inventoyPanel.SetActive(!_inventoyPanel.activeSelf); 
     }
 }

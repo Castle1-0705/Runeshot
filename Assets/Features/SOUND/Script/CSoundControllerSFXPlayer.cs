@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class CSoundControllerSFXPlayer : CSoundController
+public class CSoundControllerSFXPlayer : CSoundController<CSoundControllerSFXPlayer>
 {
     private void Start()
     {

@@ -27,9 +27,7 @@ public class CEnchantCraftingManager : CSingleton<CEnchantCraftingManager>
         for (int i = 0; i < recipeDatabase.Count; i++)
         {
             CEnchantCraftingPanelController panel = Instantiate(_panelPrefab, _panelLayout);
-
-            panel.InjectSound(_sound);
-
+              
             panel.InitializePanel(recipeDatabase[i]);
 
             _panels.Add(panel);

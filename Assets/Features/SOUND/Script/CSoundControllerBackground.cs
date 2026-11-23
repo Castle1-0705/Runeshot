@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CSoundControllerBackground : CSoundController
+public class CSoundControllerBackground : CSoundController<CSoundControllerBackground>
 {  
     private void Start()
     {
