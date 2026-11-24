@@ -3,6 +3,9 @@ using UnityEngine.AI;
 
 public class CEnemySpawnManager : MonoBehaviour
 {
+    [Header("준비 시간")]
+    [SerializeField][Range(0f,100f)] private float _preptime = 30f; 
+ 
     [Header("적 설정")]
     [SerializeField] private CEnemy _enemyPrefab;
     [SerializeField] private int _maxEnemyCount = 8;
@@ -13,7 +16,7 @@ public class CEnemySpawnManager : MonoBehaviour
 
     [Header("스폰 시간")]
     [SerializeField] private float _spawnIntervalMin = 3f;
-    [SerializeField] private float _spawnIntervalMax = 5f;
+    [SerializeField] private float _spawnIntervalMax = 20f;
 
     [Header("스폰 위치")]
     [SerializeField] private float _spawnOutsideDistance = 1.5f;
@@ -34,8 +37,7 @@ public class CEnemySpawnManager : MonoBehaviour
     private float _spawnTimer;
     private float _nextSpawnTime;
 
-    private Vector3 _spawnPosition;
-
+    private Vector3 _spawnPosition; 
 
     private void Start()
     {
@@ -43,7 +45,7 @@ public class CEnemySpawnManager : MonoBehaviour
         {
             _maxEnemyCount = 1;
         }
-
+        
         _enemyPool = new CEnemy[_maxEnemyCount];
 
         if (_mainCamera == null)
@@ -61,11 +63,16 @@ public class CEnemySpawnManager : MonoBehaviour
             }
         }
 
-        SetNextSpawnTime();
+        SetNextSpawnTime(); 
     }
 
     private void Update()
     {
+        if(Time.time < _preptime)
+        {
+            return;
+        }
+           
         if (_enemyPrefab == null || _player == null || _mainCamera == null)
         {
             return;

@@ -3227151,12 +3227151,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e2cb34436e5584d9a19919b8d512c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _preptime: 30
+  _timeSharpness: 0.035
   _enemyPrefab: {fileID: 1715956814467052569, guid: 0a3b201ebdef0ee43805fe3f98396ffe, type: 3}
   _maxEnemyCount: 8
   _player: {fileID: 285415444}
   _mainCamera: {fileID: 0}
   _spawnIntervalMin: 3
-  _spawnIntervalMax: 5
+  _spawnIntervalMax: 20
   _spawnOutsideDistance: 1.5
   _minPlayerDistance: 4
   _enemyRemoveDistance: 20
@@ -3322403,12 +3322405,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e2cb34436e5584d9a19919b8d512c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _preptime: 30
+  _timeSharpness: 0.05
   _enemyPrefab: {fileID: 1620478685575174749, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
   _maxEnemyCount: 8
   _player: {fileID: 285415444}
   _mainCamera: {fileID: 0}
   _spawnIntervalMin: 3
-  _spawnIntervalMax: 5
+  _spawnIntervalMax: 20
   _spawnOutsideDistance: 1.5
   _minPlayerDistance: 4
   _enemyRemoveDistance: 20
