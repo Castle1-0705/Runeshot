@@ -9,8 +9,10 @@ public class COptionPenel : MonoBehaviour
     #region ¿ŒΩ∫∆Â≈Õ
     [SerializeField] private GameObject _optionPanel;
     [SerializeField] private GameObject _soundPenel;
+    [SerializeField] private GameObject _displayPenel;
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _soundButton;
+    [SerializeField] private Button _displayButton;
     [SerializeField] private Button _resumeButton;
     [SerializeField] private Button _returnMain;
 
@@ -36,6 +38,7 @@ public class COptionPenel : MonoBehaviour
         _exitButton.onClick.AddListener(GameEnd);
         _soundButton.onClick.AddListener(ViewSoundOption);
         _returnMain.onClick.AddListener(ReturnMain);
+        _displayButton.onClick.AddListener(ViewDisplayOption);
     }
 
     private void BindOption()
@@ -70,7 +73,12 @@ public class COptionPenel : MonoBehaviour
             _soundPenel.SetActive(false); 
             return;
         }
-
+        else if(_displayPenel.activeSelf)
+        {
+            _displayPenel.SetActive(false);
+            return;
+        }
+         
         _optionPanel.SetActive(_enabled);
     }
 
@@ -91,10 +99,17 @@ public class COptionPenel : MonoBehaviour
     public void ViewSoundOption()
     {
         _soundPenel.SetActive(true);
+        _optionPanel.gameObject.SetActive(false);
     }
 
     public void ReturnMain()
     {
         SceneManager.LoadScene(_stringTitleScene);
+    }
+
+    public void ViewDisplayOption()
+    {
+        _displayPenel.gameObject.SetActive(true);
+        _optionPanel.gameObject.SetActive(false);
     }
 }
