@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -37,7 +36,6 @@ public class CInventoryInputController : MonoBehaviour
     private string _soundDrink = "Drink";
     #endregion
 
-    public Action<CItemDataSO> durationUI;
     private void Start()
     {
         CInputDispatcher inputDispatcher = CInputDispatcher.Instance;
@@ -168,22 +166,11 @@ public class CInventoryInputController : MonoBehaviour
 
     private void UseQuickSlot(int slotIndex)
     {
-        CItemSlotData slot = CInventoryManager.Instance[slotIndex];
-
-        if (slot != null && slot.Item != null && slot.Item.ItemType != EItemtype.Weapon)
+        CInventoryManager inventory = CInventoryManager.Instance;
+        if (inventory != null && inventory.TryUseConsumable(slotIndex))
         {
-            if (slot.Item.OnUse())
-            {
-                if (slot.Item.ItemType == EItemtype.Consumable)
-                {
-                    CInventoryManager.Instance.RemoveFromInventory(slotIndex, 1);
-                    CSoundControllerUI.PlaySound(_soundDrink);
-                    durationUI.Invoke(slot.Item);
-                }
-            }
+            CSoundControllerUI.PlaySound(_soundDrink);
         }
-
-        //Debug.Log(slotIndex);
     }
 
     private void OnScroll(float scroll)

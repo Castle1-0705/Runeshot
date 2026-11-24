@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ItemSO_Pistol
   m_EditorClassIdentifier: 
   _id: Item_Pistol
-  _name: "\uD53C\uC2A4\uD1A8"
-  _itemSprite: {fileID: 0}
+  _name: Pistol
+  _itemSprite: {fileID: 21300000, guid: c4b198b92b21bfc43a6175dfa49b3cfd, type: 3}
   _maxStack: 1
   _itemType: 1
   _effect:

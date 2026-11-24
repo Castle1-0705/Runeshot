@@ -33,8 +33,21 @@ public class CItemSlotController : MonoBehaviour, IDropHandler
         _item.UpdateSlotItem(item);
     }
 
+    public void CancelDrag()
+    {
+        if (_item != null)
+        {
+            _item.CancelDrag();
+        }
+    }
+
     public virtual void OnDrop(PointerEventData eventData)
     {
+        if (eventData == null || eventData.pointerDrag == null || !gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
         GameObject dropedGO = eventData.pointerDrag;
         CDragableItemController item =  dropedGO.GetComponent<CDragableItemController>();
 
