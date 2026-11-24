@@ -22,25 +22,23 @@ public class CPotionDurationUI : MonoBehaviour
 {
     #region 인스펙터
     [SerializeField] private Slider _slider;
-    [SerializeField] private Image _potion;
-    [SerializeField] private CInventoryInputController _controller;
+    [SerializeField] private Image _potion; 
     [SerializeField] private Transform _layout;
+
     #endregion
-     
+
     #region 내부 변수  
+    CInventoryManager _inventoryManager;
+
     private Dictionary<string, Sliders> _overTimes = new Dictionary<string, Sliders>(); 
     private Dictionary<string, Sliders> _effectToPlayerHPs = new Dictionary<string, Sliders>(); 
     private Dictionary<string, Sliders> _modifiers = new Dictionary<string, Sliders>(); 
     #endregion
     
-    private void Awake()
+    private void Start()
     {
-        if(_controller == null)
-        { 
-            Debug.Log("포션 UI에 컨트롤러가 없다");
-            return;
-        }
-        _controller.durationUI += PotionDuration; 
+        _inventoryManager = CInventoryManager.Instance;
+        _inventoryManager.durationUI += PotionDuration; 
     }
     void PotionDuration(CItemDataSO item)
     { 
