@@ -38,7 +38,16 @@ public class CPotionDurationUI : MonoBehaviour
     private void Start()
     {
         _inventoryManager = CInventoryManager.Instance;
+
         _inventoryManager.durationUI += PotionDuration; 
+    }
+
+    private void OnDestroy()
+    {
+        if(_inventoryManager != null)
+        {
+            _inventoryManager.durationUI -= PotionDuration;
+        } 
     }
     void PotionDuration(CItemDataSO item)
     { 
@@ -55,7 +64,7 @@ public class CPotionDurationUI : MonoBehaviour
             {
                 CItemEffectHealOverTime overTime = (CItemEffectHealOverTime)item.Effect[i];
 
-                //TODO
+                //TODO 
                 //but 사용할 이유가 없음
 
             }
