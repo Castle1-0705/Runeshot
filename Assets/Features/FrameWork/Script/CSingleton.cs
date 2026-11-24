@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -35,9 +36,13 @@ public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         return CSingleton<T>.Instance;
     }
-
+ 
     protected virtual void Awake()
     {
+        //씬 옮길 때만 생성가능
+        SceneManager.sceneUnloaded -= IsDestroyedFalse;
+        SceneManager.sceneUnloaded += IsDestroyedFalse;
+
         if (_instance == null && _instance != this)
         {
             _instance = this as T;
@@ -45,7 +50,7 @@ public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
             _isDestroyed = false;
         }
 
-        else if(_instance != this)
+        else if (_instance != this)
         {
             Destroy(gameObject);
         }
@@ -58,5 +63,10 @@ public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
             _instance = null;
             _isDestroyed = true;
         }
+    }
+     
+    private void IsDestroyedFalse(Scene scene)
+    {
+        _isDestroyed = false;
     }
 }
