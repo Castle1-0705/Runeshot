@@ -181,8 +181,7 @@ public class CPotionDurationUI : MonoBehaviour
 
         await UniTask.WaitUntil(() => RefreshDuration(effectToPlayerHP, sliders),PlayerLoopTiming.Update,destroyCancellationToken);
 
-        sliders._num = 1;
-        sliders._slider.gameObject.SetActive(false);
+        
     }
     private async UniTask Duration(CItemEffectAddStatusEffectToPlayerModifier modifier, Sliders sliders)
     {
@@ -193,8 +192,7 @@ public class CPotionDurationUI : MonoBehaviour
 
         await UniTask.WaitUntil(() => RefreshDuration(modifier, sliders),PlayerLoopTiming.Update,destroyCancellationToken);
 
-        sliders._num = 1;
-        sliders._slider.gameObject.SetActive(false);
+        
     }
     #endregion
 
@@ -210,6 +208,8 @@ public class CPotionDurationUI : MonoBehaviour
          
         if (effectToPlayerHP.StatusEffect.DurationTimer <= 0)
         {
+            sliders._num = 1;
+            sliders._slider.gameObject.SetActive(false);
             return true;
         }
 
@@ -226,6 +226,8 @@ public class CPotionDurationUI : MonoBehaviour
          
         if(modifier.StatusEffect.DurationTimer <= 0)
         {
+            sliders._num = 1;
+            sliders._slider.gameObject.SetActive(false);
             return true;
         }
 
