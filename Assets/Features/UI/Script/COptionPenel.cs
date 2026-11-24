@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class COptionPenel : MonoBehaviour
@@ -11,21 +12,30 @@ public class COptionPenel : MonoBehaviour
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _soundButton;
     [SerializeField] private Button _resumeButton;
+    [SerializeField] private Button _returnMain;
 
     [SerializeField] private string _inputKey = "ESC";
     #endregion
 
     #region 내부 변수 
     private bool _enabled = false;
+    private string _stringTitleScene = "TitleScene";
     #endregion
 
     private void Start()
     {
         BindOption();
+        AddOption();
+         
         _optionPanel.SetActive(_enabled);
+    }
+
+    void AddOption()
+    {
         _resumeButton.onClick.AddListener(Resume);
         _exitButton.onClick.AddListener(GameEnd);
         _soundButton.onClick.AddListener(ViewSoundOption);
+        _returnMain.onClick.AddListener(ReturnMain);
     }
 
     private void BindOption()
@@ -81,5 +91,10 @@ public class COptionPenel : MonoBehaviour
     public void ViewSoundOption()
     {
         _soundPenel.SetActive(true);
+    }
+
+    public void ReturnMain()
+    {
+        SceneManager.LoadScene(_stringTitleScene);
     }
 }
