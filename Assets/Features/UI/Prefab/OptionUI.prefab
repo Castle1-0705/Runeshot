@@ -7542,6 +7542,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2574484203987790970}
     m_Modifications:
+    - target: {fileID: 2745280214259040927, guid: 9e0ab3556cd3ff042b8efffaca1eab61, type: 3}
+      propertyPath: _closeObject
+      value: 
+      objectReference: {fileID: 3006784330663177387}
     - target: {fileID: 5494758459040913679, guid: 9e0ab3556cd3ff042b8efffaca1eab61, type: 3}
       propertyPath: m_Name
       value: CloseButton
@@ -7644,6 +7648,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1678469673138255242}
     m_Modifications:
+    - target: {fileID: 2745280214259040927, guid: 9e0ab3556cd3ff042b8efffaca1eab61, type: 3}
+      propertyPath: _closeObject
+      value: 
+      objectReference: {fileID: 605642257898006620}
     - target: {fileID: 5494758459040913679, guid: 9e0ab3556cd3ff042b8efffaca1eab61, type: 3}
       propertyPath: m_Name
       value: CloseButton
@@ -7746,6 +7754,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7759837947506087478}
     m_Modifications:
+    - target: {fileID: 2745280214259040927, guid: 9e0ab3556cd3ff042b8efffaca1eab61, type: 3}
+      propertyPath: _closeObject
+      value: 
+      objectReference: {fileID: 6441277736602081375}
     - target: {fileID: 5494758459040913679, guid: 9e0ab3556cd3ff042b8efffaca1eab61, type: 3}
       propertyPath: m_Name
       value: CloseButton

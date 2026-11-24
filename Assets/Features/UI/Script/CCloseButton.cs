@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class CCloseButton : MonoBehaviour
 {
-    [SerializeField] Button _closeButton;
+    [SerializeField] GameObject _closeObject;
      
     public void CloseTimeScale1()
-    {
-        transform.parent.gameObject.SetActive(false);
+    { 
+        _closeObject.SetActive(false);
 
         TimeScale();
     }
     public void Close()
     {
-        transform.parent.gameObject.SetActive(false); 
+        _closeObject.SetActive(false);
     }
 
     public void TimeScale()

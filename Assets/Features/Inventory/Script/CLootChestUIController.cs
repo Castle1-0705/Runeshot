@@ -99,5 +99,7 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
         }
 
         _panel.SetActive(toggle);
-	}
+
+        Time.timeScale = toggle ? 0f : 1f;
+    }
 }
