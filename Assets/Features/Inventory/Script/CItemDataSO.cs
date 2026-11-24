@@ -70,6 +70,24 @@ public class CItemDataSO : CGameDataSO
 		return true;
     }
 
+    public bool TryEquipWeapon()
+    {
+        if (_itemType != EItemtype.Weapon || _effect == null)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < _effect.Length; i++)
+        {
+            if (_effect[i] is CItemEffectEquipWeapon equipWeapon)
+            {
+                return equipWeapon.TryEquipWeapon();
+            }
+        }
+
+        return false;
+    }
+
     protected override void OnValidate()
     {
         base.OnValidate();
@@ -149,13 +167,16 @@ public class CItemEffectEquipWeapon : CItemEffect
     public bool TryEquipWeapon()
     {
         CPlayerCharacterController player = CPlayerCharacterController.Instance;
-        if (player == null || player.Weapon == null || _weaponData == null)
+        if (player == null || player.Weapon == null || !player.Weapon.isActiveAndEnabled ||
+            player.HPhandler == null || player.HPhandler.HP <= 0.0f ||
+            player.StateController == null || player.StateController.CurrentState == EPlayerState.Dead ||
+            _weaponData == null)
         {
             Debug.LogWarning("플레이어 무기 또는 장착할 무기 데이터가 비어있음");
             return false;
         }
 
-        return player.Weapon.EquipWeapon(_weaponData);
+        return player.Weapon.EquipWeapon(_weaponData, true);
     }
 }
 
