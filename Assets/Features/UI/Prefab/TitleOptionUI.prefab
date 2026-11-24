@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7312708258479909966}
   - component: {fileID: 3288155170300868506}
   - component: {fileID: 454817184222718346}
-  - component: {fileID: 2029326465092382931}
   m_Layer: 5
   m_Name: TitleOptionUI
   m_TagString: Untagged
@@ -130,18 +129,6 @@ MonoBehaviour:
   _returnMain: {fileID: 0}
   _keyButton: {fileID: 7511944179519707809}
   _inputKey: ESC
---- !u!114 &2029326465092382931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54600378854838524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f72e878d3b5d70d42ada339133403721, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &123603769234421204
 GameObject:
   m_ObjectHideFlags: 0
