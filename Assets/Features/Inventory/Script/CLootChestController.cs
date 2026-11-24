@@ -14,6 +14,7 @@ public class CLootChestController : MonoBehaviour, IInteractable
     #region 내부변수
     private bool _isOpend = false;
     private CInputActionData _interactAction;
+    private CLootChestUIController _chestUI;
     #endregion
 
     private void Awake()
@@ -115,8 +116,14 @@ public class CLootChestController : MonoBehaviour, IInteractable
             _isOpend = true;
         }
 
-        CLootChestUIController.Instance.ToggleUI(true);
-        CLootChestUIController.Instance.UpdateSlot(_inventory);
+        _chestUI = CLootChestUIController.Instance;
+        if (_chestUI == null)
+        {
+            return;
+        }
+
+        _chestUI.ToggleUI(true);
+        _chestUI.UpdateSlot(_inventory);
 
     }
 
@@ -188,7 +195,10 @@ public class CLootChestController : MonoBehaviour, IInteractable
         {
             _isInteractable = false;
             _enabled = false;
-            CLootChestUIController.Instance.ToggleUI(false);
+            if (_chestUI != null)
+            {
+                _chestUI.ToggleUI(false);
+            }
         }
     }
   
