@@ -34,6 +34,7 @@ public class CItemDataSO : CGameDataSO
 	public Sprite ItemSprite => _itemSprite;
 	public int MaxStack => _maxStack;
 	public EItemtype ItemType => _itemType;
+	public CItemEffect[] Effect => _effect;
 	public string Description => _description;
 	#endregion
 
@@ -130,8 +131,13 @@ public class CItemEffectHealOverTime : CItemEffect
 	#region 인스팩터
 	[SerializeField] private float _healAmount;
 	[SerializeField] private float _duration;
-	#endregion
-	public override async UniTask OnUse()
+    #endregion
+
+    #region 프로퍼티
+    public float Duration => _duration;
+    #endregion
+
+    public override async UniTask OnUse()
 	{
 		CPlayerHPHandler playerHP = CPlayerCharacterController.Instance.HPhandler;
 		if(playerHP == null)
@@ -185,8 +191,12 @@ public class CItemEffectAddStatusEffectToPlayerHP : CItemEffect
 {
 	#region 인스팩터
 	[SerializeReference, SubclassSelector] private CStatusEffect _statusEffect;
-	#endregion
-	public override UniTask OnUse()
+    #endregion
+
+    #region 프로퍼티
+    public CStatusEffect StatusEffect => _statusEffect;
+    #endregion
+    public override UniTask OnUse()
 	{
 		CStatusEffectHandler statusEffectHandler = CPlayerCharacterController.Instance.StatusEffectHandler;
 
@@ -201,8 +211,13 @@ public class CItemEffectAddStatusEffectToPlayerModifier : CItemEffect
 {
 	#region 인스팩터
 	[SerializeReference, SubclassSelector] private CStatusEffect _statusEffect;
-	#endregion
-	public override UniTask OnUse()
+    #endregion
+
+    #region 프로퍼티
+    public CStatusEffect StatusEffect => _statusEffect;
+    #endregion
+
+    public override UniTask OnUse()
     {
         CStatusEffectHandler statusEffectHandler = CPlayerCharacterController.Instance.StatusEffectHandler;
 
