@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -36,6 +37,7 @@ public class CInventoryInputController : MonoBehaviour
     private string _soundDrink = "Drink";
     #endregion
 
+    public Action<CItemDataSO> durationUI;
     private void Start()
     {
         CInputDispatcher inputDispatcher = CInputDispatcher.Instance;
@@ -176,6 +178,7 @@ public class CInventoryInputController : MonoBehaviour
                 {
                     CInventoryManager.Instance.RemoveFromInventory(slotIndex, 1);
                     CSoundControllerUI.PlaySound(_soundDrink);
+                    durationUI.Invoke(slot.Item);
                 }
             }
         }

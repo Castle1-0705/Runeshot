@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class CStatusEffectHandler : MonoBehaviour
 
     #region 프로퍼티
     public IReadOnlyList<CStatusEffect> StatusEffects => _statusEffects;
-    public IReadOnlyDictionary<string, CStatusEffect> EffectsMap => _effectsMap;
+    public IReadOnlyDictionary<string, CStatusEffect> EffectsMap => _effectsMap; 
     #endregion
 
     public void ApplyStatusEffect<T>(CStatusEffect effect, T target)
@@ -46,7 +47,7 @@ public class CStatusEffectHandler : MonoBehaviour
                 default:
                     break;
             }
-        }
+        } 
     }
 
     public void RemoveStatusEffect(CStatusEffect effect)
