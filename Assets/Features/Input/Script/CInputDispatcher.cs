@@ -69,7 +69,7 @@ public class CInputAxisActionData
 }
 
 [DefaultExecutionOrder(-10)]
-public class CInputDispatcher : CSingletonDontDstroyAtLoad<CInputDispatcher>
+public class CInputDispatcher : CSingleton<CInputDispatcher>
 {
     #region 인스팩터
     [SerializeField] private List<CInputActionData> _inputActions;
