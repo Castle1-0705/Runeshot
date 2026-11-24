@@ -10,11 +10,13 @@ public class COptionPenel : MonoBehaviour
     [SerializeField] private GameObject _optionPanel;
     [SerializeField] private GameObject _soundPenel;
     [SerializeField] private GameObject _displayPenel;
+    [SerializeField] private GameObject _keyPenel;
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _soundButton;
     [SerializeField] private Button _displayButton;
     [SerializeField] private Button _resumeButton;
     [SerializeField] private Button _returnMain;
+    [SerializeField] private Button _keyButton;
 
     [SerializeField] private string _inputKey = "ESC";
     #endregion
@@ -27,18 +29,33 @@ public class COptionPenel : MonoBehaviour
     private void Start()
     {
         BindOption();
-        AddOption();
+        AddTitleOption();
+        AddBattleMapOption();
          
         _optionPanel.SetActive(_enabled);
     }
 
-    void AddOption()
-    {
-        _resumeButton.onClick.AddListener(Resume);
-        _exitButton.onClick.AddListener(GameEnd);
+    private void AddTitleOption()
+    { 
+        if (_soundButton == null || _displayButton == null || _keyButton == null)
+        {
+            return;
+        } 
+
         _soundButton.onClick.AddListener(ViewSoundOption);
-        _returnMain.onClick.AddListener(ReturnMain);
         _displayButton.onClick.AddListener(ViewDisplayOption);
+        _keyButton.onClick.AddListener(ViewKeyOption);
+    }
+    private void AddBattleMapOption()
+    {
+        if (_resumeButton == null || _returnMain == null || _exitButton == null)
+        {
+            return; 
+        }
+         
+        _exitButton.onClick.AddListener(GameEnd);
+        _resumeButton.onClick.AddListener(Resume);
+        _returnMain.onClick.AddListener(ReturnMain); 
     }
 
     private void BindOption()
@@ -79,6 +96,12 @@ public class COptionPenel : MonoBehaviour
             Time.timeScale = 1f;
             return;
         }
+        else if(_keyPenel.activeSelf)
+        {
+            _keyPenel.SetActive(false);
+            Time.timeScale = 1f;
+            return;
+        }
 
         Time.timeScale = _enabled ? 0 : 1f;
 
@@ -102,7 +125,7 @@ public class COptionPenel : MonoBehaviour
     public void ViewSoundOption()
     {
         _soundPenel.SetActive(true);
-        _optionPanel.gameObject.SetActive(false);
+        _optionPanel.SetActive(false);
     }
 
     public void ReturnMain()
@@ -112,7 +135,13 @@ public class COptionPenel : MonoBehaviour
 
     public void ViewDisplayOption()
     {
-        _displayPenel.gameObject.SetActive(true);
-        _optionPanel.gameObject.SetActive(false);
+        _displayPenel.SetActive(true);
+        _optionPanel.SetActive(false);
+    }
+
+    public void ViewKeyOption()
+    {
+        _keyPenel.SetActive(true);
+        _optionPanel.SetActive(false);
     }
 }
