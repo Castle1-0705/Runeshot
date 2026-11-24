@@ -50,6 +50,36 @@ MonoBehaviour:
     _element:
       rid: 5559903975761510406
     _luckModifier: 2
+  - _weight: 1
+    _modifiers: []
+    _element:
+      rid: 5559904900000000000
+    _luckModifier: 0
+  - _weight: 1
+    _modifiers: []
+    _element:
+      rid: 5559904900000000001
+    _luckModifier: 0
+  - _weight: 1
+    _modifiers: []
+    _element:
+      rid: 5559904900000000002
+    _luckModifier: 0
+  - _weight: 1
+    _modifiers: []
+    _element:
+      rid: 5559904900000000003
+    _luckModifier: 0
+  - _weight: 1
+    _modifiers: []
+    _element:
+      rid: 5559904900000000004
+    _luckModifier: 0
+  - _weight: 1
+    _modifiers: []
+    _element:
+      rid: 5559904900000000005
+    _luckModifier: 0
   references:
     version: 2
     RefIds:
@@ -89,3 +119,39 @@ MonoBehaviour:
         _minAmount: 1
         _maxAmount: 2
         _item: {fileID: 11400000, guid: 463c00064baa9d74b92dbca98be857b9, type: 2}
+    - rid: 5559904900000000000
+      type: {class: CItemReward, ns: , asm: Assembly-CSharp}
+      data:
+        _minAmount: 1
+        _maxAmount: 1
+        _item: {fileID: 11400000, guid: 10879b1c86eb5424e81f631dc611fb45, type: 2}
+    - rid: 5559904900000000001
+      type: {class: CItemReward, ns: , asm: Assembly-CSharp}
+      data:
+        _minAmount: 1
+        _maxAmount: 1
+        _item: {fileID: 11400000, guid: 0f6c53be15a5873a2883ea73fd049754, type: 2}
+    - rid: 5559904900000000002
+      type: {class: CItemReward, ns: , asm: Assembly-CSharp}
+      data:
+        _minAmount: 1
+        _maxAmount: 1
+        _item: {fileID: 11400000, guid: c0dcff1694e3ce8284816579bc1ee661, type: 2}
+    - rid: 5559904900000000003
+      type: {class: CItemReward, ns: , asm: Assembly-CSharp}
+      data:
+        _minAmount: 6
+        _maxAmount: 18
+        _item: {fileID: 11400000, guid: ffd4c510752c40d580c91f0f086fc0c1, type: 2}
+    - rid: 5559904900000000004
+      type: {class: CItemReward, ns: , asm: Assembly-CSharp}
+      data:
+        _minAmount: 10
+        _maxAmount: 30
+        _item: {fileID: 11400000, guid: 72a8e526e3a142b992e5bb514e29b148, type: 2}
+    - rid: 5559904900000000005
+      type: {class: CItemReward, ns: , asm: Assembly-CSharp}
+      data:
+        _minAmount: 3
+        _maxAmount: 8
+        _item: {fileID: 11400000, guid: 8e0eb051f0704cf2b22a9cec8cf5aacc, type: 2}

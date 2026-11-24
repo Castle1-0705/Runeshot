@@ -42,6 +42,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
      
     private void SetFalse()
     {
+        
         gameObject.SetActive(false);
         HP = MaxHP;
     }
@@ -64,7 +65,8 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         if (HP <= 0f)
         {
             _enemy.DieOrAlive(false);
-            _aniHP.SetBool(_death,true); 
+            _aniHP.SetBool(_death,true);
+            CSoundControllerSFXMoster.PlaySound(_stringDeath);
 
             await UniTask.WaitUntil(UntilDeath, PlayerLoopTiming.Update, destroyCancellationToken); 
 

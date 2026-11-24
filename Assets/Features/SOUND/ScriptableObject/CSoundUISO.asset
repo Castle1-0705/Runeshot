@@ -15,7 +15,13 @@ MonoBehaviour:
   cSoundData:
     _AudioClipList:
     - {fileID: 8300000, guid: 6dff165a6fca25e489a69d26a10ab6b9, type: 3}
-    - {fileID: 8300000, guid: 2e1c0edfc97324f3cbdc4ed5f343753b, type: 3}
+    - {fileID: 8300000, guid: 0ed4a08350e62b8408e7883f367047a7, type: 3}
+    - {fileID: 8300000, guid: c6a3d35da57c28a45b4b834e0491e626, type: 3}
+    - {fileID: 8300000, guid: ca506a688e0119b49811c0e9b94df442, type: 3}
+    - {fileID: 8300000, guid: 289954a376f3c7d4c886444b0d10fc3a, type: 3}
     _AudioClipNames:
     - Inventory
     - Craft
+    - EnchantInventory
+    - Chest
+    - Click

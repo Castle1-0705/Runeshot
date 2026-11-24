@@ -6,8 +6,7 @@ using UnityEngine;
 public class CInventoryInputController : MonoBehaviour
 {
     #region 인스펙터    
-    [SerializeField] private GameObject _inventoyPanel;
-    [SerializeField] private CSoundControllerUI _sound; 
+    [SerializeField] private GameObject _inventoyPanel; 
 
 
     [Space]
@@ -34,6 +33,7 @@ public class CInventoryInputController : MonoBehaviour
     private bool _isReady = false;
 
     private string _soundInventory = "Inventory";
+    private string _soundDrink = "Drink";
     #endregion
 
     private void Start()
@@ -57,13 +57,7 @@ public class CInventoryInputController : MonoBehaviour
         }
 
         TryBind();
-
-        if(_sound == null)
-        {
-            Debug.Log("인벤토리 사운드 누락");
-            enabled = false;
-            return;
-        }
+         
     }
 
     private void OnEnable()
@@ -172,20 +166,11 @@ public class CInventoryInputController : MonoBehaviour
 
     private void UseQuickSlot(int slotIndex)
     {
-        CItemSlotData slot = CInventoryManager.Instance[slotIndex];
-
-        if (slot != null && slot.Item != null && slot.Item.ItemType != EItemtype.Weapon)
+        CInventoryManager inventory = CInventoryManager.Instance;
+        if (inventory != null && inventory.TryUseConsumable(slotIndex))
         {
-            if (slot.Item.OnUse())
-            {
-                if (slot.Item.ItemType == EItemtype.Consumable)
-                {
-                    CInventoryManager.Instance.RemoveFromInventory(slotIndex, 1);
-                }
-            }
+            CSoundControllerUI.PlaySound(_soundDrink);
         }
-
-        //Debug.Log(slotIndex);
     }
 
     private void OnScroll(float scroll)
@@ -220,7 +205,7 @@ public class CInventoryInputController : MonoBehaviour
 
     private void ToggleInventory()
     {
-        _sound.PlaySound(_sound.SoundSO.Clips[_soundInventory]);
+        CSoundControllerUI.PlaySound(_soundInventory); 
         _inventoyPanel.SetActive(!_inventoyPanel.activeSelf); 
     }
 }

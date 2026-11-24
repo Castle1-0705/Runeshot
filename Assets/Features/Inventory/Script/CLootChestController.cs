@@ -13,6 +13,8 @@ public class CLootChestController : MonoBehaviour, IInteractable
 
     #region 내부변수
     private bool _isOpend = false;
+    private CInputActionData _interactAction;
+    private CLootChestUIController _chestUI;
     #endregion
 
     private void Awake()
@@ -47,11 +49,32 @@ public class CLootChestController : MonoBehaviour, IInteractable
 
         _spriteRenderer.sprite = _data.ChestSprite;
 
-        CInputDispatcher.Instance.InputActionMap["Interact"].OnPerformedAction += ChestToggle;
+
+    }
+
+    private void Start()
+    {
+        CInputDispatcher dispatcher = CInputDispatcher.Instance;
+        if (dispatcher != null && dispatcher.InputActionMap.TryGetValue("Interact", out _interactAction))
+        {
+            _interactAction.OnPerformedAction += ChestToggle;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_interactAction != null)
+        {
+            _interactAction.OnPerformedAction -= ChestToggle;
+        }
     }
 
     public void Interact()
     {
+        if (!isActiveAndEnabled || _data == null || _inventory == null)
+        {
+            return;
+        }
         if(!_isOpend)
         {
             if (_inventory == null)
@@ -62,9 +85,10 @@ public class CLootChestController : MonoBehaviour, IInteractable
 
             _inventory.InitializeInventory(_data.InventorySize);
 
-            IRewardable[] itemRewards = CLootTableManager.GetLootTableElements(_data.LootTableID, _inventory.InventorySize);
+            IRewardable[] itemRewards = _inventory.InventorySize > 0 ?
+                CLootTableManager.GetLootTableElements(_data.LootTableID, _inventory.InventorySize) : null;
 
-            for (int i = 0; i < itemRewards.Length; i++)
+            for (int i = 0; itemRewards != null && i < itemRewards.Length; i++)
             {
                 if (!(itemRewards[i] is CItemReward itemReward))
                 {
@@ -76,7 +100,15 @@ public class CLootChestController : MonoBehaviour, IInteractable
                     continue;
                 }
 
-                int amount = Random.Range(itemReward.MinAmount, itemReward.MaxAmount +1);
+                int minAmount = Mathf.Max(0, itemReward.MinAmount);
+                int maxAmount = Mathf.Max(minAmount, itemReward.MaxAmount);
+                maxAmount = Mathf.Min(maxAmount, Mathf.Max(0, itemReward.Item.MaxStack));
+                minAmount = Mathf.Min(minAmount, maxAmount);
+                int amount = Random.Range(minAmount, maxAmount + 1);
+                if (amount <= 0)
+                {
+                    continue;
+                }
 
                 _inventory.AddToInventory(itemReward.Item, amount);
             }
@@ -84,8 +116,14 @@ public class CLootChestController : MonoBehaviour, IInteractable
             _isOpend = true;
         }
 
-        CLootChestUIController.Instance.ToggleUI(true);
-        CLootChestUIController.Instance.UpdateSlot(_inventory);
+        _chestUI = CLootChestUIController.Instance;
+        if (_chestUI == null)
+        {
+            return;
+        }
+
+        _chestUI.ToggleUI(true);
+        _chestUI.UpdateSlot(_inventory);
 
     }
 
@@ -99,18 +137,24 @@ public class CLootChestController : MonoBehaviour, IInteractable
         Interact(); 
     }
 
+    #region 내부 변수 
     private bool _isInteractable = false;
     private bool _enabled = false;
     private string _playerTag = "Player";
+    private string _soundChest = "Chest";
+    #endregion
+
     private void ChestToggle()
     {
-        if(!_isInteractable)
+        if(!isActiveAndEnabled || !_isInteractable)
         {
             return;
         }
 
-        _enabled = !_enabled;
+        _enabled = !CLootChestUIController.Instance.IsOpenFor(_inventory);
 
+        CSoundControllerUI.PlaySound(_soundChest);
+         
         if(_enabled)
         {
             ChestOpenTest();
@@ -151,7 +195,10 @@ public class CLootChestController : MonoBehaviour, IInteractable
         {
             _isInteractable = false;
             _enabled = false;
-            CLootChestUIController.Instance.ToggleUI(false);
+            if (_chestUI != null)
+            {
+                _chestUI.ToggleUI(false);
+            }
         }
     }
   

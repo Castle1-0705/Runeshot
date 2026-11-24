@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: ItemSO_PistolRound
   _name: PistolRound
-  _itemSprite: {fileID: 0}
+  _itemSprite: {fileID: 21300000, guid: d42cd05b36ff4da4b881f2d3c09bbcd4, type: 3}
   _maxStack: 60
   _itemType: 4
   _effect: []
   _condition: []
+  _description: 
   references:
     version: 2
     RefIds: []

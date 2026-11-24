@@ -91,17 +91,19 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 	#endregion
 
 	#region 내부변수
+	private CPlayerCharacterController _player;
 	private List<CItemSlotData> _inventory = new List<CItemSlotData>();
-	private Dictionary<CItemDataSO, List<int>> _inventoryItemMap = new Dictionary<CItemDataSO, List<int>>();
-	#endregion
+	private Dictionary<CItemDataSO, List<int>> _inventoryItemMap = new Dictionary<CItemDataSO, List<int>>(); 
+    #endregion
 
-	#region 프로퍼티
-	public IReadOnlyList<CItemSlotData> Inventory => _inventory;
+    #region 프로퍼티
+    public IReadOnlyList<CItemSlotData> Inventory => _inventory;
 	public IReadOnlyDictionary<CItemDataSO, List<int>> InventoryItemMap => _inventoryItemMap;
-	#endregion
+    public Action<CItemDataSO> durationUI;
+    #endregion
 
-	#region 인덱서
-	public CItemSlotData this[int index] => _inventory[index];
+    #region 인덱서
+    public CItemSlotData this[int index] => _inventory[index];
 	#endregion
 
 	protected override void Awake()
@@ -128,10 +130,10 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
             return;
         }
 
-        CPlayerCharacterController player = FindFirstObjectByType<CPlayerCharacterController>();
-        if (player != null && player.Weapon != null)
+        _player = CPlayerCharacterController.Instance;
+        if (_player != null && _player.Weapon != null)
         {
-            player.Weapon.SetAmmoSource(this);
+            _player.Weapon.SetAmmoSource(this);
         }
     }
 
@@ -171,8 +173,43 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
         }
     }
 
+    public bool TryUseConsumable(int index)
+    {
+        if (index < 0 || index >= _inventory.Count)
+        {
+            return false;
+        }
+
+        CItemSlotData slot = _inventory[index];
+        if (slot == null || slot.Item == null || slot.Amount <= 0 ||
+            slot.Item.ItemType != EItemtype.Consumable)
+        {
+            return false;
+        }
+
+        if (_player == null || _player.HPhandler == null || _player.HPhandler.HP <= 0.0f ||
+            _player.StateController == null || _player.StateController.CurrentState == EPlayerState.Dead)
+        {
+            return false;
+        }
+
+        if (!slot.Item.OnUse())
+        {
+            return false;
+        }
+		 
+		durationUI?.Invoke(slot.Item);
+
+        RemoveFromInventory(index, 1);
+        return true;
+    }
+
     public bool AddToInventory(CItemDataSO item, int amount)
     {
+        if (item == null || amount <= 0 || item.ItemType == EItemtype.Weapon)
+        {
+            return false;
+        }
 
 		if (_inventoryItemMap.ContainsKey(item))
 		{
@@ -213,6 +250,19 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 
     public bool AddToInventory(CItemDataSO item, int index, int amount, out int leftAmount)
 	{
+
+        leftAmount = amount;
+        if (item == null || amount <= 0 || item.ItemType == EItemtype.Weapon ||
+            index < 0 || index >= _inventory.Count)
+        {
+            return false;
+        }
+
+        if (_inventorySlots[index].SlotType != EItemtype.None &&
+            _inventorySlots[index].SlotType != item.ItemType)
+        {
+            return false;
+        }
 
 		if(_inventory[index] == null)
 		{
