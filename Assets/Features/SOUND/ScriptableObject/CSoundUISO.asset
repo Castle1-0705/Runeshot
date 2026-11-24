@@ -19,9 +19,11 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c6a3d35da57c28a45b4b834e0491e626, type: 3}
     - {fileID: 8300000, guid: ca506a688e0119b49811c0e9b94df442, type: 3}
     - {fileID: 8300000, guid: 289954a376f3c7d4c886444b0d10fc3a, type: 3}
+    - {fileID: 8300000, guid: 3aa14e5ca81d2ee428178bb8310699ad, type: 3}
     _AudioClipNames:
     - Inventory
     - Craft
     - EnchantInventory
     - Chest
     - Click
+    - Drink
