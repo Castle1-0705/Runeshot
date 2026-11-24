@@ -63,22 +63,25 @@ public class COptionPenel : MonoBehaviour
     }
     public void OpenOption()
     {
-        
+        _enabled = _optionPanel.activeSelf;
+
         _enabled = !_enabled;
-
-        Time.timeScale = _enabled ? 0 : 1f;
-
+         
         if (_soundPenel.activeSelf)
         {
-            _soundPenel.SetActive(false); 
+            _soundPenel.SetActive(false);
+            Time.timeScale = 1f;
             return;
         }
         else if(_displayPenel.activeSelf)
         {
-            _displayPenel.SetActive(false);
+            _displayPenel.SetActive(false); 
+            Time.timeScale = 1f;
             return;
         }
-         
+
+        Time.timeScale = _enabled ? 0 : 1f;
+
         _optionPanel.SetActive(_enabled);
     }
 
