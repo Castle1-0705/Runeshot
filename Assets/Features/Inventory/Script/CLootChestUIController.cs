@@ -12,19 +12,56 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 	[SerializeField] private TMP_Text _chestNameText;
 	#endregion
 
+    #region 내부변수
+    private CItemContainerInventoryHandler _container;
+    #endregion
+
 	#region 프로퍼티
 	public CItemSlotController[] Slots => _slots;
     #endregion
 	  
     private void Start()
     {
-        _panel.SetActive(false);
+        ToggleUI(false);
+    }
+
+    private void OnDisable()
+    {
+        if (_slots == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            if (_slots[i] != null)
+            {
+                _slots[i].CancelDrag();
+            }
+        }
+    }
+
+    public bool IsOpenFor(CItemContainerInventoryHandler container)
+    {
+        return _panel != null && _panel.activeInHierarchy && object.ReferenceEquals(_container, container);
     }
 
     public void UpdateSlot(CItemContainerInventoryHandler container)
 	{
+        if (container == null || _slots == null)
+        {
+            return;
+        }
+
+        _container = container;
 		for (int i = 0; i < _slots.Length; i++)
 		{
+            if (_slots[i] == null)
+            {
+                continue;
+            }
+
+            _slots[i].CancelDrag();
 			if (i >= container.InventorySize)
 			{
 				_slots[i].gameObject.SetActive(false);
@@ -45,6 +82,22 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 
 	public void ToggleUI(bool toggle)
 	{
-		_panel.SetActive(toggle);
+        if (_panel == null)
+        {
+            return;
+        }
+
+        if (!toggle && _slots != null)
+        {
+            for (int i = 0; i < _slots.Length; i++)
+            {
+                if (_slots[i] != null)
+                {
+                    _slots[i].CancelDrag();
+                }
+            }
+        }
+
+        _panel.SetActive(toggle);
 	}
 }

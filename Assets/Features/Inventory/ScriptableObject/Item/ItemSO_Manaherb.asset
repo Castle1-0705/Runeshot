@@ -33,7 +33,7 @@ MonoBehaviour:
         _percentage: 1
         _allowEqual: 0
     - rid: 5559904044942098432
-      type: {class: CItemEffectAddStatusEffectToPlayerModifier, ns: , asm: Assembly-CSharp}
+      type: {class: CItemEffectAddStatusEffectToPlayerHP, ns: , asm: Assembly-CSharp}
       data:
         _statusEffect:
           rid: 5559904044942098433

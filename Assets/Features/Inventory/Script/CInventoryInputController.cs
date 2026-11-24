@@ -166,21 +166,11 @@ public class CInventoryInputController : MonoBehaviour
 
     private void UseQuickSlot(int slotIndex)
     {
-        CItemSlotData slot = CInventoryManager.Instance[slotIndex];
-
-        if (slot != null && slot.Item != null && slot.Item.ItemType != EItemtype.Weapon)
+        CInventoryManager inventory = CInventoryManager.Instance;
+        if (inventory != null && inventory.TryUseConsumable(slotIndex))
         {
-            if (slot.Item.OnUse())
-            {
-                if (slot.Item.ItemType == EItemtype.Consumable)
-                {
-                    CInventoryManager.Instance.RemoveFromInventory(slotIndex, 1);
-                    CSoundControllerUI.PlaySound(_soundDrink);
-                }
-            }
+            CSoundControllerUI.PlaySound(_soundDrink);
         }
-
-        //Debug.Log(slotIndex);
     }
 
     private void OnScroll(float scroll)

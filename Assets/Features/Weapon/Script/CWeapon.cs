@@ -28,6 +28,10 @@ public class CWeapon : MonoBehaviour
     private Vector3 _muzzleLocalPosition;
     #endregion
 
+    #region 이벤트
+    public event System.Action<CWeaponDataSO> OnWeaponChanged;
+    #endregion
+
     #region 프로퍼티
     public CWeaponDataSO Data => _data;
     public bool IsAutomatic => _data != null && _data.Trigger != null && _data.Trigger.IsAutomatic;
@@ -125,8 +129,21 @@ public class CWeapon : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (OnWeaponChanged != null)
+        {
+            OnWeaponChanged(null);
+        }
+    }
+
     private void UpdateWeaponVisual()
     {
+        if (OnWeaponChanged != null)
+        {
+            OnWeaponChanged(_data);
+        }
+
         if (_weaponRenderer == null || !_usePlayerInput || _enemyStatus != null)
         {
             return;
