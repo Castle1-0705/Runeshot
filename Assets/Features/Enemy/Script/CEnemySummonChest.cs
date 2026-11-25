@@ -23,7 +23,7 @@ public class CEnemySummonChest : MonoBehaviour
          
         if(ranNum < _percentage)
         {
-            GameObject chestClone = Instantiate(_chestPrifab, transform.position,transform.rotation);
+            GameObject chestClone = Instantiate(_chestPrifab, transform.position,Quaternion.identity);
             DestroyChest(chestClone); 
         }
     }
