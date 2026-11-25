@@ -14,6 +14,7 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 
     #region 내부변수
     private CItemContainerInventoryHandler _container;
+    private CGameManager _gameManager;
     #endregion
 
 	#region 프로퍼티
@@ -25,8 +26,18 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
         ToggleUI(false);
     }
 
+    private void OnEnable()
+    {
+        SetChestPaused(_panel != null && _panel.activeInHierarchy);
+    }
+
     private void OnDisable()
     {
+        if (_gameManager != null)
+        {
+            _gameManager.SetChestPaused(false);
+        }
+
         if (_slots == null)
         {
             return;
@@ -38,6 +49,29 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
             {
                 _slots[i].CancelDrag();
             }
+        }
+    }
+
+    protected override void OnDestroy()
+    {
+        if (_gameManager != null)
+        {
+            _gameManager.SetChestPaused(false);
+        }
+
+        base.OnDestroy();
+    }
+
+    private void SetChestPaused(bool isPaused)
+    {
+        if (_gameManager == null)
+        {
+            _gameManager = CGameManager.Instance;
+        }
+
+        if (_gameManager != null)
+        {
+            _gameManager.SetChestPaused(isPaused);
         }
     }
 
@@ -100,6 +134,6 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 
         _panel.SetActive(toggle);
 
-        Time.timeScale = toggle ? 0f : 1f;
+        SetChestPaused(toggle && _panel.activeInHierarchy && isActiveAndEnabled);
     }
 }

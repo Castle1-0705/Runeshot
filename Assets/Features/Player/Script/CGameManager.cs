@@ -13,6 +13,8 @@ public class CGameManager : MonoBehaviour
     #region 내부 변수
     private static CGameManager _instance;
     private EGameState _currentState = EGameState.Playing;
+    private bool _isChestPaused;
+    private bool _isOptionPaused;
     #endregion
 
     #region 프로퍼티
@@ -59,7 +61,9 @@ public class CGameManager : MonoBehaviour
         }
 
         _currentState = EGameState.Playing;
-        Time.timeScale = 1.0f;
+        _isChestPaused = false;
+        _isOptionPaused = false;
+        UpdateTimeScale();
         OnStateChanged?.Invoke(_currentState);
     }
 
@@ -71,8 +75,41 @@ public class CGameManager : MonoBehaviour
         }
 
         _currentState = EGameState.GameOver;
-        Time.timeScale = 0.0f;
+        UpdateTimeScale();
         OnStateChanged?.Invoke(_currentState);
         OnGameOver?.Invoke();
+    }
+
+    public void SetChestPaused(bool isPaused)
+    {
+        if (_instance != this)
+        {
+            return;
+        }
+
+        _isChestPaused = isPaused;
+        UpdateTimeScale();
+    }
+
+    public void SetOptionPaused(bool isPaused)
+    {
+        if (_instance != this)
+        {
+            return;
+        }
+
+        _isOptionPaused = isPaused;
+        UpdateTimeScale();
+    }
+
+    private void UpdateTimeScale()
+    {
+        if (!IsPlaying || _isChestPaused || _isOptionPaused)
+        {
+            Time.timeScale = 0.0f;
+            return;
+        }
+
+        Time.timeScale = 1.0f;
     }
 }
