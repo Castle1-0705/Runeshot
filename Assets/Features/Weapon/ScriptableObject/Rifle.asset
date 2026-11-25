@@ -17,7 +17,7 @@ MonoBehaviour:
   _projectile: {fileID: 11400000, guid: 18ff2828bf544852adeb3feca4df0a39, type: 2}
   _trigger: {fileID: 11400000, guid: 29d9b18d28fe4ac7a1076cd830b2bfa1, type: 2}
   _reload: {fileID: 0}
-  _fireInterval: 0.12
+  _fireInterval: 0.16
   _spreadAngle: 10
   _magazineSize: 30
   _reloadTime: 1.5

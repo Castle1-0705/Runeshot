@@ -4233,9 +4233,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2108859798155996965}
-        m_TargetAssemblyTypeName: CCloseButton, Assembly-CSharp
-        m_MethodName: CloseTimeScale1
+      - m_Target: {fileID: 7897055090810013407}
+        m_TargetAssemblyTypeName: CLootChestUIController, Assembly-CSharp
+        m_MethodName: CloseCurrentChest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

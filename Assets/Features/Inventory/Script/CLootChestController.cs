@@ -79,7 +79,7 @@ public class CLootChestController : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (!isActiveAndEnabled || _data == null || _inventory == null)
+        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) || !isActiveAndEnabled || _data == null || _inventory == null)
         {
             return;
         }
@@ -135,6 +135,15 @@ public class CLootChestController : MonoBehaviour, IInteractable
 
     }
 
+    public void CloseChest()
+    {
+        _enabled = false;
+        if (_chestUI != null && _chestUI.IsOpenFor(_inventory))
+        {
+            _chestUI.ToggleUI(false);
+        }
+    }
+
     //for test=================
 
     //modified by June Gyu
@@ -154,6 +163,12 @@ public class CLootChestController : MonoBehaviour, IInteractable
      
     private void ChestToggle()
     {
+        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        {
+            CloseChest();
+            return;
+        }
+
         if(!isActiveAndEnabled || !_isInteractable)
         {
             return;
