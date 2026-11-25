@@ -8,7 +8,8 @@ public class CLootChestController : MonoBehaviour, IInteractable
     #region 인스팩터
     [SerializeField] private CLootChestDataSO _data;
     [SerializeField] private CItemContainerInventoryHandler _inventory;
-    [SerializeField] private SpriteRenderer _spriteRenderer; 
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Canvas _InteractIcon;
     #endregion
 
     #region 내부변수
@@ -47,8 +48,15 @@ public class CLootChestController : MonoBehaviour, IInteractable
             return;
         }
 
-        _spriteRenderer.sprite = _data.ChestSprite;
+        if(_InteractIcon == null)
+        {
+            Debug.LogWarning("_InteractIcon 누락");
+            enabled = false;
+            return;
+        }
 
+        _spriteRenderer.sprite = _data.ChestSprite;
+        _InteractIcon.gameObject.SetActive(false);
 
     }
 
@@ -143,7 +151,7 @@ public class CLootChestController : MonoBehaviour, IInteractable
     private string _playerTag = "Player";
     private string _soundChest = "Chest";
     #endregion
-
+     
     private void ChestToggle()
     {
         if(!isActiveAndEnabled || !_isInteractable)
@@ -162,7 +170,8 @@ public class CLootChestController : MonoBehaviour, IInteractable
         else
         {
             CLootChestUIController.Instance.ToggleUI(false);
-        } 
+        }
+         
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -170,22 +179,19 @@ public class CLootChestController : MonoBehaviour, IInteractable
         if (collision.tag == _playerTag)
         {
             _isInteractable = true;
+            _InteractIcon.gameObject.SetActive(true);
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.tag == _playerTag)
-        { 
-            if(collision.transform.position.y < _spriteRenderer.bounds.max.y)
-            {
-                
-                _spriteRenderer.sortingOrder = 4;
-            }
-            else
-            { 
-                _spriteRenderer.sortingOrder = 6;
-            }
+        {
+            int num = 0;
+             
+            num = collision.transform.position.y < _spriteRenderer.bounds.max.y ? 4 : 6;
+
+            _InteractIcon.sortingOrder = _spriteRenderer.sortingOrder = num;
         }
         
     }
@@ -199,6 +205,8 @@ public class CLootChestController : MonoBehaviour, IInteractable
             {
                 _chestUI.ToggleUI(false);
             }
+
+            _InteractIcon.gameObject.SetActive(false);
         }
     }
   

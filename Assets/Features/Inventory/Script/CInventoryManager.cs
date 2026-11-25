@@ -93,16 +93,17 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 	#region 내부변수
 	private CPlayerCharacterController _player;
 	private List<CItemSlotData> _inventory = new List<CItemSlotData>();
-	private Dictionary<CItemDataSO, List<int>> _inventoryItemMap = new Dictionary<CItemDataSO, List<int>>();
-	#endregion
+	private Dictionary<CItemDataSO, List<int>> _inventoryItemMap = new Dictionary<CItemDataSO, List<int>>(); 
+    #endregion
 
-	#region 프로퍼티
-	public IReadOnlyList<CItemSlotData> Inventory => _inventory;
+    #region 프로퍼티
+    public IReadOnlyList<CItemSlotData> Inventory => _inventory;
 	public IReadOnlyDictionary<CItemDataSO, List<int>> InventoryItemMap => _inventoryItemMap;
-	#endregion
+    public Action<CItemDataSO> durationUI;
+    #endregion
 
-	#region 인덱서
-	public CItemSlotData this[int index] => _inventory[index];
+    #region 인덱서
+    public CItemSlotData this[int index] => _inventory[index];
 	#endregion
 
 	protected override void Awake()
@@ -196,6 +197,8 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
         {
             return false;
         }
+		 
+		durationUI?.Invoke(slot.Item);
 
         RemoveFromInventory(index, 1);
         return true;
