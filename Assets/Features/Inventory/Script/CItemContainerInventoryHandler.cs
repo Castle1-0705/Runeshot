@@ -65,7 +65,7 @@ public class CItemContainerInventoryHandler : MonoBehaviour, IitemContainer
 
     public bool AddToInventory(CItemDataSO item, int amount)
     {
-        if (item == null || amount <= 0 || item.MaxStack <= 0)
+        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) || item == null || amount <= 0 || item.MaxStack <= 0)
         {
             return false;
         }
@@ -94,7 +94,7 @@ public class CItemContainerInventoryHandler : MonoBehaviour, IitemContainer
     public bool AddToInventory(CItemDataSO item, int index, int amount, out int leftAmount)
     {
         leftAmount = amount;
-        if (item == null || item.MaxStack <= 0 || amount <= 0 || index < 0 || index >= _inventory.Count ||
+        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) || item == null || item.MaxStack <= 0 || amount <= 0 || index < 0 || index >= _inventory.Count ||
             _inventorySlots[index] == null ||
             (_inventorySlots[index].SlotType != EItemtype.None && _inventorySlots[index].SlotType != item.ItemType))
         {
@@ -139,6 +139,11 @@ public class CItemContainerInventoryHandler : MonoBehaviour, IitemContainer
 
     public void RemoveFromInventory(int index)
     {
+        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        {
+            return;
+        }
+
 
 
         if (index < 0 || index >= _inventory.Count || _inventory[index] == null)
@@ -153,6 +158,11 @@ public class CItemContainerInventoryHandler : MonoBehaviour, IitemContainer
 
     public void RemoveFromInventory(int index, int amount)
     {
+        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        {
+            return;
+        }
+
         if (amount <= 0)
         {
             return;

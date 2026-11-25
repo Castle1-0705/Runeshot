@@ -17,6 +17,7 @@ public class CWeapon : MonoBehaviour
 
     #region 내부 변수
     private CPlayerWeaponInput _playerInput;
+    private CGameManager _gameManager;
     private float _nextFireTime;
     private CPlayerStateController _playerState;
     private CPlayerStatusHandler _playerStatus;
@@ -75,6 +76,7 @@ public class CWeapon : MonoBehaviour
 
     private void Start()
     {
+        BindGameManager();
         if (HasInvalidReferences(_data))
         {
             Debug.LogError("무기 데이터, 투사체 풀 또는 Muzzle이 비어있음");
@@ -106,6 +108,7 @@ public class CWeapon : MonoBehaviour
 
     private void OnEnable()
     {
+        BindGameManager();
         UpdateWeaponVisual();
 
         if (_playerInput != null)
@@ -116,6 +119,7 @@ public class CWeapon : MonoBehaviour
 
     private void OnDisable()
     {
+        UnbindGameManager();
         IsReloading = false;
 
         if (_weaponRenderer != null)
@@ -131,10 +135,49 @@ public class CWeapon : MonoBehaviour
 
     private void OnDestroy()
     {
+        UnbindGameManager();
         if (OnWeaponChanged != null)
         {
             OnWeaponChanged(null);
         }
+    }
+
+    private void BindGameManager()
+    {
+        UnbindGameManager();
+        _gameManager = CGameManager.Instance;
+        if (_gameManager != null)
+        {
+            _gameManager.OnGameOver += HandleGameOver;
+            if (_gameManager.IsGameOver)
+            {
+                HandleGameOver();
+            }
+        }
+    }
+
+    private void UnbindGameManager()
+    {
+        if (_gameManager != null)
+        {
+            _gameManager.OnGameOver -= HandleGameOver;
+        }
+        _gameManager = null;
+    }
+
+    private void HandleGameOver()
+    {
+        IsReloading = false;
+        if (_playerInput != null)
+        {
+            _playerInput.ClearPendingShots();
+        }
+    }
+
+    private bool CanRunCombat()
+    {
+        CGameManager gameManager = CGameManager.Instance;
+        return Time.timeScale > 0.0f && (gameManager == null || gameManager.CanRunCombat);
     }
 
     private void UpdateWeaponVisual()
@@ -228,6 +271,11 @@ public class CWeapon : MonoBehaviour
 
     public bool EquipWeapon(CWeaponDataSO data, bool fromPickup = false)
     {
+        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        {
+            return false;
+        }
+
         if (fromPickup && (!isActiveAndEnabled || IsPlayerDead()))
         {
             return false;
@@ -264,7 +312,7 @@ public class CWeapon : MonoBehaviour
 
     public bool TryFire(Vector2 direction)
     {
-        if (!isActiveAndEnabled || HasInvalidReferences(_data) ||
+        if (!CanRunCombat() || !isActiveAndEnabled || HasInvalidReferences(_data) ||
             direction == Vector2.zero || IsReloading || (_enemyStatus == null && MagazineAmmo <= 0) || Time.time < _nextFireTime)
         {
             return false;
@@ -342,7 +390,7 @@ public class CWeapon : MonoBehaviour
 
     public bool TryReload()
     {
-        if (!isActiveAndEnabled || HasInvalidReferences(_data) || IsPlayerDead() ||
+        if (!CanRunCombat() || !isActiveAndEnabled || HasInvalidReferences(_data) || IsPlayerDead() ||
             _enemyStatus != null || IsReloading || MagazineAmmo >= _data.MagazineSize || _data.AmmoItem == null ||
             _data.AmmoItem.ItemType != EItemtype.Ammunition ||
             !HasAmmoSource() || !HasAmmo(_data.AmmoItem))
@@ -350,6 +398,7 @@ public class CWeapon : MonoBehaviour
             return false;
         }
 
+        BindGameManager();
         float reloadTime = _data.ReloadTime;
         if (_playerStatus != null && _playerStatus.isActiveAndEnabled)
         {
@@ -376,13 +425,14 @@ public class CWeapon : MonoBehaviour
             return;
         }
 
-        if (IsPlayerDead() || HasInvalidReferences(_data) || !HasAmmoSource())
+        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) ||
+            IsPlayerDead() || HasInvalidReferences(_data) || !HasAmmoSource())
         {
             IsReloading = false;
             return;
         }
 
-        if (Time.time < _reloadEndTime)
+        if (!CanRunCombat() || Time.time < _reloadEndTime)
         {
             return;
         }

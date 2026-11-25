@@ -14,6 +14,7 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
 
     #region 내부변수
     private CItemDataSO _itemData;
+    private CGameManager _gameManager;
     private IitemContainer _dragContainer;
     private bool _isDragging;
     private bool _isDragCancelled;
@@ -63,6 +64,13 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
             return;
         }
 
+        _gameManager = CGameManager.Instance;
+        if (_gameManager != null)
+        {
+            _gameManager.OnGameOver -= CancelDrag;
+            _gameManager.OnGameOver += CancelDrag;
+        }
+
         _dragContainer = _slot.ItemContainer;
         _isDragging = true;
         _localPosition = transform.localPosition;
@@ -73,6 +81,12 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        {
+            CancelDrag();
+            return;
+        }
+
         if (_isDragging)
         {
             transform.position = eventData.position;
@@ -86,6 +100,12 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
 
     public void CancelDrag()
     {
+        if (_gameManager != null)
+        {
+            _gameManager.OnGameOver -= CancelDrag;
+        }
+        _gameManager = null;
+
         if (!_isDragging)
         {
             return;
@@ -101,7 +121,7 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
 
     private bool HasValidSource()
     {
-        if (_isDragCancelled || _slot == null || !_slot.gameObject.activeInHierarchy || _itemData == null ||
+        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) || _isDragCancelled || _slot == null || !_slot.gameObject.activeInHierarchy || _itemData == null ||
             _slot.ItemContainer == null || _slot.SlotIndex < 0 ||
             _slot.SlotIndex >= _slot.ItemContainer.Inventory.Count ||
             (_isDragging && _dragContainer != _slot.ItemContainer))
@@ -211,6 +231,7 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
 
     private void OnDisable()
     {
+        CancelDrag();
         if(CTooltipController.Instance == null)
         {
             return;

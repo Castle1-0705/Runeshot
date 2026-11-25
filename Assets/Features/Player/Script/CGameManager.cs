@@ -22,6 +22,7 @@ public class CGameManager : MonoBehaviour
     public EGameState CurrentState => _currentState;
     public bool IsPlaying => _currentState == EGameState.Playing;
     public bool IsGameOver => _currentState == EGameState.GameOver;
+    public bool CanRunCombat => IsPlaying && !_isChestPaused && !_isOptionPaused && Time.timeScale > 0.0f;
     #endregion
 
     #region 이벤트

@@ -175,7 +175,7 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 
     public bool TryUseConsumable(int index)
     {
-        if (index < 0 || index >= _inventory.Count)
+        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) || index < 0 || index >= _inventory.Count)
         {
             return false;
         }
@@ -206,7 +206,7 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 
     public bool AddToInventory(CItemDataSO item, int amount)
     {
-        if (item == null || amount <= 0 || item.ItemType == EItemtype.Weapon)
+        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) || item == null || amount <= 0 || item.ItemType == EItemtype.Weapon)
         {
             return false;
         }
@@ -252,7 +252,7 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 	{
 
         leftAmount = amount;
-        if (item == null || amount <= 0 || item.ItemType == EItemtype.Weapon ||
+        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) || item == null || amount <= 0 || item.ItemType == EItemtype.Weapon ||
             index < 0 || index >= _inventory.Count)
         {
             return false;
@@ -315,6 +315,11 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 
 	public void RemoveFromInventory(int index)
 	{
+        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        {
+            return;
+        }
+
 
 
         if (_inventory[index] == null)
@@ -344,6 +349,11 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 
 	public void RemoveFromInventory(int index, int amount)
 	{
+        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        {
+            return;
+        }
+
 
         if (_inventory[index] == null)
         {
@@ -380,6 +390,11 @@ public class CInventoryManager : CSingleton<CInventoryManager> , IitemContainer
 	[ContextMenu("SortInventory")]
 	public void SortInventory()
 	{
+        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        {
+            return;
+        }
+
 		List<CItemSlotData> inventoryWithItem = new List<CItemSlotData>();
 
 		for (int i = 0; i < _inventory.Count; i++)

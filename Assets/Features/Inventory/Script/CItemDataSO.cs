@@ -40,6 +40,11 @@ public class CItemDataSO : CGameDataSO
 
 	public bool OnUse()
 	{
+        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        {
+            return false;
+        }
+
 		for (int i = 0; i < _condition.Length; i++)
 		{
 			if(_condition[i] == null)
