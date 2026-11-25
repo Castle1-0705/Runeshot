@@ -1,0 +1,10 @@
+Guns by greenpixels_
+Source: https://greenpixels.itch.io/pixel-art-assets-7
+Author: https://greenpixels.itch.io/
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+Used files: M92.png, M15.png, SawedOffShotgun.png, PistolAmmoBig.png, RifleAmmoBig.png, ShotgunShellBig.png.
+Original PNG pixels are unchanged. RuneShot configures Unity import settings, sprite scale, grip and muzzle metadata.
+
+Redistribution: retain this attribution and include it with the distributed game, for example in its credits or a bundled credits file.

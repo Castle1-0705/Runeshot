@@ -27,31 +27,51 @@ public class CItemContainerInventoryHandler : MonoBehaviour, IitemContainer
     {
         CItemSlotController[] slots = CLootChestUIController.Instance.Slots;
 
-        _inventorySize = inventorySize;
+        if (slots == null)
+        {
+            return;
+        }
+
+        _inventorySize = Mathf.Clamp(inventorySize, 0, slots.Length);
         _inventory.Clear();
+        if (_inventorySlots == null)
+        {
+            _inventorySlots = new List<CItemSlotController>();
+        }
         _inventorySlots.Clear();
 
         for (int i = 0; i < _inventorySize; i++)
         {
             _inventory.Add(null);
 
-            if( slots[i] == null)
-            {
-                Debug.Log(i);
-            }
-
             CItemSlotController slot = slots[i];
 
-            slot.InitializeSlot(i, this, null);
+            if (slot != null)
+            {
+                slot.InitializeSlot(i, this, null);
+            }
             _inventorySlots.Add(slot);
+        }
+    }
+
+    private void UpdateSlot(int index)
+    {
+        CItemSlotController slot = _inventorySlots[index];
+        if (slot != null && object.ReferenceEquals(slot.ItemContainer, this))
+        {
+            slot.UpdateSlot(_inventory[index] != null ? _inventory[index].Item : null);
         }
     }
 
     public bool AddToInventory(CItemDataSO item, int amount)
     {
+        if (item == null || amount <= 0 || item.MaxStack <= 0)
+        {
+            return false;
+        }
         for (int i = 0; i < _inventory.Count; i++)
         {
-            if (_inventorySlots[i].SlotType != EItemtype.None)
+            if (_inventorySlots[i] == null || _inventorySlots[i].SlotType != EItemtype.None)
             {
                 continue;
             }
@@ -73,12 +93,18 @@ public class CItemContainerInventoryHandler : MonoBehaviour, IitemContainer
 
     public bool AddToInventory(CItemDataSO item, int index, int amount, out int leftAmount)
     {
+        leftAmount = amount;
+        if (item == null || item.MaxStack <= 0 || amount <= 0 || index < 0 || index >= _inventory.Count ||
+            _inventorySlots[index] == null ||
+            (_inventorySlots[index].SlotType != EItemtype.None && _inventorySlots[index].SlotType != item.ItemType))
+        {
+            return false;
+        }
 
         if (_inventory[index] == null)
         {
-
             _inventory[index] = new CItemSlotData(item, amount);
-            _inventorySlots[index].UpdateSlot(item);
+            UpdateSlot(index);
 
             if (amount <= item.MaxStack)
             {
@@ -102,7 +128,7 @@ public class CItemContainerInventoryHandler : MonoBehaviour, IitemContainer
 
         if (_inventory[index].AddToSlot(item, amount, out leftAmount))
         {
-            _inventorySlots[index].UpdateSlot(item);
+            UpdateSlot(index);
 
             return true;
         }
@@ -115,18 +141,22 @@ public class CItemContainerInventoryHandler : MonoBehaviour, IitemContainer
     {
 
 
-        if (_inventory[index] == null)
+        if (index < 0 || index >= _inventory.Count || _inventory[index] == null)
         {
             Debug.LogWarning("이 아이템슬롯은 이미 비어있음");
             return;
         }
 
         _inventory[index] = null;
-        _inventorySlots[index].UpdateSlot(null);
+        UpdateSlot(index);
     }
 
     public void RemoveFromInventory(int index, int amount)
     {
+        if (amount <= 0)
+        {
+            return;
+        }
 
         if (_inventory[index] == null)
         {
@@ -137,10 +167,10 @@ public class CItemContainerInventoryHandler : MonoBehaviour, IitemContainer
         if (!_inventory[index].RemoveFormSlot(amount))
         {
             _inventory[index] = null;
-            _inventorySlots[index].UpdateSlot(null);
+            UpdateSlot(index);
             return;
         }
 
-        _inventorySlots[index].UpdateSlot(_inventory[index].Item);
+        UpdateSlot(index);
     }
 }

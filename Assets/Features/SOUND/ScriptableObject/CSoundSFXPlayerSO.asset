@@ -16,8 +16,8 @@ MonoBehaviour:
     _AudioClipList:
     - {fileID: 8300000, guid: 83dfcafc564aa3544a270a5be5bbbfad, type: 3}
     - {fileID: 8300000, guid: e45e8fb5a09194c37836f7af3b31834b, type: 3}
-    - {fileID: 8300000, guid: 83dfcafc564aa3544a270a5be5bbbfad, type: 3}
-    - {fileID: 8300000, guid: 83dfcafc564aa3544a270a5be5bbbfad, type: 3}
+    - {fileID: 8300000, guid: 1e279984c1aa557469c772256ef52629, type: 3}
+    - {fileID: 8300000, guid: 689602e5b4406e247a638a42043d138d, type: 3}
     _AudioClipNames:
     - Pistol
     - Reload

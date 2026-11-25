@@ -17,7 +17,7 @@ public class COptionSoundVolume : MonoBehaviour
 
     #region 내부 변수 
     private float _maxValue = 10f;
-    private float _minValue = -40f;
+    private float _minValue = -80f;
     #endregion
 
     private void Awake()
@@ -49,14 +49,5 @@ public class COptionSoundVolume : MonoBehaviour
     {
         CSoundManager.Instance.Master.audioMixer.SetFloat("UI", _ui.value); 
     }
-
-    private void OnEnable()
-    {
-        _optionPanel.gameObject.SetActive(false);
-    }
-
-    //private void OnDisable()
-    //{
-    //    _optionPanel.gameObject.SetActive(true);
-    //}
+     
 }

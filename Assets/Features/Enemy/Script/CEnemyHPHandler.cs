@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEngine;
+using UnityEngine; 
 
 public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
 {
@@ -27,8 +27,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         HP = MaxHP;
 
         OnDeath += DropItem;
-        OnDeath += SetFalse;
-
+        OnDeath += SetFalse; 
     }
 
     private void DropItem()
@@ -42,6 +41,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
      
     private void SetFalse()
     {
+        
         gameObject.SetActive(false);
         HP = MaxHP;
     }
@@ -64,7 +64,8 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         if (HP <= 0f)
         {
             _enemy.DieOrAlive(false);
-            _aniHP.SetBool(_death,true); 
+            _aniHP.SetBool(_death,true);
+            CSoundControllerSFXMoster.PlaySound(_stringDeath);
 
             await UniTask.WaitUntil(UntilDeath, PlayerLoopTiming.Update, destroyCancellationToken); 
 

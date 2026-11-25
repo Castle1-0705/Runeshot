@@ -34,6 +34,7 @@ public class CItemDataSO : CGameDataSO
 	public Sprite ItemSprite => _itemSprite;
 	public int MaxStack => _maxStack;
 	public EItemtype ItemType => _itemType;
+	public CItemEffect[] Effect => _effect;
 	public string Description => _description;
 	#endregion
 
@@ -68,6 +69,24 @@ public class CItemDataSO : CGameDataSO
         }
 
 		return true;
+    }
+
+    public bool TryEquipWeapon()
+    {
+        if (_itemType != EItemtype.Weapon || _effect == null)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < _effect.Length; i++)
+        {
+            if (_effect[i] is CItemEffectEquipWeapon equipWeapon)
+            {
+                return equipWeapon.TryEquipWeapon();
+            }
+        }
+
+        return false;
     }
 
     protected override void OnValidate()
@@ -112,8 +131,13 @@ public class CItemEffectHealOverTime : CItemEffect
 	#region 인스팩터
 	[SerializeField] private float _healAmount;
 	[SerializeField] private float _duration;
-	#endregion
-	public override async UniTask OnUse()
+    #endregion
+
+    #region 프로퍼티
+    public float Duration => _duration;
+    #endregion
+
+    public override async UniTask OnUse()
 	{
 		CPlayerHPHandler playerHP = CPlayerCharacterController.Instance.HPhandler;
 		if(playerHP == null)
@@ -149,13 +173,16 @@ public class CItemEffectEquipWeapon : CItemEffect
     public bool TryEquipWeapon()
     {
         CPlayerCharacterController player = CPlayerCharacterController.Instance;
-        if (player == null || player.Weapon == null || _weaponData == null)
+        if (player == null || player.Weapon == null || !player.Weapon.isActiveAndEnabled ||
+            player.HPhandler == null || player.HPhandler.HP <= 0.0f ||
+            player.StateController == null || player.StateController.CurrentState == EPlayerState.Dead ||
+            _weaponData == null)
         {
             Debug.LogWarning("플레이어 무기 또는 장착할 무기 데이터가 비어있음");
             return false;
         }
 
-        return player.Weapon.EquipWeapon(_weaponData);
+        return player.Weapon.EquipWeapon(_weaponData, true);
     }
 }
 
@@ -164,8 +191,12 @@ public class CItemEffectAddStatusEffectToPlayerHP : CItemEffect
 {
 	#region 인스팩터
 	[SerializeReference, SubclassSelector] private CStatusEffect _statusEffect;
-	#endregion
-	public override UniTask OnUse()
+    #endregion
+
+    #region 프로퍼티
+    public CStatusEffect StatusEffect => _statusEffect;
+    #endregion
+    public override UniTask OnUse()
 	{
 		CStatusEffectHandler statusEffectHandler = CPlayerCharacterController.Instance.StatusEffectHandler;
 
@@ -180,8 +211,13 @@ public class CItemEffectAddStatusEffectToPlayerModifier : CItemEffect
 {
 	#region 인스팩터
 	[SerializeReference, SubclassSelector] private CStatusEffect _statusEffect;
-	#endregion
-	public override UniTask OnUse()
+    #endregion
+
+    #region 프로퍼티
+    public CStatusEffect StatusEffect => _statusEffect;
+    #endregion
+
+    public override UniTask OnUse()
     {
         CStatusEffectHandler statusEffectHandler = CPlayerCharacterController.Instance.StatusEffectHandler;
 

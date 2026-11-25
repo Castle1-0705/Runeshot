@@ -31,11 +31,17 @@ public class CLootTableElement
                 return weight;
             }
 
+            CPlayerCharacterController player = CPlayerCharacterController.Instance;
+            if (player == null || player.ModifierHandler == null)
+            {
+                return Mathf.Max(0.0f, weight);
+            }
+
             float modifier = 0;
 
             for (int i = 0; i < _modifiers.Count; i++)
             {
-                modifier = CPlayerCharacterController.Instance.ModifierHandler.GetModifiedValue(_modifiers[i], modifier);
+                modifier = player.ModifierHandler.GetModifiedValue(_modifiers[i], modifier);
             }
 
             modifier = modifier * _luckModifier;
@@ -82,7 +88,9 @@ public class CLootTableManager : CSingleton<CLootTableManager>
     public static CLootTableDataSO GetLootTable(string id)
     {
         CLootTableDataSO lootTable;
-        if (!CDataBaseManager.Instance.LootTableDB.TryGet(id, out lootTable))
+        if (string.IsNullOrEmpty(id) || CDataBaseManager.Instance == null ||
+            CDataBaseManager.Instance.LootTableDB == null ||
+            !CDataBaseManager.Instance.LootTableDB.TryGet(id, out lootTable))
         {
             return null;
         }
@@ -110,29 +118,41 @@ public class CLootTableManager : CSingleton<CLootTableManager>
 
     private IRewardable GetLootTableElement(string id)
     {
-        CLootTableDataSO lootTable;
-        CDataBaseManager.Instance.LootTableDB.TryGet(id, out lootTable);
-
-        float ranMax = 0;
-
-        for (int i = 0; i < lootTable.LootTableElements.Count; i++)
+        CLootTableDataSO lootTable = GetLootTable(id);
+        if (lootTable == null || lootTable.LootTableElements == null)
         {
-            ranMax += lootTable.LootTableElements[i].Weight;
+            return null;
         }
 
-        float ranNum = Random.Range(0f, ranMax);
-
-        float resultNum = 0f;
-
-        IRewardable element = null;
-
+        float ranMax = 0.0f;
         for (int i = 0; i < lootTable.LootTableElements.Count; i++)
         {
-            resultNum += lootTable.LootTableElements[i].Weight;
-
-            if (resultNum >= ranNum)
+            CLootTableElement entry = lootTable.LootTableElements[i];
+            if (entry != null)
             {
-                element = lootTable.LootTableElements[i].Element;
+                ranMax += Mathf.Max(0.0f, entry.Weight);
+            }
+        }
+
+        if (ranMax <= 0.0f)
+        {
+            return null;
+        }
+
+        float ranNum = Random.Range(0.0f, ranMax);
+        IRewardable element = null;
+        for (int i = 0; i < lootTable.LootTableElements.Count; i++)
+        {
+            CLootTableElement entry = lootTable.LootTableElements[i];
+            if (entry == null || entry.Weight <= 0.0f)
+            {
+                continue;
+            }
+
+            element = entry.Element;
+            ranNum -= entry.Weight;
+            if (ranNum <= 0.0f)
+            {
                 break;
             }
         }

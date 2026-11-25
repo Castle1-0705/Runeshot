@@ -8,7 +8,7 @@ public class CEnemyAttack : CEnemyActionBase
 {
      
     #region 내부변수
-    protected float _attackInterval;
+    protected float _attackInterval; 
     protected float _damage; 
     protected float _time;
     protected string _attack = "TAttack";

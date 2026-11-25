@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CWeaponMagazineUI : CSingleton<CWeaponMagazineUI>
+public class CWeaponMagazineUI : MonoBehaviour
 {
 
     #region ¿ŒΩ∫∆Â≈Õ
@@ -24,18 +24,7 @@ public class CWeaponMagazineUI : CSingleton<CWeaponMagazineUI>
     private Image _reload;
     private List<Image> _images = new List<Image>();
     #endregion
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (Instance != this)
-        {
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
-    }
-
+     
     private void Start()
     { 
         if(_magazineSlider == null || _weapon == null)

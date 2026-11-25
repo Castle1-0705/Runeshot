@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CSoundControllerUI : CSoundController
+public class CSoundControllerUI : CSoundController<CSoundControllerUI>
 { 
     private void Start()
     {

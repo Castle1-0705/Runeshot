@@ -12,6 +12,7 @@ public class CEnchantCraftingManager : CSingleton<CEnchantCraftingManager>
 
     #region 내부변수
     private List<CEnchantCraftingPanelController> _panels = new List<CEnchantCraftingPanelController>();
+    private string _soundEnchantInventory = "EnchantInventory";
     #endregion
 
     private void Start()
@@ -27,9 +28,7 @@ public class CEnchantCraftingManager : CSingleton<CEnchantCraftingManager>
         for (int i = 0; i < recipeDatabase.Count; i++)
         {
             CEnchantCraftingPanelController panel = Instantiate(_panelPrefab, _panelLayout);
-
-            panel.InjectSound(_sound);
-
+              
             panel.InitializePanel(recipeDatabase[i]);
 
             _panels.Add(panel);
@@ -141,10 +140,11 @@ public class CEnchantCraftingManager : CSingleton<CEnchantCraftingManager>
             UpdatePanel();
         }
     }
-
+    
     public void ToggleUI()
     {
         gameObject.SetActive(!gameObject.activeSelf);
         UpdatePanelIfActive();
+        CSoundControllerUI.PlaySound(_soundEnchantInventory);
     }
 }

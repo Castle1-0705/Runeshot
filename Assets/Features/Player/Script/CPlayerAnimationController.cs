@@ -375,6 +375,7 @@ public class CPlayerAnimationController : MonoBehaviour
             _spumPrefabs._anim.runtimeAnimatorController == null ||
             _spumPrefabs.IDLE_List.Count == 0 || _spumPrefabs.IDLE_List[0] == null ||
             _spumPrefabs.MOVE_List.Count == 0 || _spumPrefabs.MOVE_List[0] == null ||
+            _spumPrefabs.DAMAGED_List.Count == 0 || _spumPrefabs.DAMAGED_List[0] == null ||
             _spumPrefabs.DEATH_List.Count == 0 || _spumPrefabs.DEATH_List[0] == null)
         {
             Debug.LogError("SPUM 외형 또는 기본 애니메이션 참조가 비어있음");
@@ -422,18 +423,25 @@ public class CPlayerAnimationController : MonoBehaviour
             RestoreSpumDodgeVisual();
         }
 
-        if (state == EPlayerState.Dead)
+        if (_playedDead || state == EPlayerState.Dead)
         {
+            _playedDead = true;
             PlaySpumAnimation(PlayerState.DEATH);
             return;
         }
 
         if (state == EPlayerState.Hit)
         {
+            PlaySpumAnimation(PlayerState.DAMAGED);
             return;
         }
 
-        if (state == EPlayerState.Move || state == EPlayerState.Roll)
+        if (state == EPlayerState.Roll)
+        {
+            return;
+        }
+
+        if (state == EPlayerState.Move)
         {
             PlaySpumAnimation(PlayerState.MOVE);
         }
@@ -527,9 +535,9 @@ public class CPlayerAnimationController : MonoBehaviour
         {
             _dodgeTimer = 0.0f;
             _wasRolling = true;
-            _spumPrefabs._anim.speed = _spumAnimationSpeed * 1.5f;
-            // 진입할 때 한 번만 재생해 IDLE 전환 대기 없이 발 동작 시작
-            _spumPrefabs._anim.Play("MOVE", 0, 0.0f);
+            _hasSpumAnimation = false;
+            // 대시 상태에 진입할 때만 전용 외형 애니메이션 재생
+            _spumPrefabs._anim.Play("ROLL", 0, 0.0f);
         }
 
         _dodgeTimer += Time.deltaTime;
@@ -559,6 +567,7 @@ public class CPlayerAnimationController : MonoBehaviour
         }
 
         _spumPrefabs.PlayAnimation(animation, 0);
+        _spumPrefabs._anim.Play(animation.ToString(), 0, 0.0f);
         _currentSpumAnimation = animation;
         _hasSpumAnimation = true;
     }
