@@ -21,7 +21,7 @@ MonoBehaviour:
   _weaponSpreadHeapfire: 1.4
   _weaponSpreadAimed: 0.6
   _weaponFireInterval: 1
-  _weaponDamage: 1
+  _weaponDamage: 2.5
   _reloadSpeed: 1
   _maxHunger: 0
   _hungerRate: 1

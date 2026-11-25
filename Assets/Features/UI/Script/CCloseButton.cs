@@ -8,18 +8,39 @@ public class CCloseButton : MonoBehaviour
     [SerializeField] GameObject _closeObject;
      
     public void CloseTimeScale1()
-    { 
-        _closeObject.SetActive(false);
-
-        TimeScale();
+    {
+        Close();
     }
+
     public void Close()
     {
+        if (_closeObject == null)
+        {
+            return;
+        }
+
+        CLootChestUIController chestUI = _closeObject.GetComponent<CLootChestUIController>();
+        if (chestUI != null)
+        {
+            chestUI.CloseCurrentChest();
+            return;
+        }
+
         _closeObject.SetActive(false);
+        TimeScale();
     }
 
     public void TimeScale()
     {
-        Time.timeScale = 1.0f;
+        if (_closeObject == null)
+        {
+            return;
+        }
+
+        COptionPenel option = _closeObject.GetComponentInParent<COptionPenel>(true);
+        if (option != null)
+        {
+            option.UpdatePauseRequest();
+        }
     }
 }

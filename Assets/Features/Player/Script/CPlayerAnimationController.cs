@@ -38,6 +38,9 @@ public class CPlayerAnimationController : MonoBehaviour
     private float _upperDirection;
     private PlayerState _currentSpumAnimation;
     private bool _hasSpumAnimation;
+    private CGameManager _gameManager;
+    private AnimatorUpdateMode _animatorUpdateMode;
+    private AnimatorUpdateMode _spumAnimatorUpdateMode;
     #endregion
 
     private void Awake()
@@ -64,8 +67,13 @@ public class CPlayerAnimationController : MonoBehaviour
             return;
         }
 
+        _animatorUpdateMode = _animator.updateMode;
         if (_spumPrefabs != null)
         {
+            if (_spumPrefabs._anim != null)
+            {
+                _spumAnimatorUpdateMode = _spumPrefabs._anim.updateMode;
+            }
             InitializeSpum();
         }
 
@@ -91,8 +99,49 @@ public class CPlayerAnimationController : MonoBehaviour
         _hitMask.backSortingOrder = _spriteRenderer.sortingOrder;
     }
 
+    private void Start()
+    {
+        BindGameManager();
+    }
+
+    private void OnEnable()
+    {
+        BindGameManager();
+    }
+
+    private void BindGameManager()
+    {
+        _gameManager = CGameManager.Instance;
+        if (_gameManager != null)
+        {
+            _gameManager.OnStateChanged -= HandleGameStateChanged;
+            _gameManager.OnStateChanged += HandleGameStateChanged;
+        }
+    }
+
+    private void HandleGameStateChanged(EGameState state)
+    {
+        if (state != EGameState.Playing)
+        {
+            return;
+        }
+
+        _animator.updateMode = _animatorUpdateMode;
+        if (_spumPrefabs != null && _spumPrefabs._anim != null)
+        {
+            _spumPrefabs._anim.updateMode = _spumAnimatorUpdateMode;
+        }
+        _playedDead = false;
+        _hasSpumAnimation = false;
+        _currentAnimation = null;
+    }
+
     private void OnDisable()
     {
+        if (_gameManager != null)
+        {
+            _gameManager.OnStateChanged -= HandleGameStateChanged;
+        }
         if (_spumPrefabs != null && _wasRolling)
         {
             RestoreSpumDodgeVisual();
@@ -137,6 +186,7 @@ public class CPlayerAnimationController : MonoBehaviour
                 _spriteRenderer.flipX = false;
                 _spriteRenderer.color = Color.white;
 
+                _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
                 _animator.Play("Dead_Front", 0, 0.0f);
 
                 _wasRolling = false;
@@ -425,6 +475,7 @@ public class CPlayerAnimationController : MonoBehaviour
 
         if (_playedDead || state == EPlayerState.Dead)
         {
+            _spumPrefabs._anim.updateMode = AnimatorUpdateMode.UnscaledTime;
             _playedDead = true;
             PlaySpumAnimation(PlayerState.DEATH);
             return;
