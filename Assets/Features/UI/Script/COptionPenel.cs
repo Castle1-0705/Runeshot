@@ -23,6 +23,8 @@ public class COptionPenel : MonoBehaviour
 
     #region 내부 변수 
     private bool _enabled = false;
+    private CGameManager _gameManager;
+    private CInputActionData _optionInput;
     private string _stringTitleScene = "TitleScene";
     #endregion
 
@@ -32,7 +34,7 @@ public class COptionPenel : MonoBehaviour
         AddTitleOption();
         AddBattleMapOption();
          
-        _optionPanel.SetActive(_enabled);
+        Resume();
     }
 
     private void AddTitleOption()
@@ -60,63 +62,146 @@ public class COptionPenel : MonoBehaviour
 
     private void BindOption()
     {
-        if (CInputDispatcher.Instance.InputActionMap.ContainsKey(_inputKey))
+        if (_optionInput == null)
         {
-            CInputDispatcher.Instance.InputActionMap[_inputKey].OnPerformedAction += OpenOption;
+            CInputDispatcher dispatcher = CInputDispatcher.Instance;
+            if (dispatcher == null || !dispatcher.InputActionMap.TryGetValue(_inputKey, out _optionInput))
+            {
+                return;
+            }
         }
+
+        _optionInput.OnPerformedAction -= OpenOption;
+        if (isActiveAndEnabled)
+        {
+            _optionInput.OnPerformedAction += OpenOption;
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (_optionInput != null)
+        {
+            BindOption();
+        }
+        UpdatePauseRequest();
     }
 
     private void OnDisable()
     {
-        if (CInputDispatcher.Instance == null)
-        {
-            return;
-        }
+        ReleasePauseRequest();
+    }
 
-        if (CInputDispatcher.Instance.InputActionMap.ContainsKey(_inputKey))
+    private void OnDestroy()
+    {
+        ReleasePauseRequest();
+    }
+
+    private void ReleasePauseRequest()
+    {
+        if (_optionInput != null)
         {
-            CInputDispatcher.Instance.InputActionMap[_inputKey].OnPerformedAction -= OpenOption;
+            _optionInput.OnPerformedAction -= OpenOption;
+        }
+        if (_gameManager != null)
+        {
+            _gameManager.SetOptionPaused(false);
         }
     }
+
+    public void UpdatePauseRequest()
+    {
+        _enabled = _optionPanel != null && _optionPanel.activeSelf;
+        bool isOpen = isActiveAndEnabled &&
+            ((_optionPanel != null && _optionPanel.activeInHierarchy) ||
+             (_soundPenel != null && _soundPenel.activeInHierarchy) ||
+             (_displayPenel != null && _displayPenel.activeInHierarchy) ||
+             (_keyPenel != null && _keyPenel.activeInHierarchy));
+
+        _gameManager = CGameManager.Instance;
+        if (_gameManager != null)
+        {
+            _gameManager.SetOptionPaused(isOpen);
+        }
+    }
+
     public void OpenOption()
     {
-        _enabled = _optionPanel.activeSelf;
-
-        _enabled = !_enabled;
-         
-        if (_soundPenel.activeSelf)
+        if ((_soundPenel != null && _soundPenel.activeSelf) ||
+            (_displayPenel != null && _displayPenel.activeSelf) ||
+            (_keyPenel != null && _keyPenel.activeSelf))
         {
-            _soundPenel.SetActive(false);
-            Time.timeScale = 1f;
-            return;
-        }
-        else if(_displayPenel.activeSelf)
-        {
-            _displayPenel.SetActive(false); 
-            Time.timeScale = 1f;
-            return;
-        }
-        else if(_keyPenel.activeSelf)
-        {
-            _keyPenel.SetActive(false);
-            Time.timeScale = 1f;
+            if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+            {
+                Resume();
+            }
+            else
+            {
+                ShowPanel(_optionPanel);
+            }
             return;
         }
 
-        Time.timeScale = _enabled ? 0 : 1f;
+        if (_optionPanel != null)
+        {
+            _enabled = !_optionPanel.activeSelf;
+            if (_enabled && CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+            {
+                return;
+            }
+            _optionPanel.SetActive(_enabled);
+        }
 
-        _optionPanel.SetActive(_enabled);
+        UpdatePauseRequest();
     }
 
-     
     public void Resume()
     {
-        Time.timeScale = 1f;
-
-        _enabled = false;
-
-        _optionPanel.SetActive(_enabled);
+        if (_optionPanel != null)
+        {
+            _optionPanel.SetActive(false);
+        }
+        if (_soundPenel != null)
+        {
+            _soundPenel.SetActive(false);
+        }
+        if (_displayPenel != null)
+        {
+            _displayPenel.SetActive(false);
+        }
+        if (_keyPenel != null)
+        {
+            _keyPenel.SetActive(false);
+        }
+        UpdatePauseRequest();
     }
+
+    private void ShowPanel(GameObject panel)
+    {
+        if (panel == null || (CGameManager.Instance != null && CGameManager.Instance.IsGameOver))
+        {
+            return;
+        }
+
+        if (_optionPanel != null)
+        {
+            _optionPanel.SetActive(_optionPanel == panel);
+        }
+        if (_soundPenel != null)
+        {
+            _soundPenel.SetActive(_soundPenel == panel);
+        }
+        if (_displayPenel != null)
+        {
+            _displayPenel.SetActive(_displayPenel == panel);
+        }
+        if (_keyPenel != null)
+        {
+            _keyPenel.SetActive(_keyPenel == panel);
+        }
+        UpdatePauseRequest();
+    }
+
     public void GameEnd()
     {
         Application.Quit();
@@ -124,8 +209,7 @@ public class COptionPenel : MonoBehaviour
      
     public void ViewSoundOption()
     {
-        _soundPenel.SetActive(true);
-        _optionPanel.SetActive(false);
+        ShowPanel(_soundPenel);
     }
 
     public void ReturnMain()
@@ -135,13 +219,11 @@ public class COptionPenel : MonoBehaviour
 
     public void ViewDisplayOption()
     {
-        _displayPenel.SetActive(true);
-        _optionPanel.SetActive(false);
+        ShowPanel(_displayPenel);
     }
 
     public void ViewKeyOption()
     {
-        _keyPenel.SetActive(true);
-        _optionPanel.SetActive(false);
+        ShowPanel(_keyPenel);
     }
 }

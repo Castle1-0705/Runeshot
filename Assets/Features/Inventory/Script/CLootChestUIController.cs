@@ -90,6 +90,11 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 
     private void HandleGameOver()
     {
+        CloseCurrentChest();
+    }
+
+    public void CloseCurrentChest()
+    {
         CLootChestController chest = _container != null ? _container.GetComponent<CLootChestController>() : null;
         if (chest != null)
         {
