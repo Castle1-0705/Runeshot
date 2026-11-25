@@ -21,6 +21,52 @@ public class CPlayerCharacterController : CSingleton<CPlayerCharacterController>
 	public CPlayerStateController StateController => GetComponent<CPlayerStateController>();
 	#endregion
 
+    #region 내부 변수
+    private CGameManager _gameManager;
+    #endregion
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (Instance != this)
+        {
+            return;
+        }
+
+        _gameManager = CGameManager.Instance;
+        if (_gameManager == null)
+        {
+            _gameManager = gameObject.AddComponent<CGameManager>();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (_hpHandler == null || _gameManager == null)
+        {
+            return;
+        }
+
+        _hpHandler.OnDeath -= HandlePlayerDeath;
+        _hpHandler.OnDeath += HandlePlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        if (_hpHandler != null)
+        {
+            _hpHandler.OnDeath -= HandlePlayerDeath;
+        }
+    }
+
+    private void HandlePlayerDeath()
+    {
+        if (_gameManager != null)
+        {
+            _gameManager.GameOver();
+        }
+    }
+
     // 추후 Map에서 정한 스폰 Transform을 직접 전달할 수 있음
     public void MoveToSpawn(Transform spawn)
     {

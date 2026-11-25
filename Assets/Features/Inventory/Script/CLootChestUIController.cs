@@ -14,6 +14,7 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 
     #region 내부변수
     private CItemContainerInventoryHandler _container;
+    private CGameManager _gameManager;
     #endregion
 
 	#region 프로퍼티
@@ -25,8 +26,25 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
         ToggleUI(false);
     }
 
+    private void OnEnable()
+    {
+        BindGameManager();
+        if (_gameManager != null && _gameManager.IsGameOver)
+        {
+            HandleGameOver();
+            return;
+        }
+        SetChestPaused(_panel != null && _panel.activeInHierarchy);
+    }
+
     private void OnDisable()
     {
+        UnbindGameManager();
+        if (_gameManager != null)
+        {
+            _gameManager.SetChestPaused(false);
+        }
+
         if (_slots == null)
         {
             return;
@@ -41,6 +59,64 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
         }
     }
 
+    protected override void OnDestroy()
+    {
+        UnbindGameManager();
+        if (_gameManager != null)
+        {
+            _gameManager.SetChestPaused(false);
+        }
+
+        base.OnDestroy();
+    }
+
+    private void BindGameManager()
+    {
+        UnbindGameManager();
+        _gameManager = CGameManager.Instance;
+        if (_gameManager != null && isActiveAndEnabled)
+        {
+            _gameManager.OnGameOver += HandleGameOver;
+        }
+    }
+
+    private void UnbindGameManager()
+    {
+        if (_gameManager != null)
+        {
+            _gameManager.OnGameOver -= HandleGameOver;
+        }
+    }
+
+    private void HandleGameOver()
+    {
+        CloseCurrentChest();
+    }
+
+    public void CloseCurrentChest()
+    {
+        CLootChestController chest = _container != null ? _container.GetComponent<CLootChestController>() : null;
+        if (chest != null)
+        {
+            chest.CloseChest();
+        }
+        ToggleUI(false);
+        _container = null;
+    }
+
+    private void SetChestPaused(bool isPaused)
+    {
+        if (_gameManager == null)
+        {
+            BindGameManager();
+        }
+
+        if (_gameManager != null)
+        {
+            _gameManager.SetChestPaused(isPaused);
+        }
+    }
+
     public bool IsOpenFor(CItemContainerInventoryHandler container)
     {
         return _panel != null && _panel.activeInHierarchy && object.ReferenceEquals(_container, container);
@@ -48,7 +124,7 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 
     public void UpdateSlot(CItemContainerInventoryHandler container)
 	{
-        if (container == null || _slots == null)
+        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) || container == null || _slots == null)
         {
             return;
         }
@@ -82,6 +158,11 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 
 	public void ToggleUI(bool toggle)
 	{
+        if (toggle && (CGameManager.Instance != null && CGameManager.Instance.IsGameOver))
+        {
+            return;
+        }
+
         if (_panel == null)
         {
             return;
@@ -100,6 +181,6 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 
         _panel.SetActive(toggle);
 
-        Time.timeScale = toggle ? 0f : 1f;
+        SetChestPaused(toggle && _panel.activeInHierarchy && isActiveAndEnabled);
     }
 }

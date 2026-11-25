@@ -48,7 +48,8 @@ public class CProjectile : MonoBehaviour
 
     private void Update()
     {
-        if (_isReturned)
+        CGameManager gameManager = CGameManager.Instance;
+        if (_isReturned || Time.timeScale <= 0.0f || (gameManager != null && !gameManager.CanRunCombat))
         {
             return;
         }
@@ -72,6 +73,12 @@ public class CProjectile : MonoBehaviour
 
     private bool TryHit(float distance)
     {
+        CGameManager gameManager = CGameManager.Instance;
+        if (Time.timeScale <= 0.0f || (gameManager != null && !gameManager.CanRunCombat))
+        {
+            return false;
+        }
+
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _collisionRadius, _direction, distance);
 
         for (int i = 0; i < hits.Length; i++)
