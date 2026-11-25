@@ -63,8 +63,12 @@ public abstract class CSingleton<T> : MonoBehaviour where T : MonoBehaviour
             _instance = null;
             _isDestroyed = true;
         }
+    } 
+    private void OnApplicationQuit()
+    {
+        SceneManager.sceneUnloaded -= IsDestroyedFalse;
     }
-     
+
     private void IsDestroyedFalse(Scene scene)
     {
         _isDestroyed = false;
