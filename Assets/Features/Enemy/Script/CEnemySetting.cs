@@ -19,6 +19,9 @@ public class CEnemySetting : MonoBehaviour
 
     [SerializeField] public Transform _muzzle;
 
+    [SerializeField] public PolygonCollider2D _poCol;
+    [SerializeField] public Transform _coltr;
+
     public CancellationTokenSource _source;
      
     public CancellationTokenSource TokenGen()
