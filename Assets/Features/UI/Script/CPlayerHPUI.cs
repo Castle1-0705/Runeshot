@@ -27,7 +27,13 @@ public class CPlayerHPUI : MonoBehaviour
         _playerHP.OnHealEvent += PlayerHP;
         IniValue(); 
     }
-    
+
+    private void OnDestroy()
+    {
+        _playerHP.OnHitEvent -= PlayerHP;
+        _playerHP.OnHealEvent -= PlayerHP;
+    }
+
     private void IniValue()
     {
         _hpSlider.value = 1f;
