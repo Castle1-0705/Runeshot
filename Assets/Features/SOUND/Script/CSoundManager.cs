@@ -7,18 +7,24 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class CSoundManager : CSingletonDontDstroyAtLoad<CSoundManager>
-{ 
+{
+    #region 인스펙터 
     [SerializeField] private AudioMixerGroup _master;
     [SerializeField] private AudioMixerGroup _backGround;
     [SerializeField] private AudioMixerGroup _sfx;
     [SerializeField] private AudioMixerGroup _ui;
-   
+    #endregion
+
+    #region 프로퍼티 
     public AudioMixerGroup Master => _master;
     public AudioMixerGroup BackGround => _backGround;
     public AudioMixerGroup SFX => _sfx; 
     public AudioMixerGroup UI => _ui;
+    #endregion
 
-    Transform _cameraTr;
+    #region 내부 변수 
+    private Transform _cameraTr;
+    #endregion
 
     protected override void Awake()
     {
