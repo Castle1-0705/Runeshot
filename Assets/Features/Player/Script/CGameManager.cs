@@ -22,12 +22,14 @@ public class CGameManager : MonoBehaviour
     public EGameState CurrentState => _currentState;
     public bool IsPlaying => _currentState == EGameState.Playing;
     public bool IsGameOver => _currentState == EGameState.GameOver;
+    public bool IsClear => _currentState == EGameState.Clear;
     public bool CanRunCombat => IsPlaying && !_isChestPaused && !_isOptionPaused && Time.timeScale > 0.0f;
     #endregion
 
     #region 이벤트
     public event Action<EGameState> OnStateChanged;
     public event Action OnGameOver;
+    public event Action OnClear;
     #endregion
 
     private void Awake()
@@ -79,6 +81,19 @@ public class CGameManager : MonoBehaviour
         UpdateTimeScale();
         OnStateChanged?.Invoke(_currentState);
         OnGameOver?.Invoke();
+    }
+
+    public void Clear()
+    {
+        if (_instance != this || !IsPlaying)
+        {
+            return;
+        }
+
+        _currentState = EGameState.Clear;
+        UpdateTimeScale();
+        OnStateChanged?.Invoke(_currentState);
+        OnClear?.Invoke();
     }
 
     public void SetChestPaused(bool isPaused)

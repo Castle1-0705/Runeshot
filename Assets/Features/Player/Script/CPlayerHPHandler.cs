@@ -45,7 +45,8 @@ public class CPlayerHPHandler : CHPHandler<CPlayerStausDataSO>
     // 플레이어 피격
     public override UniTask OnHit(float damage)
     {
-        if (!isActiveAndEnabled || damage <= 0.0f ||
+        if ((CGameManager.Instance != null && !CGameManager.Instance.IsPlaying) ||
+            !isActiveAndEnabled || damage <= 0.0f ||
             HP <= 0.0f || IsInvincible)
         {
             return UniTask.CompletedTask;
@@ -104,7 +105,8 @@ public class CPlayerHPHandler : CHPHandler<CPlayerStausDataSO>
     // 체력 회복
     public void Heal(float amount)
     {
-        if (amount <= 0.0f || HP <= 0.0f || HP >= MaxHP)
+        if ((CGameManager.Instance != null && !CGameManager.Instance.IsPlaying) ||
+            amount <= 0.0f || HP <= 0.0f || HP >= MaxHP)
         {
             return;
         }

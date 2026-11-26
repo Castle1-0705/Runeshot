@@ -69,6 +69,8 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
         {
             _gameManager.OnGameOver -= CancelDrag;
             _gameManager.OnGameOver += CancelDrag;
+            _gameManager.OnClear -= CancelDrag;
+            _gameManager.OnClear += CancelDrag;
         }
 
         _dragContainer = _slot.ItemContainer;
@@ -81,7 +83,7 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        if (CGameManager.Instance != null && !CGameManager.Instance.IsPlaying)
         {
             CancelDrag();
             return;
@@ -103,6 +105,7 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
         if (_gameManager != null)
         {
             _gameManager.OnGameOver -= CancelDrag;
+            _gameManager.OnClear -= CancelDrag;
         }
         _gameManager = null;
 
@@ -121,7 +124,7 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
 
     private bool HasValidSource()
     {
-        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) || _isDragCancelled || _slot == null || !_slot.gameObject.activeInHierarchy || _itemData == null ||
+        if ((CGameManager.Instance != null && !CGameManager.Instance.IsPlaying) || _isDragCancelled || _slot == null || !_slot.gameObject.activeInHierarchy || _itemData == null ||
             _slot.ItemContainer == null || _slot.SlotIndex < 0 ||
             _slot.SlotIndex >= _slot.ItemContainer.Inventory.Count ||
             (_isDragging && _dragContainer != _slot.ItemContainer))

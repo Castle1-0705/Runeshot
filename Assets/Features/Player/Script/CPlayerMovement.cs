@@ -99,6 +99,12 @@ public class CPlayerMovement : MonoBehaviour
     // 이동 입력
     private void InputMove(Vector2 direction)
     {
+        if (CGameManager.Instance != null && !CGameManager.Instance.IsPlaying)
+        {
+            _moveDirection = Vector2.zero;
+            return;
+        }
+
         _moveDirection = Vector2.ClampMagnitude(direction, 1.0f);
 
         if (_stateController.CurrentState != EPlayerState.Idle &&
@@ -120,7 +126,8 @@ public class CPlayerMovement : MonoBehaviour
     // 이동
     private void Move()
     {
-        if (_stateController.CurrentState != EPlayerState.Move)
+        if ((CGameManager.Instance != null && !CGameManager.Instance.IsPlaying) ||
+            _stateController.CurrentState != EPlayerState.Move)
         {
             return;
         }
