@@ -17,7 +17,7 @@ public class COptionSoundVolume : MonoBehaviour
 
     #region 내부 변수 
     private float _maxValue = 1f;
-    private float _minValue = 0.01f;
+    private float _minValue = 0.0001f;
     #endregion
 
     private void Awake()
