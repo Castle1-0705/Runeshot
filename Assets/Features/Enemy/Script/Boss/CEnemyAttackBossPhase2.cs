@@ -12,19 +12,21 @@ public class CEnemyAttackBossPhase2 : CEnemyAttack
     private string _stringPlayer = "Player";
      
     private float _phaseHPPercent = 0.6f;
-    private float _sqrRange = 4 * 4f;
+    private float _sqrRange;
 
     private bool _isPhaseInverval = false;
     private float _phaseInterval = 10f; 
     private bool _isPhaseAttack = false;
     private float _chargingTime = 3f;
       
-    public CEnemyAttackBossPhase2(CEnemySetting enemySetting, int num) : base(enemySetting, num)
+    public CEnemyAttackBossPhase2(CEnemySetting enemySetting, int num, float range) : base(enemySetting, num)
     {
         _enemyHP = enemySetting.GetComponent<CEnemyHPHandler>();
         _rangeCol = enemySetting._poCol;
         _colTr = enemySetting._coltr;
-         
+
+        _sqrRange = range*range;
+
         InitObject(); 
     }
 
