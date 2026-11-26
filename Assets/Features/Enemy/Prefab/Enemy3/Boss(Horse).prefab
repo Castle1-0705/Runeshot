@@ -2483,7 +2483,7 @@ MonoBehaviour:
   _border: {fileID: 4587580813454075294}
   _fill: {fileID: 8729976465476277933}
   _col: {fileID: 8060970005797414642}
-  _splineRange: 4
+  _phase: {fileID: 11400000, guid: e0e54e1c80dd09244b3c2a8f8fa60777, type: 2}
 --- !u!1 &2724847480255947739
 GameObject:
   m_ObjectHideFlags: 0
