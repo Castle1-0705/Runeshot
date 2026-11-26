@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _priority: 8
+  _damageModifier: 7
   _range: 9
