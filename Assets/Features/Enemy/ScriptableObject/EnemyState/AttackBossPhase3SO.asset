@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435e05908aefd96448b3c1c20252e655, type: 3}
+  m_Name: AttackBossPhase3SO
+  m_EditorClassIdentifier: 
+  _id: 
+  _priority: 10
+  _otherWeapon: {fileID: 11400000, guid: d7d6ac445a240fb4eb856da4d0652541, type: 2}
+  attackInterval: 0.03

@@ -12,19 +12,24 @@ public class CEnemyAttackBossPhase2 : CEnemyAttack
     private string _stringPlayer = "Player";
      
     private float _phaseHPPercent = 0.6f;
-    private float _sqrRange = 4 * 4f;
+    private float _sqrRange;
 
     private bool _isPhaseInverval = false;
     private float _phaseInterval = 10f; 
     private bool _isPhaseAttack = false;
     private float _chargingTime = 3f;
-      
-    public CEnemyAttackBossPhase2(CEnemySetting enemySetting, int num) : base(enemySetting, num)
+
+    private float _damageModifier;
+    public CEnemyAttackBossPhase2(CEnemySetting enemySetting, int num, float range, float damageModifier) : base(enemySetting, num)
     {
         _enemyHP = enemySetting.GetComponent<CEnemyHPHandler>();
         _rangeCol = enemySetting._poCol;
         _colTr = enemySetting._coltr;
-         
+
+        _sqrRange = range*range;
+
+        _damageModifier = damageModifier;
+
         InitObject(); 
     }
 
@@ -36,17 +41,7 @@ public class CEnemyAttackBossPhase2 : CEnemyAttack
          
         _colTr.localScale = Vector3.zero;
     }
-    public void SetRange(Collider2D col)
-    {
-        if (col.bounds.extents.y < col.bounds.extents.x)
-        {
-            _sqrRange = col.bounds.extents.y * col.bounds.extents.y;
-        }
-        else
-        {
-            _sqrRange = col.bounds.extents.x * col.bounds.extents.x;
-        }
-    }
+    
     public override bool Condition(Transform PlayerTr)
     { 
         if (PlayerTr == null)
@@ -122,7 +117,7 @@ public class CEnemyAttackBossPhase2 : CEnemyAttack
         {
             if(collider2Ds[0].tag == _stringPlayer)
             {
-                _playerHP.OnHit(_damage);
+                _playerHP.OnHit(_damage* _damageModifier);
                 collider2Ds[0] = null;
             } 
         }
@@ -140,5 +135,18 @@ public class CEnemyAttackBossPhase2 : CEnemyAttack
 
         _colTr.localScale = Vector3.zero;
         _rangeCol.gameObject.SetActive(false); 
+    }
+
+    //안쓰는 것
+    public void SetRange(Collider2D col)
+    {
+        if (col.bounds.extents.y < col.bounds.extents.x)
+        {
+            _sqrRange = col.bounds.extents.y * col.bounds.extents.y;
+        }
+        else
+        {
+            _sqrRange = col.bounds.extents.x * col.bounds.extents.x;
+        }
     }
 }

@@ -76,6 +76,8 @@ public class CWeapon : MonoBehaviour
 
     private void Start()
     {
+        _projectilePool = CProjectilePool.Instance;
+
         BindGameManager();
         if (HasInvalidReferences(_data))
         {
@@ -102,6 +104,8 @@ public class CWeapon : MonoBehaviour
 
             _playerInput.Initialize(this, _gunHolder, _triggerActionName);
         }
+
+       
 
         UpdateWeaponVisual();
     }
@@ -371,6 +375,67 @@ public class CWeapon : MonoBehaviour
         CSoundControllerSFXPlayer.PlaySound(Data.name);
 
         _data.Trigger.TriggerWeapon(_data.Projectile, _projectilePool, _muzzle.position, direction, damage, shooter).Forget();
+        return true;
+    }
+    public bool TryFire(Vector2 direction, CWeaponDataSO data)
+    {
+        if (!CanRunCombat() || !isActiveAndEnabled || HasInvalidReferences(data) ||
+            direction == Vector2.zero || IsReloading || (_enemyStatus == null && MagazineAmmo <= 0) || Time.time < _nextFireTime)
+        {
+            return false;
+        }
+
+        if (IsPlayerDead())
+        {
+            return false;
+        }
+
+        float damage = data.Projectile.Damage;
+        float fireInterval = data.FireInterval;
+        float spread = data.SpreadAngle;
+
+        if (_enemyStatus != null && _enemyStatus.isActiveAndEnabled)
+        {
+            damage *= _enemyStatus.WeaponDamage;
+            fireInterval *= _enemyStatus.WeaponFireInterval;
+            spread *= _enemyStatus.WeaponSpread;
+        }
+        else if (_playerStatus != null && _playerStatus.isActiveAndEnabled)
+        {
+            damage *= _playerStatus.WeaponDamage;
+            fireInterval *= _playerStatus.WeaponFireInterval;
+            spread *= _playerStatus.WeaponSpread;
+        }
+
+        if (spread > 0.0f)
+        {
+            float halfSpread = spread * 0.5f;
+            float angle = Random.Range(-halfSpread, halfSpread);
+            direction = Quaternion.Euler(0.0f, 0.0f, angle) * direction;
+        }
+
+        if (_enemyStatus == null)
+        {
+            _magazines[data] = MagazineAmmo - 1;
+        }
+        _nextFireTime = Time.time + Mathf.Max(0.0f, fireInterval);
+        Transform shooter = transform;
+        if (_enemyStatus != null)
+        {
+            shooter = _enemyStatus.transform;
+        }
+        else if (_playerState != null)
+        {
+            shooter = _playerState.transform;
+        }
+        else if (_playerStatus != null)
+        {
+            shooter = _playerStatus.transform;
+        }
+
+        CSoundControllerSFXPlayer.PlaySound(data.name);
+
+        data.Trigger.TriggerWeapon(data.Projectile, _projectilePool, _muzzle.position, direction, damage, shooter).Forget();
         return true;
     }
 
