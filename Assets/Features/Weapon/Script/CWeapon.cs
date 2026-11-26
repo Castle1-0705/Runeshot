@@ -76,6 +76,8 @@ public class CWeapon : MonoBehaviour
 
     private void Start()
     {
+        _projectilePool = CProjectilePool.Instance;
+
         BindGameManager();
         if (HasInvalidReferences(_data))
         {
@@ -103,7 +105,7 @@ public class CWeapon : MonoBehaviour
             _playerInput.Initialize(this, _gunHolder, _triggerActionName);
         }
 
-        _projectilePool = CProjectilePool.Instance;
+       
 
         UpdateWeaponVisual();
     }
