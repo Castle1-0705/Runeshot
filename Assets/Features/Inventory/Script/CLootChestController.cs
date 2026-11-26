@@ -69,11 +69,27 @@ public class CLootChestController : MonoBehaviour, IInteractable
         }
     }
 
+    private void OnDisable()
+    {
+        ReleaseChestUI();
+    }
+
     private void OnDestroy()
     {
         if (_interactAction != null)
         {
             _interactAction.OnPerformedAction -= ChestToggle;
+        }
+
+        ReleaseChestUI();
+    }
+
+    private void ReleaseChestUI()
+    {
+        _enabled = false;
+        if (_chestUI != null && _chestUI.IsOpenFor(_inventory))
+        {
+            _chestUI.CloseCurrentChest();
         }
     }
 
@@ -215,11 +231,7 @@ public class CLootChestController : MonoBehaviour, IInteractable
         if (collision.tag == _playerTag)
         {
             _isInteractable = false;
-            _enabled = false;
-            if (_chestUI != null)
-            {
-                _chestUI.ToggleUI(false);
-            }
+            ReleaseChestUI();
 
             _InteractIcon.gameObject.SetActive(false);
         }
