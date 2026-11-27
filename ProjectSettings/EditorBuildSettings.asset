@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: 94c21d30b7a07c54dbb9c846de2ad914
   - enabled: 1
     path: Assets/Scenes/BattleMap.unity
-    guid: 9e3d9b833ff712a43b123b1cf4dbeb45
+    guid: 6b0891fd672bc0a449ec6bcc42401858
   - enabled: 0
     path: Assets/Scenes/MainTile.unity
     guid: 2cda990e2423bbf4892e6590ba056729
