@@ -22,6 +22,13 @@ public class CHouseExit : MonoBehaviour
 
     private void ExitHouse()
     {
+        CGameManager gameManager = CGameManager.Instance;
+
+        if (gameManager == null || !gameManager.CanRunCombat)
+        {
+            return;
+        }
+
         if (_player == null || !CMapReturnData.HasReturnPosition)
         {
             return;

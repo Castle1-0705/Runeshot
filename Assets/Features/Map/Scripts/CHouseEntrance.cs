@@ -25,6 +25,13 @@ public class CHouseEntrance : MonoBehaviour
 
     private void EnterHouse()
     {
+        CGameManager gameManager = CGameManager.Instance;
+
+        if (gameManager == null || !gameManager.CanRunCombat)
+        {
+            return;
+        }
+
         if (_player == null || _interiorSpawnPoint == null)
         {
             return;
