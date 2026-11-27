@@ -246,6 +246,4 @@ public class CLootChestController : MonoBehaviour, IInteractable
             _InteractIcon.gameObject.SetActive(false);
         }
     }
-  
-
 }

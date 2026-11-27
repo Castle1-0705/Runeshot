@@ -51,7 +51,7 @@ public class CPlayerHPHandler : CHPHandler<CPlayerStausDataSO>
         {
             return UniTask.CompletedTask;
         }
-
+        
         HP -= damage;
 
         OnHitInvoke();
