@@ -8,6 +8,7 @@ public class CHouseEntrance : MonoBehaviour
 
     private Transform _player;
     private bool _isPlayerNear;
+    private bool _isVisited;
 
     private void Update()
     {
@@ -37,10 +38,26 @@ public class CHouseEntrance : MonoBehaviour
             return;
         }
 
+        if (CMapReturnData.IsInsideHouse)
+        {
+            return;
+        }
+
+        CHouseInteriorController interior = _interiorSpawnPoint.GetComponentInParent<CHouseInteriorController>();
+
         CMapReturnData.ReturnPosition = transform.position;
         CMapReturnData.HasReturnPosition = true;
+        CMapReturnData.CurrentInterior = interior;
 
         _player.position = _interiorSpawnPoint.position;
+
+        if (!_isVisited && interior != null)
+        {
+            if (interior.SpawnChest())
+            {
+                _isVisited = true;
+            }            
+        }
 
         _isPlayerNear = false;
         _player = null;

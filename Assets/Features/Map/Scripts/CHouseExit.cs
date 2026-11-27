@@ -34,9 +34,14 @@ public class CHouseExit : MonoBehaviour
             return;
         }
 
+        if (CMapReturnData.CurrentInterior != null)
+        {
+            CMapReturnData.CurrentInterior.ClearInterior();
+        }
+
         _player.position = CMapReturnData.ReturnPosition;
 
-        CMapReturnData.HasReturnPosition = false;
+        CMapReturnData.Reset();
 
         _isPlayerNear = false;
         _player = null;
