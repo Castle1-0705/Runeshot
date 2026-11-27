@@ -80,6 +80,11 @@ public class CEnemySpawnManager : MonoBehaviour
 
         RemoveFarEnemies();
 
+        if (CMapReturnData.IsInsideHouse)
+        {
+            return;
+        }
+
         int enemyCount = CountEnemy();
 
         if (enemyCount >= _maxEnemyCount)

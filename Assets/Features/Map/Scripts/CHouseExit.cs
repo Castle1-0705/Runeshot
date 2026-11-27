@@ -22,14 +22,26 @@ public class CHouseExit : MonoBehaviour
 
     private void ExitHouse()
     {
+        CGameManager gameManager = CGameManager.Instance;
+
+        if (gameManager == null || !gameManager.CanRunCombat)
+        {
+            return;
+        }
+
         if (_player == null || !CMapReturnData.HasReturnPosition)
         {
             return;
         }
 
+        if (CMapReturnData.CurrentInterior != null)
+        {
+            CMapReturnData.CurrentInterior.ClearInterior();
+        }
+
         _player.position = CMapReturnData.ReturnPosition;
 
-        CMapReturnData.HasReturnPosition = false;
+        CMapReturnData.Reset();
 
         _isPlayerNear = false;
         _player = null;

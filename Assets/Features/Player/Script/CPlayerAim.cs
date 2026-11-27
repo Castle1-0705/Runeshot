@@ -75,6 +75,11 @@ public class CPlayerAim : MonoBehaviour
     // 마우스 방향 조준
     private void Aim()
     {
+        if (CGameManager.Instance != null && !CGameManager.Instance.IsPlaying)
+        {
+            return;
+        }
+
         if (_mainCamera == null)
         {
             RefreshCamera();
@@ -115,6 +120,11 @@ public class CPlayerAim : MonoBehaviour
 
     private void UpdateArmPose()
     {
+        if (CGameManager.Instance != null && !CGameManager.Instance.IsPlaying)
+        {
+            return;
+        }
+
         if (_aimArm == null || _aimArm.parent == null || _weapon == null ||
             !_weapon.isActiveAndEnabled || _weapon.Data == null || _weapon.Data.WeaponSprite == null ||
             _stateController == null || _stateController.CurrentState == EPlayerState.Dead ||
