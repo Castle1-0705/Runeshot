@@ -30,6 +30,11 @@ public class CPlayerHPUI : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (_playerHP == null)
+        {
+            return;
+        }
+
         _playerHP.OnHitEvent -= PlayerHP;
         _playerHP.OnHealEvent -= PlayerHP;
     }
