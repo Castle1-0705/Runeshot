@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 3
   _name: Boss
-  _maxHp: 200
+  _maxHp: 2500
   _movementSpeed: 5
   _healRate: 1
   _weaponSpread: 1
@@ -24,4 +24,4 @@ MonoBehaviour:
   _weaponDamage: 10
   _reloadSpeed: 6
   _detectionDistance: 15
-  _attackRange: 8
+  _attackRange: 10

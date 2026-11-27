@@ -5,9 +5,8 @@ using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CEnemyAttackBossPhase3 : CEnemyAttack
-{
-    private CEnemyHPHandler _enemyHP; 
+public class CEnemyAttackBossPhase3 : CEnemyAttackBossPhaseBase
+{ 
     private CWeaponDataSO _otherWeapon;
     private CWeapon _weapon;
     private Transform _muzzle;
@@ -15,35 +14,33 @@ public class CEnemyAttackBossPhase3 : CEnemyAttack
      
     private new float _attackInterval;
     private float _attackTime;
-    private float _sqrRange;
-    private float _rangeModify = 0.6f;
-    private float _phaseHPPercent = 0.6f;
-
-    private bool _isPhaseInverval = false;
-    private float _phaseInterval = 17f;
-    private bool _isPhaseAttack = false;
-    private float _chargingTime = 1.5f;
-
+    private float _rangeModify = 0.6f; 
+      
     private float _angle;
     private float _angelInverval = 10f;
     private float _angelMax = 360f;
 
     private Vector2 _direction;
-    private Vector3 isClockwise;
-
+    private Vector3 isClockwise; 
 
     public CEnemyAttackBossPhase3(CEnemySetting enemySetting, int num, CWeaponDataSO weapon, float attackInterval) : base(enemySetting, num)
-    {
-        _enemyHP = enemySetting.GetComponent<CEnemyHPHandler>();
+    { 
         _weapon = enemySetting._weapon;
         _otherWeapon = weapon;
         _muzzle = enemySetting._muzzle;
         _attackInterval = attackInterval;
         _point = enemySetting._point;
-
-        _sqrRange = _enemy.Enemydata.AttackRange * _enemy.Enemydata.AttackRange* _rangeModify;
+         
+        InitObject(); 
     }
+    private void InitObject()
+    {
+        _phaseInterval = 17f;
+        _chargingTime = 1.5f;
+        _phaseHPPercent = 0.6f;
 
+        _sqrRange = _enemy.Enemydata.AttackRange * _enemy.Enemydata.AttackRange * _rangeModify;
+    }
     public override bool Condition(Transform PlayerTr)
     {
         if (PlayerTr == null)
@@ -54,14 +51,19 @@ public class CEnemyAttackBossPhase3 : CEnemyAttack
         if (_isPhaseAttack)
         {
             return true;
-        } 
+        }
+         
+        if (_isOtherPhaseAttacking)
+        {
+            return false;
+        }
 
         if ((PlayerTr.position - _tr.position).sqrMagnitude < _sqrRange)
         {
             if (_enemyHP.HP < _enemyHP.MaxHP * _phaseHPPercent)
-            {
-                if (_isPhaseInverval)
-                {
+            { 
+                if (_isPhaseInterval)
+                { 
                     _time += Time.deltaTime;
 
                     if (_time < _phaseInterval)
@@ -71,7 +73,7 @@ public class CEnemyAttackBossPhase3 : CEnemyAttack
                     else
                     {
                         _time = 0;
-                        _isPhaseInverval = false;
+                        _isPhaseInterval = false;
                     }
 
                 } 
@@ -95,6 +97,8 @@ public class CEnemyAttackBossPhase3 : CEnemyAttack
         int ranNum = Random.Range(0, 2); 
         isClockwise = ranNum == 0 ? Vector3.back : Vector3.forward;
         _point.localScale = Vector3.one;
+
+        _isOtherPhaseAttacking = _isPhaseAttack;
     }
 
     public override void ActionUpdate(Transform PlayerTr)
@@ -137,10 +141,18 @@ public class CEnemyAttackBossPhase3 : CEnemyAttack
             return;
         }
 
+        _phaseInterval = _phaseInterval + Random.Range(-3f,3f);
+        _angelMax = _angelMax + Random.Range(-50f, 50f);
+
+        _phaseInterval = Mathf.Clamp(_phaseInterval, 2f, 25f);
+        _angelMax = Mathf.Clamp(_angelMax, 250f, 1000f);
+
         _angle = 0;
         _isPhaseAttack = false;
-        _isPhaseInverval = true;
+        _isPhaseInterval = true;
         _time = 0;
+
+        _isOtherPhaseAttacking = _isPhaseAttack;
     }
     public override void ActionExit()
     {

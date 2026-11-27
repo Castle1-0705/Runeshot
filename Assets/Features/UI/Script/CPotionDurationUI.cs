@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
-using UnityEngine.UI;
+using UnityEngine.UI; 
 
 [Serializable]
 public class Sliders
@@ -14,7 +14,7 @@ public class Sliders
 
     public Sliders(Slider slider)
     {
-        _slider = slider;
+        _slider = slider; 
     }
 }
 
@@ -80,6 +80,8 @@ public class CPotionDurationUI : MonoBehaviour
                     }
                     else
                     {
+                    
+                        _effectToPlayerHPs[effectToPlayerHP.StatusEffect.EffectName]._slider.transform.SetAsFirstSibling();
                         _effectToPlayerHPs[effectToPlayerHP.StatusEffect.EffectName]._slider.gameObject.SetActive(true);
                         Duration(effectToPlayerHP, _effectToPlayerHPs[effectToPlayerHP.StatusEffect.EffectName]).Forget();
                     }
@@ -87,6 +89,7 @@ public class CPotionDurationUI : MonoBehaviour
                 else
                 {
                     InitSlider(effectToPlayerHP);
+                    _effectToPlayerHPs[effectToPlayerHP.StatusEffect.EffectName]._slider.transform.SetAsFirstSibling();
 
                     //실행
                     Duration(effectToPlayerHP, _effectToPlayerHPs[effectToPlayerHP.StatusEffect.EffectName]).Forget();
@@ -106,6 +109,8 @@ public class CPotionDurationUI : MonoBehaviour
                     }
                     else
                     {
+                        
+                        _modifiers[modifier.StatusEffect.EffectName]._slider.transform.SetAsFirstSibling();
                         _modifiers[modifier.StatusEffect.EffectName]._slider.gameObject.SetActive(true);
                         Duration(modifier, _modifiers[modifier.StatusEffect.EffectName]).Forget();
                     }
@@ -113,6 +118,7 @@ public class CPotionDurationUI : MonoBehaviour
                 else
                 {
                     InitSlider(modifier);
+                    _modifiers[modifier.StatusEffect.EffectName]._slider.transform.SetAsFirstSibling();
 
                     //실행
                     Duration(modifier, _modifiers[modifier.StatusEffect.EffectName]).Forget();
@@ -132,19 +138,19 @@ public class CPotionDurationUI : MonoBehaviour
         }
         //생성
          
-        Slider slider = Instantiate(_slider, _layout);
+        Slider slider = Instantiate(_slider, _layout); 
         Image image = Instantiate(_potion, slider.transform);
         Sliders sliders = new Sliders(slider);
 
         //저장
-        _effectToPlayerHPs.Add(effectToPlayerHP.StatusEffect.EffectName, sliders);
+        _effectToPlayerHPs.Add(effectToPlayerHP.StatusEffect.EffectName, sliders); 
 
-        if(effectToPlayerHP.StatusEffect.Duration == 0)
+        if (effectToPlayerHP.StatusEffect.Duration == 0)
         {
             Debug.Log("지속시간이 0");
             return;
         }
-
+        
         //초기화
         slider.fillRect = image.rectTransform;
         slider.value = effectToPlayerHP.StatusEffect.DurationTimer / effectToPlayerHP.StatusEffect.Duration;
@@ -157,14 +163,13 @@ public class CPotionDurationUI : MonoBehaviour
         Sliders sliders = new Sliders(slider);
 
         //저장
-        _modifiers.Add(modifier.StatusEffect.EffectName, sliders);
+        _modifiers.Add(modifier.StatusEffect.EffectName, sliders); 
 
         if (modifier.StatusEffect.Duration == 0)
         {
             Debug.Log("지속시간이 0");
             return;
         }
-
         //초기화
         slider.fillRect = image.rectTransform;
         slider.value = modifier.StatusEffect.DurationTimer / modifier.StatusEffect.Duration;
@@ -199,7 +204,7 @@ public class CPotionDurationUI : MonoBehaviour
     #region RefreshDuration
     private bool RefreshDuration(CItemEffectAddStatusEffectToPlayerHP effectToPlayerHP, Sliders sliders)
     {
-        if(effectToPlayerHP == null || sliders == null)
+        if(effectToPlayerHP == null || sliders == null || sliders._slider.IsDestroyed())
         {
             return true;
         }
