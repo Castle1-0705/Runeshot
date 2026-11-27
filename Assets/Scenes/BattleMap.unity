@@ -63483,7 +63483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6292192947421196722, guid: 1a7cc946baf354941a40f63b9e372c8e, type: 3}
       propertyPath: m_Name
-      value: OptionUI
+      value: BattleMapOptionUI
       objectReference: {fileID: 0}
     - target: {fileID: 6358902834144707908, guid: 1a7cc946baf354941a40f63b9e372c8e, type: 3}
       propertyPath: m_AnchorMax.x
