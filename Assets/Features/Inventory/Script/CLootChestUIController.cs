@@ -29,9 +29,9 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
     private void OnEnable()
     {
         BindGameManager();
-        if (_gameManager != null && _gameManager.IsGameOver)
+        if (_gameManager != null && !_gameManager.IsPlaying)
         {
-            HandleGameOver();
+            HandleGameEnd();
             return;
         }
         SetChestPaused(_panel != null && _panel.activeInHierarchy);
@@ -40,6 +40,7 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
     private void OnDisable()
     {
         UnbindGameManager();
+        _container = null;
         if (_gameManager != null)
         {
             _gameManager.SetChestPaused(false);
@@ -76,7 +77,8 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
         _gameManager = CGameManager.Instance;
         if (_gameManager != null && isActiveAndEnabled)
         {
-            _gameManager.OnGameOver += HandleGameOver;
+            _gameManager.OnGameOver += HandleGameEnd;
+            _gameManager.OnClear += HandleGameEnd;
         }
     }
 
@@ -84,11 +86,12 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
     {
         if (_gameManager != null)
         {
-            _gameManager.OnGameOver -= HandleGameOver;
+            _gameManager.OnGameOver -= HandleGameEnd;
+            _gameManager.OnClear -= HandleGameEnd;
         }
     }
 
-    private void HandleGameOver()
+    private void HandleGameEnd()
     {
         CloseCurrentChest();
     }
@@ -124,7 +127,7 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 
     public void UpdateSlot(CItemContainerInventoryHandler container)
 	{
-        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) || container == null || _slots == null)
+        if ((CGameManager.Instance != null && !CGameManager.Instance.IsPlaying) || container == null || _slots == null)
         {
             return;
         }
@@ -158,7 +161,7 @@ public class CLootChestUIController : CSingleton<CLootChestUIController>
 
 	public void ToggleUI(bool toggle)
 	{
-        if (toggle && (CGameManager.Instance != null && CGameManager.Instance.IsGameOver))
+        if (toggle && (CGameManager.Instance != null && !CGameManager.Instance.IsPlaying))
         {
             return;
         }

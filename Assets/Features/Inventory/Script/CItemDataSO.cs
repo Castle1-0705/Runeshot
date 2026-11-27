@@ -40,7 +40,7 @@ public class CItemDataSO : CGameDataSO
 
 	public bool OnUse()
 	{
-        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        if (CGameManager.Instance != null && !CGameManager.Instance.IsPlaying)
         {
             return false;
         }
