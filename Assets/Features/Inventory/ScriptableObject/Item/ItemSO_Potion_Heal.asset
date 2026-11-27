@@ -38,7 +38,7 @@ MonoBehaviour:
         _effectName: HealOverTime
         _stackType: 3
         _duration: 30
-        _healAmount: 1
+        _healAmount: 0.5
     - rid: 5559903838880399360
       type: {class: CItemEffectHeal, ns: , asm: Assembly-CSharp}
       data:
