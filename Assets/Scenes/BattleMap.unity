@@ -412,15 +412,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 349871559780076854, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 15.79
       objectReference: {fileID: 0}
     - target: {fileID: 349871559780076854, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -4.73
       objectReference: {fileID: 0}
     - target: {fileID: 349871559780076854, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.05
+      value: -0.33
       objectReference: {fileID: 0}
     - target: {fileID: 349871559780076854, guid: 8b848ece43362f743a57e33005a9d832, type: 3}
       propertyPath: m_LocalRotation.w
@@ -47060,7 +47060,7 @@ GameObject:
   - component: {fileID: 202567189}
   - component: {fileID: 202567188}
   - component: {fileID: 202567187}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3194891,10 +3194891,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4587580813454075294, guid: 494642757a394f24597017c6f9cf5f65, type: 3}
-      propertyPath: m_Creator
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8553682414496702744, guid: 494642757a394f24597017c6f9cf5f65, type: 3}
       propertyPath: m_LocalPosition.x
       value: 323.61923
@@ -3194934,10 +3194930,6 @@ PrefabInstance:
     - target: {fileID: 8553682414496702744, guid: 494642757a394f24597017c6f9cf5f65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8729976465476277933, guid: 494642757a394f24597017c6f9cf5f65, type: 3}
-      propertyPath: m_Creator
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3538255,7 +3538247,7 @@ GameObject:
   - component: {fileID: 1487808046}
   - component: {fileID: 1487808045}
   - component: {fileID: 1487808044}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3582195,6 +3582187,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 685867454468372620, guid: a651eecb4238f3148b3f85b367674804, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1032229763447002057, guid: a651eecb4238f3148b3f85b367674804, type: 3}
       propertyPath: m_Size.x
       value: 703
