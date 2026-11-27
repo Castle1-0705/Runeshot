@@ -536,7 +536,7 @@ MonoBehaviour:
 
     Quick Slot : Num Key
 
-    Option
+    Option,Cancel
     : ESC
 
     Quick Use : Mouse Wheel
