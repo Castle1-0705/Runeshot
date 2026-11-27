@@ -63577,6 +63577,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7346873664008092825, guid: 1a7cc946baf354941a40f63b9e372c8e, type: 3}
+      propertyPath: m_text
+      value: '
+
+        Move : WASD
+
+        Dash : Space bar
+
+        Quick Slot
+        : Num Key
+
+        Option,Cancel : ESC
+
+        Quick Use : Mouse Wheel
+
+        (1,2
+        Slot)'
+      objectReference: {fileID: 0}
     - target: {fileID: 7458146695513939919, guid: 1a7cc946baf354941a40f63b9e372c8e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
