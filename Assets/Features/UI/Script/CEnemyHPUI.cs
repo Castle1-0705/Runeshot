@@ -46,6 +46,11 @@ public class CEnemyHPUI : MonoBehaviour
 
     public void EnemyHP()
     {
+        if (_hpSlider == null || _enemyHP == null)
+        {
+            return;
+        }
+
         if (_enemyHP.MaxHP != 0)
         {
             float enemyHP = _enemyHP.HP / _enemyHP.MaxHP;
