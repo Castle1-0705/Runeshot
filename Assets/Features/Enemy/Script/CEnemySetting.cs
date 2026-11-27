@@ -21,8 +21,10 @@ public class CEnemySetting : MonoBehaviour
     //보스
     [SerializeField] public SpriteRenderer _meleeAttack;
     [SerializeField] public SpriteRenderer _rangeAttack;
+    [SerializeField] public LineRenderer _lineRen;
 
     //보스 패턴
+    [SerializeField] public CEnemyHPHandler _enemyHP;
     [SerializeField] public PolygonCollider2D _poCol;
     [SerializeField] public Transform _coltr;
     [SerializeField] public Transform _point;
