@@ -152,10 +152,11 @@ public class CWeapon : MonoBehaviour
         _gameManager = CGameManager.Instance;
         if (_gameManager != null)
         {
-            _gameManager.OnGameOver += HandleGameOver;
-            if (_gameManager.IsGameOver)
+            _gameManager.OnGameOver += HandleGameEnd;
+            _gameManager.OnClear += HandleGameEnd;
+            if (!_gameManager.IsPlaying)
             {
-                HandleGameOver();
+                HandleGameEnd();
             }
         }
     }
@@ -164,12 +165,13 @@ public class CWeapon : MonoBehaviour
     {
         if (_gameManager != null)
         {
-            _gameManager.OnGameOver -= HandleGameOver;
+            _gameManager.OnGameOver -= HandleGameEnd;
+            _gameManager.OnClear -= HandleGameEnd;
         }
         _gameManager = null;
     }
 
-    private void HandleGameOver()
+    private void HandleGameEnd()
     {
         IsReloading = false;
         if (_playerInput != null)
@@ -275,7 +277,7 @@ public class CWeapon : MonoBehaviour
 
     public bool EquipWeapon(CWeaponDataSO data, bool fromPickup = false)
     {
-        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        if (CGameManager.Instance != null && !CGameManager.Instance.IsPlaying)
         {
             return false;
         }
@@ -490,7 +492,7 @@ public class CWeapon : MonoBehaviour
             return;
         }
 
-        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) ||
+        if ((CGameManager.Instance != null && !CGameManager.Instance.IsPlaying) ||
             IsPlayerDead() || HasInvalidReferences(_data) || !HasAmmoSource())
         {
             IsReloading = false;

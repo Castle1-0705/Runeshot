@@ -30,6 +30,7 @@ public class CPlayerRoll : MonoBehaviour
     public float RollDuration => _rollDuration;
     public bool CanRoll =>
         isActiveAndEnabled && _stateController != null &&
+        (CGameManager.Instance == null || CGameManager.Instance.IsPlaying) &&
         _stateController.CurrentState == EPlayerState.Move &&
         !_isRolling && _rollCooldownTimer <= 0.0f;
     #endregion

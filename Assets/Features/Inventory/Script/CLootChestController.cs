@@ -69,17 +69,38 @@ public class CLootChestController : MonoBehaviour, IInteractable
         }
     }
 
+    private void OnDisable()
+    {
+        ReleaseChestUI();
+    }
+
     private void OnDestroy()
     {
         if (_interactAction != null)
         {
             _interactAction.OnPerformedAction -= ChestToggle;
         }
+
+        ReleaseChestUI();
+    }
+
+    private void ReleaseChestUI()
+    {
+        _enabled = false;
+        if (_chestUI != null && _chestUI.IsOpenFor(_inventory))
+        {
+            _chestUI.CloseCurrentChest();
+        }
     }
 
     public void Interact()
     {
-        if ((CGameManager.Instance != null && CGameManager.Instance.IsGameOver) || !isActiveAndEnabled || _data == null || _inventory == null)
+        if (CGameManager.Instance != null && CGameManager.Instance.IsOptionPaused)
+        {
+            return;
+        }
+
+        if ((CGameManager.Instance != null && !CGameManager.Instance.IsPlaying) || !isActiveAndEnabled || _data == null || _inventory == null)
         {
             return;
         }
@@ -163,9 +184,14 @@ public class CLootChestController : MonoBehaviour, IInteractable
      
     private void ChestToggle()
     {
-        if (CGameManager.Instance != null && CGameManager.Instance.IsGameOver)
+        if (CGameManager.Instance != null && !CGameManager.Instance.IsPlaying)
         {
             CloseChest();
+            return;
+        }
+
+        if (CGameManager.Instance != null && CGameManager.Instance.IsOptionPaused)
+        {
             return;
         }
 
@@ -215,15 +241,9 @@ public class CLootChestController : MonoBehaviour, IInteractable
         if (collision.tag == _playerTag)
         {
             _isInteractable = false;
-            _enabled = false;
-            if (_chestUI != null)
-            {
-                _chestUI.ToggleUI(false);
-            }
+            ReleaseChestUI();
 
             _InteractIcon.gameObject.SetActive(false);
         }
     }
-  
-
 }

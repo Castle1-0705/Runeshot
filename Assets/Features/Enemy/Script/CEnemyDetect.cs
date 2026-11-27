@@ -52,7 +52,12 @@ public class CEnemyDetect : MonoBehaviour
         
         Vector3 origin = transform.parent.position;
         Vector3 dir = collision.transform.position - transform.parent.position;
-        _hit2D = Physics2D.Raycast(origin, dir, _monsterRangelayerCollider.bounds.size.x, _monsterRangelayer);
+        _hit2D = Physics2D.Raycast(origin, dir, _monsterRangelayerCollider.bounds.extents.x, _monsterRangelayer);
+
+        if(_hit2D.collider == null)
+        {
+            return;
+        }
 
         if (_hit2D.collider.tag == _playerTag)
         { 

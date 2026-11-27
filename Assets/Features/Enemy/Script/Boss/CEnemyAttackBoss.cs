@@ -21,14 +21,18 @@ public class CEnemyAttackBoss : CEnemyAttack
     private string _stringAttackMelee = "TAttack";
     private string _stringAttackRange = "TAttackRange";
     private string _stringAttackCharge = "IMove";
+    private string _stringChargeFailed = "TDamaged";
     private bool _isCharging;
-    private float _chargeAttackSpeed = 20f;
+    private float _chargeAttackSpeed = 23f;
     private float _movementSpeed;
     private float _attackRange;
     private LayerMask _mask;
+    private LayerMask _wallMask;
     private string _playerLayer = "Player";
+    private string _wallLayer = "Wall";
     private float _rangeFireInterval = 0.5f;
-    Vector3 dir;
+    private Vector3 _chargedir;
+    private float _AttackDamageMultifly = 3f;
     #endregion
 
     private AttackState _attackState;
@@ -52,6 +56,7 @@ public class CEnemyAttackBoss : CEnemyAttack
         _attackRange = _enemy.Enemydata.AttackRange;
 
         _mask = 1 << LayerMask.NameToLayer(_playerLayer);
+        _wallMask = 1 << LayerMask.NameToLayer(_wallLayer);
     }
     
      
@@ -133,7 +138,7 @@ public class CEnemyAttackBoss : CEnemyAttack
     private void MeleeAttack()
     {
         ChangeAlpha(true);
-        _playerHP.OnHit(_damage*3f);
+        _playerHP.OnHit(_damage* _AttackDamageMultifly);
         _ani.SetTrigger(_stringAttackMelee);
     }
 
@@ -174,14 +179,14 @@ public class CEnemyAttackBoss : CEnemyAttack
     
     private async UniTask ChargeAttack(Transform PlayerTr, CancellationTokenSource source)
     {
-        dir = (PlayerTr.position - _tr.position).normalized * 3f;
+        _chargedir = (PlayerTr.position - _tr.position).normalized * 3f;
 
         IsCharging(true);
 
         if (!_nav.pathPending)
         {
             
-            _nav.SetDestination(PlayerTr.position + dir);
+            _nav.SetDestination(PlayerTr.position + _chargedir);
         }
 
         try
@@ -207,7 +212,7 @@ public class CEnemyAttackBoss : CEnemyAttack
             _lineRen.endWidth = _tr.localScale.magnitude;
 
             _lineRen.SetPosition(0,_tr.position); 
-            _lineRen.SetPosition(1,_playerHP.transform.position + dir);
+            _lineRen.SetPosition(1,_playerHP.transform.position + _chargedir);
 
             _nav.autoBraking = false;
             _nav.speed = _chargeAttackSpeed;
@@ -239,7 +244,13 @@ public class CEnemyAttackBoss : CEnemyAttack
         if(_col.IsTouchingLayers(_mask))
         {
             _ani.SetTrigger(_stringAttackMelee);
-            _playerHP.OnHit(_damage);
+            _playerHP.OnHit(_damage* _AttackDamageMultifly);
+            _enemySetting.TokenCancel(); 
+        }
+
+        else if(_col.IsTouchingLayers(_wallMask))
+        {
+            _ani.SetTrigger(_stringChargeFailed); 
             _enemySetting.TokenCancel(); 
         }
 
