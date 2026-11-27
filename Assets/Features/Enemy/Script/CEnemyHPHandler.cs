@@ -25,23 +25,18 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         }
          
         HP = MaxHP;
-
-        OnDeath += DropItem;
+         
         OnDeath += SetFalse; 
-    }
+    } 
 
-    private void DropItem()
-    {
-       
-    }
     private void OnEnable()
     { 
         _enemy.DieOrAlive(true); 
+        OnHealInvoke();
     }
      
     private void SetFalse()
-    {
-        
+    { 
         gameObject.SetActive(false);
         HP = MaxHP;
     }
@@ -85,6 +80,7 @@ public class CEnemyHPHandler : CHPHandler<CEnemyStatusDataSO>
         } 
         return false;
     }
+
     public override UniTask OnHeal(float amount)
     { 
         HP += amount;

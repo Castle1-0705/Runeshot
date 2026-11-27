@@ -14,6 +14,7 @@ public class CEnemyAttackBoss : CEnemyAttack
     private CEnemySetting _enemySetting;
     private CWeapon _rangeWeaponAttack;
     private Transform _muzzle;
+    private LineRenderer _lineRen;
     #endregion
 
     #region 내부변수
@@ -21,12 +22,13 @@ public class CEnemyAttackBoss : CEnemyAttack
     private string _stringAttackRange = "TAttackRange";
     private string _stringAttackCharge = "IMove";
     private bool _isCharging;
-    private float _chargeAttackSpeed = 15f;
+    private float _chargeAttackSpeed = 20f;
     private float _movementSpeed;
     private float _attackRange;
     private LayerMask _mask;
     private string _playerLayer = "Player";
     private float _rangeFireInterval = 0.5f;
+    Vector3 dir;
     #endregion
 
     private AttackState _attackState;
@@ -41,6 +43,7 @@ public class CEnemyAttackBoss : CEnemyAttack
         _meleeAttack = enemySetting._meleeAttack;
         _rangeAttack = enemySetting._rangeAttack;
         _enemySetting = enemySetting;
+        _lineRen = enemySetting._lineRen;
 
         _rangeWeaponAttack = enemySetting._weapon;
         _muzzle = enemySetting._muzzle;
@@ -68,11 +71,11 @@ public class CEnemyAttackBoss : CEnemyAttack
          
         float distance = (PlayerTr.position - _tr.position).magnitude;
 
-        if (distance < 1.5f)
+        if (distance < 2.5f)
         {
             _attackState = AttackState.MeleeAttack;
         }
-        else if (distance < _enemy.Enemydata.AttackRange * 0.8f)
+        else if (distance < _enemy.Enemydata.AttackRange * 0.7f)
         {
             _attackState = AttackState.RangeAttack;
         }
@@ -130,7 +133,7 @@ public class CEnemyAttackBoss : CEnemyAttack
     private void MeleeAttack()
     {
         ChangeAlpha(true);
-        _playerHP.OnHit(_damage);
+        _playerHP.OnHit(_damage*3f);
         _ani.SetTrigger(_stringAttackMelee);
     }
 
@@ -168,15 +171,17 @@ public class CEnemyAttackBoss : CEnemyAttack
         _meleeAttack.color = colorMelee;
         _rangeAttack.color = colorRange;
     }
-
+    
     private async UniTask ChargeAttack(Transform PlayerTr, CancellationTokenSource source)
     {
+        dir = (PlayerTr.position - _tr.position).normalized * 3f;
 
         IsCharging(true);
 
         if (!_nav.pathPending)
         {
-            _nav.SetDestination(PlayerTr.position);
+            
+            _nav.SetDestination(PlayerTr.position + dir);
         }
 
         try
@@ -196,9 +201,19 @@ public class CEnemyAttackBoss : CEnemyAttack
 
         if (_isCharging)
         {
+            _lineRen.positionCount = 2;
+
+            _lineRen.startWidth = _tr.localScale.magnitude;
+            _lineRen.endWidth = _tr.localScale.magnitude;
+
+            _lineRen.SetPosition(0,_tr.position); 
+            _lineRen.SetPosition(1,_playerHP.transform.position + dir);
+
             _nav.autoBraking = false;
             _nav.speed = _chargeAttackSpeed;
             _nav.stoppingDistance = 0;
+            _nav.acceleration = 100f;
+            ChangeAlpha(true);
             _ani.SetInteger(_stringAttackCharge, 1);
         }
         else
@@ -207,11 +222,15 @@ public class CEnemyAttackBoss : CEnemyAttack
             {
                 return;
             }
+            _lineRen.positionCount = 0;
 
+            _nav.acceleration = 15f;
             _nav.autoBraking = true;
             _nav.speed = _movementSpeed;
             _nav.stoppingDistance = _attackRange;
             _ani.SetInteger(_stringAttackCharge, 0);
+
+            _ani.SetTrigger(_stringAttackMelee);
         }
 
     } 
@@ -219,14 +238,18 @@ public class CEnemyAttackBoss : CEnemyAttack
     {
         if(_col.IsTouchingLayers(_mask))
         {
+            _ani.SetTrigger(_stringAttackMelee);
             _playerHP.OnHit(_damage);
             _enemySetting.TokenCancel(); 
         }
-       
-        if ((_nav.destination - _tr.position).sqrMagnitude < 0.1f)
-        { 
+
+        float distance = (_nav.destination - _tr.position).sqrMagnitude;
+          
+        if (distance < 1f)
+        {
             return true;
-        } 
+        }
+         
         return false;
     }
    
