@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac913c64111272c43a1b6eeb29a99978, type: 3}
+  m_Name: EnemyShotgun
+  m_EditorClassIdentifier: 
+  _id: shotgun
+  _name: Shotgun
+  _projectile: {fileID: 11400000, guid: dc698f8efe0c3ff45a4d5d1540b4cee2, type: 2}
+  _trigger: {fileID: 11400000, guid: 9400516e59ae4191b24ec340931bcca0, type: 2}
+  _reload: {fileID: 0}
+  _fireInterval: 0.65
+  _spreadAngle: 2
+  _magazineSize: 6
+  _reloadTime: 2
+  _ammoItem: {fileID: 11400000, guid: 8e0eb051f0704cf2b22a9cec8cf5aacc, type: 2}
+  _weaponSprite: {fileID: 21300000, guid: 8095484df191fa04d95381fac45bbfdc, type: 3}
+  _weaponSpriteOffset: {x: 0, y: 0}
+  _weaponSpriteScale: 1
+  _weaponSpriteFlipX: 0
+  _weaponGripPixels: {x: 8.5, y: 7.5}
+  _weaponMuzzlePixels: {x: 30, y: 10.5}

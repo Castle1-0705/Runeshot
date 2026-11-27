@@ -232,7 +232,7 @@ public class CDragableItemController : MonoBehaviour, IDragHandler, IBeginDragHa
     private void OnDisable()
     {
         CancelDrag();
-        if(CTooltipController.Instance == null)
+        if(CTooltipController.IsDestroyed)
         {
             return;
         }

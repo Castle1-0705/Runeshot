@@ -1,8 +1,7 @@
  using UnityEngine; 
  
-public class CEnemyAttackBossPhase2 : CEnemyAttack
-{
-    private CEnemyHPHandler _enemyHP;
+public class CEnemyAttackBossPhase2 : CEnemyAttackBossPhaseBase
+{ 
     private Collider2D _rangeCol;
     private Transform _colTr;
      
@@ -10,19 +9,10 @@ public class CEnemyAttackBossPhase2 : CEnemyAttack
     ContactFilter2D contactFilter;
     private LayerMask _layer;
     private string _stringPlayer = "Player";
-     
-    private float _phaseHPPercent = 0.6f;
-    private float _sqrRange;
-
-    private bool _isPhaseInverval = false;
-    private float _phaseInterval = 10f; 
-    private bool _isPhaseAttack = false;
-    private float _chargingTime = 3f;
-
-    private float _damageModifier;
+      
     public CEnemyAttackBossPhase2(CEnemySetting enemySetting, int num, float range, float damageModifier) : base(enemySetting, num)
     {
-        _enemyHP = enemySetting.GetComponent<CEnemyHPHandler>();
+        
         _rangeCol = enemySetting._poCol;
         _colTr = enemySetting._coltr;
 
@@ -35,6 +25,10 @@ public class CEnemyAttackBossPhase2 : CEnemyAttack
 
     private void InitObject()
     {
+        _phaseInterval = 11f;
+        _chargingTime = 3f;
+        _phaseHPPercent = 0.8f;
+
         _layer = 1 << LayerMask.NameToLayer(_stringPlayer);
         contactFilter.layerMask = _layer;
         contactFilter.useLayerMask = true;
@@ -53,12 +47,17 @@ public class CEnemyAttackBossPhase2 : CEnemyAttack
         {
             return true;
         }
-          
+         
+        if (_isOtherPhaseAttacking)
+        {
+            return false;
+        }
+
         if ((PlayerTr.position - _tr.position).sqrMagnitude < _sqrRange)
         {
             if(_enemyHP.HP < _enemyHP.MaxHP* _phaseHPPercent)
             {  
-                if(_isPhaseInverval)
+                if(_isPhaseInterval)
                 {  
                     _time += Time.deltaTime;
 
@@ -69,7 +68,7 @@ public class CEnemyAttackBossPhase2 : CEnemyAttack
                     else
                     {
                         _time = 0;
-                        _isPhaseInverval = false;
+                        _isPhaseInterval = false;
                     }
                     
                 }
@@ -90,6 +89,7 @@ public class CEnemyAttackBossPhase2 : CEnemyAttack
 
         _ani.SetInteger("IMove", 0);
 
+        _isOtherPhaseAttacking = _isPhaseAttack;
     }
 
     public override void ActionUpdate(Transform PlayerTr)
@@ -122,17 +122,24 @@ public class CEnemyAttackBossPhase2 : CEnemyAttack
             } 
         }
 
+        _phaseInterval = _phaseInterval + Random.Range(-2f, 2f);
+        _chargingTime = _chargingTime + Random.Range(-1f, 1f);
+        _phaseInterval = Mathf.Clamp(_phaseInterval, 4f, 18f);
+        _chargingTime = Mathf.Clamp(_chargingTime, 2f, 4f);
+
         _ani.SetTrigger(_attack);
 
         _isPhaseAttack = false;
-        _isPhaseInverval = true;
-        _time = 0; 
+        _isPhaseInterval = true;
+        _time = 0;
+
+        _isOtherPhaseAttacking = _isPhaseAttack;
     }
     
     public override void ActionExit()
     {
         base.ActionExit();
-
+         
         _colTr.localScale = Vector3.zero;
         _rangeCol.gameObject.SetActive(false); 
     }
