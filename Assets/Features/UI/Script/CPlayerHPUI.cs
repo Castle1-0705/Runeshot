@@ -30,6 +30,10 @@ public class CPlayerHPUI : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (_playerHP == null)
+        {
+            return;
+        }
         _playerHP.OnHitEvent -= PlayerHP;
         _playerHP.OnHealEvent -= PlayerHP;
     }
@@ -40,6 +44,11 @@ public class CPlayerHPUI : MonoBehaviour
     }
     public void PlayerHP()
     {
+        if(_hpSlider == null || _playerHP == null)
+        {
+            return;
+        }
+
         if(_playerHP.MaxHP != 0)
         {
             float playerhp = _playerHP.HP / _playerHP.MaxHP;

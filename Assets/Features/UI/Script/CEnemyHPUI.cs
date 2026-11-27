@@ -14,7 +14,7 @@ public class CEnemyHPUI : MonoBehaviour
     {
         if(_enemyHP == null || _hpSlider == null)
         {
-            _enemyHP = transform.GetComponent<CEnemyHPHandler>();
+            _enemyHP = transform.parent.GetComponent<CEnemyHPHandler>();
             Debug.Log("인스펙터 확인");
         }
 
@@ -22,19 +22,40 @@ public class CEnemyHPUI : MonoBehaviour
         {
             return;
         }
-        _enemyHP.OnHitEvent += EnemyHP;
-        _enemyHP.OnDeath += EnemyHP;
+
+        _enemyHP.OnHitEvent += EnemyHP; 
         _enemyHP.OnHealEvent += EnemyHP;
-        EnemyHP();
+
+        IniValue(); 
+    }
+    private void OnDestroy()
+    {
+        if (_enemyHP == null)
+        {
+            return; 
+        }
+
+        _enemyHP.OnHitEvent -= EnemyHP; 
+        _enemyHP.OnHealEvent -= EnemyHP;
+    }
+
+    private void IniValue()
+    {
+        _hpSlider.value = 1f;
     }
 
     public void EnemyHP()
     {
+        if (_hpSlider == null || _enemyHP == null)
+        {
+            return;
+        }
+
         if (_enemyHP.MaxHP != 0)
         {
-            float playerhp = _enemyHP.HP / _enemyHP.MaxHP;
+            float enemyHP = _enemyHP.HP / _enemyHP.MaxHP;
 
-            _hpSlider.value = playerhp;
+            _hpSlider.value = enemyHP;
         }
     }
 }
