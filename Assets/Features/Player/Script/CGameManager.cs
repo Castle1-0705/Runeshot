@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public enum EGameState
@@ -23,6 +23,7 @@ public class CGameManager : MonoBehaviour
     public bool IsPlaying => _currentState == EGameState.Playing;
     public bool IsGameOver => _currentState == EGameState.GameOver;
     public bool IsClear => _currentState == EGameState.Clear;
+    public bool IsOptionPaused => _isOptionPaused;
     public bool CanRunCombat => IsPlaying && !_isChestPaused && !_isOptionPaused && Time.timeScale > 0.0f;
     #endregion
 

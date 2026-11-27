@@ -95,6 +95,11 @@ public class CLootChestController : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        if (CGameManager.Instance != null && CGameManager.Instance.IsOptionPaused)
+        {
+            return;
+        }
+
         if ((CGameManager.Instance != null && !CGameManager.Instance.IsPlaying) || !isActiveAndEnabled || _data == null || _inventory == null)
         {
             return;
@@ -182,6 +187,11 @@ public class CLootChestController : MonoBehaviour, IInteractable
         if (CGameManager.Instance != null && !CGameManager.Instance.IsPlaying)
         {
             CloseChest();
+            return;
+        }
+
+        if (CGameManager.Instance != null && CGameManager.Instance.IsOptionPaused)
+        {
             return;
         }
 
